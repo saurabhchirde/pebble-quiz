@@ -1,0 +1,11 @@
+.discard-modal-md {
+  min-width: 10rem;
+  height: auto;
+  z-index: 4;
+}
+
+.error-modal-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}

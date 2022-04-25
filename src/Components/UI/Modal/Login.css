@@ -1,0 +1,40 @@
+.signin-modal {
+  z-index: 4;
+}
+
+.signin-modal .close-modal-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.create-account-btn h2 {
+  font-size: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-account-btn:hover {
+  cursor: pointer;
+}
+
+.signin-modal form {
+  text-align: center;
+}
+
+.signin-modal form p span {
+  color: var(--primary-color);
+  margin-left: 1rem;
+}
+
+.password-input-field input:focus {
+  outline: none;
+}
+
+.password-input-field i:nth-child(3) {
+  left: 100%;
+  transform: translate(-100%, 0);
+  cursor: pointer;
+}
