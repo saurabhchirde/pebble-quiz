@@ -1,0 +1,46 @@
+.nav-bar-body {
+  width: 15rem;
+  height: 100vh;
+  padding: 2rem 1.5rem 1rem 1.5rem;
+  background-color: var(--nav-bar-bg);
+  color: var(--text-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-bar-body > img {
+  width: 10.5rem;
+  display: flex;
+  margin: 0 auto 1rem;
+}
+
+.user-image-name {
+  display: flex;
+  align-items: center;
+}
+
+.user-image-name div {
+  margin-right: 10px;
+}
+
+.user-image-name h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.nav-bar-menu {
+  margin-top: 5rem;
+}
+
+.nav-bar-menu div {
+  display: flex;
+  align-items: center;
+  margin: 1.3rem 0;
+}
+
+.nav-bar-menu h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}
