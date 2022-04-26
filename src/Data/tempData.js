@@ -12,7 +12,7 @@ export const avengers = [
     answer: options[3],
   },
   {
-    question: "What is Thor’s mother’s name?",
+    question: "What is Thor's mother's name?",
     options: ["Frya", "Feera", "Fridda", "Frigga"],
     answer: options[3],
   },
