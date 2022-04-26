@@ -1,7 +1,7 @@
 import { Button } from "../Button/Button";
 import { IconButton, InputTypeOne } from "Components";
 import "./Signup.css";
-import { useAxiosCalls, useModal } from "Context";
+import { useModal } from "Context";
 import { useState } from "react";
 
 const initialSignupState = {
@@ -15,13 +15,7 @@ export const Signup = () => {
   const { setShowLogin, setShowSignup, setAlertText, setShowAlert } =
     useModal();
   const [user, setUser] = useState(initialSignupState);
-  const { userSignup } = useAxiosCalls();
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const signupConfig = {
-    url: "/api/auth/signup",
-    data: user,
-  };
 
   const emailValidate =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -35,7 +29,6 @@ export const Signup = () => {
       user.email.match(emailValidate)
     ) {
       if (user.password === confirmPassword) {
-        userSignup(signupConfig);
         setShowSignup(false);
         setAlertText(
           "Account created Successfully, please login in to continue"

@@ -1,3 +1,40 @@
 .landing-page-body {
   display: flex;
 }
+
+.landing-page-content {
+  width: 85%;
+  padding: 2rem 3rem 1rem;
+}
+
+.landing-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.landing-page-popular,
+.landing-page-top-categories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2.5rem;
+}
+
+.landing-page-popular h2,
+.landing-page-top-categories h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.landing-page-popular > div,
+.landing-page-top-categories > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}

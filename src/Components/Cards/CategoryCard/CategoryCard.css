@@ -1,0 +1,43 @@
+.category-card {
+  margin: 1rem 2rem 1rem 0;
+  border-radius: 10px;
+}
+
+.category-card-image {
+  border-radius: 10px;
+}
+
+.card-square {
+  width: 19rem;
+  height: 18.5rem;
+}
+
+.card-square .category-card-image {
+  width: 19rem;
+  height: 15.5rem;
+  object-fit: cover;
+}
+
+.card-small {
+  width: 19rem;
+  height: 13rem;
+}
+
+.card-small .category-card-image {
+  width: 19rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.popular-card-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin-top: 6px;
+  text-align: center;
+}
