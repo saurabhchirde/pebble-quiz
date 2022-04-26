@@ -17,4 +17,6 @@ export { SignupAlertModal } from "./UI/Modal";
 export { SearchBar } from "./UI/Navigation";
 export { NavbarAvatar } from "./UI/Navigation";
 export { NavBar } from "./UI/Navigation";
+export { NavBarTop } from "./UI/Navigation/NavBarTop";
+export { NavBarBottom } from "./UI/Navigation/NavBarBottom";
 export { CategoryCard } from "./Cards";

@@ -1,0 +1,53 @@
+.nav-bar-bottom {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-bar-bottom {
+    width: 100%;
+    height: 3.5rem;
+    background-color: var(--nav-bar-bg);
+    display: flex;
+    position: fixed;
+    bottom: 0rem;
+    z-index: 2;
+  }
+
+  .nav-bar-bottom > div {
+    width: 20rem;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .nav-bar-bottom img {
+    width: 2rem;
+  }
+
+  .nav-bar-bottom img:hover {
+    animation: bump 300ms ease-in;
+    cursor: pointer;
+  }
+
+  @keyframes bump {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(1.3);
+    }
+    40% {
+      transform: scale(1.25);
+    }
+    60% {
+      transform: scale(1.5);
+    }
+    80% {
+      transform: scale(1.25);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
