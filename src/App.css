@@ -2,6 +2,23 @@
   text-align: center;
 }
 
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  color: var(--primary-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 5px;
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 @media screen and (max-width: 768px) {
   .login-btn-desktop {
     display: none;
