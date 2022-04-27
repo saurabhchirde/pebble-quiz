@@ -2,8 +2,10 @@
   width: 17rem;
   height: 100vh;
   padding: 2rem 0.8rem 1rem 1rem;
+
   background-color: var(--nav-bar-bg);
   color: var(--text-white);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
