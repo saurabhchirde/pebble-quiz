@@ -29,7 +29,8 @@
 
   .nav-bar-bottom img {
     width: 2rem;
-    margin: 3px 5px;
+    margin: 1px 5px;
+    padding: 2px;
   }
 
   .nav-bar-bottom img:hover {
