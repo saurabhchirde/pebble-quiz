@@ -7,8 +7,8 @@ export const NavBarTop = () => {
     <div className="nav-bar-top">
       <img src={logo_light} alt="logo" />
       <div className="flex-row-center">
-        <div className="flex-row login-btn-mobile">
-          <Button label="Login" btnClassName="btn primary-outline-btn-md" />
+        <div className="flex-row-center login-btn-mobile">
+          <Button label="Logout" btnClassName="btn primary-outline-btn-md" />
           <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
         </div>
         {/* commented for development purpose */}
