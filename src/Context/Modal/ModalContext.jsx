@@ -9,6 +9,7 @@ const ModalProvider = ({ children }) => {
   const [alertText, setAlertText] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [showNavMenu, setShowNavMenu] = useState(false);
+  const [profileMenu, setProfileMenu] = useState(false);
 
   return (
     <ModalContext.Provider
@@ -25,6 +26,8 @@ const ModalProvider = ({ children }) => {
         setShowAlert,
         showNavMenu,
         setShowNavMenu,
+        profileMenu,
+        setProfileMenu,
       }}
     >
       {children}

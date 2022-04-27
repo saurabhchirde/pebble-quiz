@@ -20,3 +20,4 @@ export { NavBar } from "./UI/Navigation";
 export { NavBarTop } from "./UI/Navigation/NavBarTop";
 export { NavBarBottom } from "./UI/Navigation/NavBarBottom";
 export { CategoryCard } from "./Cards";
+export { Footer } from "./UI/Footer/Footer";

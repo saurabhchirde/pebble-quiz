@@ -1,0 +1,75 @@
+.category-page-body {
+  display: flex;
+}
+
+.category-page-content {
+  width: 85%;
+  padding: 2rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.category-page-content div > div:nth-child(1) {
+  justify-content: flex-end;
+}
+
+.category-page-cards {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 2.5rem;
+}
+
+.category-page-cards h2 {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.category-page-cards > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1024px) {
+  .category-page-content {
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .category-page-cards h2 {
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .category-page-content {
+    width: 100%;
+    padding: 2rem 1rem 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .category-page-cards {
+    margin-top: 1rem;
+    align-items: center;
+  }
+
+  .category-page-cards > div {
+    justify-content: center;
+  }
+
+  .category-page-cards h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .category-page-content {
+    padding: 2rem 5px 1rem;
+  }
+
+  .category-page-content button {
+    font-size: 0.9rem;
+  }
+}

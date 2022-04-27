@@ -16,9 +16,15 @@
     top: 0rem;
   }
 
-  .nav-bar-top > img {
+  .nav-bar-top > a img {
     height: 2rem;
     margin-left: 10px;
+  }
+
+  .user-avatar {
+    position: relative;
+    margin: 0 10px;
+    cursor: pointer;
   }
 
   .avatar {
@@ -37,5 +43,29 @@
 
   .login-btn-mobile button:nth-child(1) {
     color: var(--text-white);
+  }
+
+  .user-menu {
+    position: absolute;
+    top: 2.7rem;
+    right: -10px;
+    background-color: var(--nav-bar-bg);
+    padding: 1rem;
+    border-radius: 4px;
+  }
+
+  .user-menu button {
+    color: var(--text-white);
+  }
+
+  .user-menu button:hover {
+    outline: 1px solid var(--text-white);
+    color: var(--text-white);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nav-bar-top {
+    padding: 0;
   }
 }

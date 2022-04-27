@@ -2,6 +2,12 @@
   display: none;
 }
 
+.active-nav {
+  outline: 1px solid var(--text-white);
+  border-radius: 4px;
+  transition: 0.3s ease-in;
+}
+
 @media screen and (max-width: 768px) {
   .nav-bar-bottom {
     width: 100%;
@@ -23,6 +29,8 @@
 
   .nav-bar-bottom img {
     width: 2rem;
+    margin: 1px 5px;
+    padding: 2px;
   }
 
   .nav-bar-bottom img:hover {

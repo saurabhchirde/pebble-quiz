@@ -1,15 +1,28 @@
-import { Button, CategoryCard, NavBarBottom, NavBarTop } from "Components";
+import {
+  Button,
+  CategoryCard,
+  Footer,
+  NavBarBottom,
+  NavBarTop,
+} from "Components";
 import { NavBar } from "Components/UI/Navigation";
+import { useModal } from "Context";
 import "./LandingPage.css";
 
 export const LandingPage = () => {
+  const { setProfileMenu } = useModal();
   return (
-    <>
-      <div className="landing-page-body">
-        <NavBar />
-        <NavBarBottom />
-        <NavBarTop />
-        <div className="landing-page-content">
+    <div className="landing-page-body">
+      <NavBar />
+      <NavBarBottom />
+      <NavBarTop />
+      <div
+        className="landing-page-content"
+        onClick={() => {
+          setProfileMenu(false);
+        }}
+      >
+        <div>
           <div className="landing-page-header">
             <h1>Welcome, Saurabh</h1>
             <div className="flex-row login-btn-desktop">
@@ -58,7 +71,8 @@ export const LandingPage = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-    </>
+    </div>
   );
 };

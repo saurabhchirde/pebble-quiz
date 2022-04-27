@@ -1,0 +1,19 @@
+.footer-body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 0;
+}
+
+.footer-body h3 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.footer-body a {
+  color: var(--text-dark);
+  margin-left: 5px;
+  font-weight: bold;
+}
