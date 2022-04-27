@@ -13,7 +13,10 @@ export const LandingPage = () => {
           <div className="landing-page-header">
             <h1>Welcome, Saurabh</h1>
             <div className="flex-row login-btn-desktop">
-              <Button label="Login" btnClassName="btn primary-outline-btn-md" />
+              <Button
+                label="Logout"
+                btnClassName="btn primary-outline-btn-md"
+              />
               <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
             </div>
           </div>
