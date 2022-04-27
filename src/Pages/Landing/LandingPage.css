@@ -1,0 +1,133 @@
+.landing-page-body {
+  display: flex;
+}
+
+.landing-page-content {
+  width: 85%;
+  padding: 2rem 3rem 1rem;
+}
+
+.landing-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-page-header > div {
+  justify-content: flex-end;
+}
+
+.landing-page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.landing-page-popular,
+.landing-page-top-categories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2.5rem;
+}
+
+.landing-page-popular h2,
+.landing-page-top-categories h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.landing-page-popular > div,
+.landing-page-top-categories > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.category-card-slider-button {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .landing-page-content {
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .landing-page-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .landing-page-popular,
+  .landing-page-top-categories {
+    margin-top: 2.2rem;
+  }
+
+  .landing-page-popular h2,
+  .landing-page-top-categories h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landing-page-content {
+    width: 100%;
+    padding: 2rem 1rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .landing-page-header button {
+    font-size: 0.9rem;
+  }
+
+  .landing-page-header h1 {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .landing-page-popular,
+  .landing-page-top-categories {
+    margin-top: 2rem;
+  }
+
+  .landing-page-popular h2,
+  .landing-page-top-categories h2 {
+    font-size: 1.2rem;
+  }
+
+  .login-btn-desktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .landing-page-header button {
+    font-size: 0.9rem;
+  }
+
+  .landing-page-header h1 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .landing-page-top-categories {
+    margin-bottom: 5rem;
+  }
+
+  .landing-page-popular > div,
+  .landing-page-top-categories > div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow-x: scroll;
+  }
+
+  .landing-page-popular > div::-webkit-scrollbar,
+  .landing-page-top-categories > div::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-card-slider-button {
+    display: flex;
+  }
+}
