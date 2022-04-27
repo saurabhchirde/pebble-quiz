@@ -1,7 +1,7 @@
 .nav-bar-body {
   width: 17rem;
   height: 100vh;
-  padding: 2rem 0.8rem 1rem 1.5rem;
+  padding: 2rem 0.8rem 1rem 1rem;
   background-color: var(--nav-bar-bg);
   color: var(--text-white);
   display: flex;
@@ -11,7 +11,7 @@
   top: 0rem;
 }
 
-.nav-bar-body > img {
+.nav-bar-body > a img {
   width: 10.5rem;
   display: flex;
   margin: 0 0 1rem;
@@ -23,7 +23,7 @@
 }
 
 .user-image-name div {
-  margin-right: 10px;
+  margin: 0 10px;
 }
 
 .user-image-name h2 {
@@ -40,13 +40,31 @@
 .nav-bar-menu div {
   display: flex;
   align-items: center;
-  margin: 1.3rem 0;
+  margin: 0.7rem 0;
+  padding: 5px 10px;
 }
 
 .nav-bar-menu h2 {
   font-size: 1.1rem;
   font-weight: 500;
   margin-left: 1rem;
+}
+
+.nav-bar-menu a {
+  text-decoration: none;
+  color: var(--text-white);
+}
+
+.nav-bar-menu div:hover {
+  outline: 1px solid var(--primary-light-color);
+  transition: 0.3s ease-in;
+  border-radius: 4px;
+}
+
+.active-nav {
+  outline: 1px solid var(--text-white);
+  border-radius: 4px;
+  transition: 0.3s ease-in;
 }
 
 @media screen and (max-width: 768px) {

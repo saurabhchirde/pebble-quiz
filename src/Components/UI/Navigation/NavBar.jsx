@@ -7,8 +7,17 @@ import {
   notifications,
 } from "Data/Icons/icons";
 import { logo_light } from "Data/Logo/logo";
+import { Link, useLocation } from "react-router-dom";
 
 export const NavBar = () => {
+  const { pathname } = useLocation();
+
+  const activeLeaderboard = pathname.includes("leadeboard");
+  const activeCategory = pathname.includes("category");
+  const activeNotifications = pathname.includes("notifications");
+  const activeSupport = pathname.includes("support");
+  const activeSettings = pathname.includes("settings");
+
   return (
     <div className="nav-bar-body">
       <div>
@@ -27,10 +36,12 @@ export const NavBar = () => {
             <img src={leaderboard} alt="icon" />
             <h2>Leaderboard</h2>
           </div>
-          <div>
-            <img src={category} alt="icon" />
-            <h2>Category</h2>
-          </div>
+          <Link to="/category">
+            <div className={activeCategory ? "active-nav" : ""}>
+              <img src={category} alt="icon" />
+              <h2>Category</h2>
+            </div>
+          </Link>
           <div>
             <img src={notifications} alt="icon" />
             <h2>Notifications</h2>
@@ -45,7 +56,9 @@ export const NavBar = () => {
           </div>
         </div>
       </div>
-      <img src={logo_light} alt="logo" />
+      <Link to="/">
+        <img src={logo_light} alt="logo" />
+      </Link>
     </div>
   );
 };

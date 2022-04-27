@@ -3,18 +3,18 @@ export const avengers = [
     question:
       "During which war did Captain America get his superhuman abilities?",
     options: ["Civil War", "World War I", "World War II", "The Cold War"],
-    answer: options[2],
+    answer: "World War II",
   },
   {
     question:
       "Which of the following characters did not disappear during the ”blip”?",
     options: ["Spiderman", "Black Panther", "Doctor Strange", "Iron Man"],
-    answer: options[3],
+    answer: "Iron Man",
   },
   {
     question: "What is Thor's mother's name?",
     options: ["Frya", "Feera", "Fridda", "Frigga"],
-    answer: options[3],
+    answer: "Frigga",
   },
 ];
 
@@ -22,17 +22,17 @@ export const sports = [
   {
     question: "Term Chinaman is related to which sports ?",
     options: ["Football", "Hockey", "Cricket", "Golf"],
-    answer: options[2],
+    answer: "Cricket",
   },
   {
     question: "With which game does Davis Cup is associated",
     options: ["Hockey", "Polo", "Lawn Tennis", "Cricket"],
-    answer: options[2],
+    answer: "Lawn Tennis",
   },
   {
     question: "What is the name of person which controls a football match",
-    options: ["A referee", "A spectator", "An Umpire", "A goalkeeper"],
-    answer: options[0],
+    options: ["A Referee", "A Spectator", "An Umpire", "A Goalkeeper"],
+    answer: "A Referee",
   },
 ];
 
@@ -40,17 +40,17 @@ export const travel = [
   {
     question: "Which river of India is called Vridha Ganga?",
     options: ["Krishna", "Godavari", "Kaveri", "Narmada"],
-    answer: options[1],
+    answer: "Godavari",
   },
   {
     question: "Which foreign country is closest to Andaman Islands",
     options: ["Sri Lanka", "Indonesia", "Pakitan", "Nepal"],
-    answer: options[0],
+    answer: "Sri Lanka",
   },
   {
     question: "The state having largest area under waste land is",
     options: ["Rajastan", "Gujarat", "Madhya Pradesh", "Jammu and kashmir"],
-    answer: options[0],
+    answer: "Rajastan",
   },
 ];
 
@@ -63,7 +63,7 @@ export const technology = [
       "Operating System",
       "Optical Sensor",
     ],
-    answer: options[2],
+    answer: "Operating System",
   },
   {
     question: "'.MOV' extension refers usually to what kind of file?",
@@ -73,30 +73,30 @@ export const technology = [
       "Audio file",
       "MS Office document",
     ],
-    answer: options[1],
+    answer: "Animation/movie file",
   },
   {
     question: "'DB' computer abbreviation usually means ?",
     options: ["Database", "Double Byte", "Data Block", "Driver Boot"],
-    answer: options[0],
+    answer: "Database",
   },
 ];
 
 export const science = [
   {
     question: "The working principle of a washing machine is",
-    options: ["reverse osmosis", "diffusion", "centrifugation", "dialysis"],
-    answer: options[2],
+    options: ["Reverse osmosis", "Diffusion", "Centrifugation", "Dialysis"],
+    answer: "Centrifugation",
   },
   {
     question: "Which of the following is used in pencils?",
     options: ["Graphite", "Silicon", "Charcoal", "Phosphorous"],
-    answer: options[0],
+    answer: "Graphite",
   },
   {
     question: "Chemical formula for water is",
     options: ["NaAlO2", "H2O", "Al2O3", "CaSiO3"],
-    answer: options[1],
+    answer: "H2O",
   },
 ];
 
@@ -105,13 +105,13 @@ export const language = [
     question:
       "Correct the sentence gramatically: She went to gym despite of her illness.",
     options: ["to", "of", "despite", "none of the above"],
-    answer: options[1],
+    answer: "of",
   },
   {
     question:
       "Choose the correct verb form from those in brackets. The earth _ round the sun.",
     options: ["moves", "moved", "move", "none of the above"],
-    answer: options[0],
+    answer: "moves",
   },
   {
     question: "Correction of sentences: What your Sirname is?",
@@ -121,7 +121,7 @@ export const language = [
       "Your Sirname is what?",
       "none of the above",
     ],
-    answer: options[1],
+    answer: "What is your Sirname?",
   },
 ];
 
@@ -129,16 +129,51 @@ export const animals = [
   {
     question: "What animal has the worst shortest memory?",
     options: ["Dog", "Elephant", "Rat", "Dolphin"],
-    answer: options[1],
+    answer: "Elephant",
   },
   {
     question: "Which of the following has no Skeleton at all?",
     options: ["Star fish", "Sponge", "Silver fish", "Jelly fish"],
-    answer: options[3],
+    answer: "Jelly fish",
   },
   {
     question: "Which living bird lays the world's largest egg?",
     options: ["Eagle", "Owl", "Ostrich", "Vulture"],
-    answer: options[2],
+    answer: "Ostrich",
+  },
+];
+
+export const categories = [
+  {
+    name: "Movies",
+    img: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+  },
+  {
+    name: "Avengers",
+    img: "https://images.unsplash.com/photo-1561149877-84d268ba65b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80",
+  },
+  {
+    name: "Sports",
+    img: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
+  },
+  {
+    name: "Travel",
+    img: "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+  },
+  {
+    name: "Technology",
+    img: "https://images.unsplash.com/photo-1617791160536-598cf32026fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80",
+  },
+  {
+    name: "Science",
+    img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+  },
+  {
+    name: "Language",
+    img: "https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+  },
+  {
+    name: "Animals",
+    img: "https://images.unsplash.com/photo-1521651201144-634f700b36ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
   },
 ];
