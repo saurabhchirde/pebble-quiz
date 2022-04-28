@@ -16,7 +16,7 @@
 .nav-bar-body > a img {
   width: 10.5rem;
   display: flex;
-  margin: 0 0 1rem;
+  margin: 0 auto 10px;
 }
 
 .user-image-name {
@@ -36,7 +36,7 @@
 }
 
 .nav-bar-menu {
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
 .nav-bar-menu div {
