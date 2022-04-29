@@ -1,4 +1,11 @@
-import { NavBar, NavBarBottom, NavBarTop, Button, Footer } from "Components";
+import {
+  NavBar,
+  NavBarBottom,
+  NavBarTop,
+  Button,
+  Footer,
+  QuizEndModal,
+} from "Components";
 import { QuestionCard } from "Components/Cards";
 import { useModal } from "Context";
 import { quizQuestions } from "Data/tempData";
@@ -11,7 +18,11 @@ export const QuestionPage = () => {
   const { categoryId } = useParams();
   const [startQuiz, setStartQuiz] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(0);
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(6);
+  const [selectedChoice, setSelectedChoice] = useState("");
+  const [score, setScore] = useState(0);
+  const [finalScore, setFinalScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
   const category = quizQuestions.find((cat) => cat._id === categoryId);
 
@@ -25,10 +36,12 @@ export const QuestionPage = () => {
         if (timer < 1) {
           if (nextQuestion < category.questions.length - 1) {
             setNextQuestion((preQuestion) => preQuestion + 1);
+            setSelectedChoice("");
           } else {
+            setShowResult(true);
             setStartQuiz(false);
           }
-          setTimer(30);
+          setTimer(6);
         } else {
           setTimer((preTime) => preTime - 1);
         }
@@ -48,11 +61,24 @@ export const QuestionPage = () => {
     timerInterval();
   }, [startQuiz, nextQuestion, timer]);
 
+  useEffect(() => {
+    if (!startQuiz) {
+      if (score < 1) {
+        setFinalScore(0);
+      } else {
+        setFinalScore(score);
+      }
+    }
+  }, [score, startQuiz]);
+
   return (
     <div className="question-page-body">
       <NavBar />
       <NavBarBottom />
       <NavBarTop />
+      {showResult && (
+        <QuizEndModal setShowResult={setShowResult} finalScore={finalScore} />
+      )}
       <div
         className="question-page-content"
         onClick={() => {
@@ -88,6 +114,10 @@ export const QuestionPage = () => {
                 totalQuestions={totalQuestions}
                 img={currentQuestionImg}
                 time={timer}
+                selectedChoice={selectedChoice}
+                setSelectedChoice={setSelectedChoice}
+                score={score}
+                setScore={setScore}
               />
             </div>
           </div>

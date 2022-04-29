@@ -96,6 +96,7 @@
 
 .right-ans {
   background-color: var(--right-ans);
+  color: var(--text-dark);
 }
 
 .wrong-ans {

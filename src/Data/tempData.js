@@ -171,7 +171,7 @@ export const quizQuestions = [
     questions: [
       {
         _id: uuid(),
-        img: "",
+        img: "https://m.media-amazon.com/images/I/81rTTsIGjmL._SL1500_.jpg",
         question:
           "In 'Chaalbaaz' which actress played the double role of separated twin sisters?",
         options: [
@@ -184,7 +184,7 @@ export const quizQuestions = [
       },
       {
         _id: uuid(),
-        img: "",
+        img: "https://remit2india.files.wordpress.com/2013/05/100-years-of-india-cinema.jpg",
         question:
           "Hollywood is in the United States. In which country is Bollywood located?",
         options: ["England", "Japan", "India", "Nepal"],
@@ -192,7 +192,7 @@ export const quizQuestions = [
       },
       {
         _id: uuid(),
-        img: "",
+        img: "https://www.bollywoodhungama.com/wp-content/uploads/2022/01/Amitabh-Bachchan-is-the-No.-1-Hero-in-the-country-Akshay-Kumar-Salman-Khan-Shah-Rukh-Khan-follow.jpeg",
         question: "Which actor is popularly known as 'the angry young man'?",
         options: [
           "Amitabh Bachanan",
@@ -211,7 +211,7 @@ export const quizQuestions = [
     questions: [
       {
         _id: uuid(),
-        img: "",
+        img: "https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         question:
           "Correct the sentence gramatically: She went to gym despite of her illness.",
         options: ["to", "of", "despite", "none of the above"],
@@ -219,7 +219,7 @@ export const quizQuestions = [
       },
       {
         _id: uuid(),
-        img: "",
+        img: "https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         question:
           "Choose the correct verb form from those in brackets. The earth _ round the sun.",
         options: ["moves", "moved", "move", "none of the above"],
@@ -227,7 +227,7 @@ export const quizQuestions = [
       },
       {
         _id: uuid(),
-        img: "",
+        img: "https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         question: "Correction of sentences: What your Sirname is?",
         options: [
           "What your Sirname?",

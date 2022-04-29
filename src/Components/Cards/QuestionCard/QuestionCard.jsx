@@ -1,5 +1,4 @@
 import { watch, check, paper } from "Data/Icons/icons";
-import { useState } from "react";
 import "./QuestionCard.css";
 
 export const QuestionCard = ({
@@ -10,11 +9,27 @@ export const QuestionCard = ({
   options,
   questionNum,
   totalQuestions,
+  selectedChoice,
+  setSelectedChoice,
+  score,
+  setScore,
 }) => {
-  const [choice, setChoice] = useState(false);
-  const optionClickHandler = (option) => {
+  const optionSelectHandler = (option) => {
+    setSelectedChoice(option);
     if (answer === option) {
-      setChoice(true);
+      setScore((preScore) => preScore + 5);
+    } else {
+      setScore((preScore) => preScore - 5);
+    }
+  };
+
+  const selectedOptionStyle = (option) => {
+    if (selectedChoice === option && selectedChoice === answer) {
+      return "right-ans";
+    } else if (selectedChoice === option) {
+      return "wrong-ans";
+    } else if (selectedChoice && option === answer) {
+      return "right-ans";
     }
   };
 
@@ -31,15 +46,15 @@ export const QuestionCard = ({
             <div className="quiz-total-time">
               <img src={watch} />
               <div>
-                <h3>{time}</h3>
+                <h3>{time} sec</h3>
                 <p>Time Left</p>
               </div>
             </div>
             <div className="quiz-high-score">
               <img src={check} />
               <div>
-                <h3>58</h3>
-                <p>Highest Score</p>
+                <h3>{score}</h3>
+                <p>Score</p>
               </div>
             </div>
             <div className="quiz-progress">
@@ -58,8 +73,9 @@ export const QuestionCard = ({
         {options.map((option, index) => (
           <button
             key={index}
-            className="option-btn"
-            onClick={() => optionClickHandler(option)}
+            className={`option-btn ${selectedOptionStyle(option)}`}
+            disabled={selectedChoice}
+            onClick={() => optionSelectHandler(option)}
           >
             {option}
           </button>
