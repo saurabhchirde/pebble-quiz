@@ -1,18 +1,28 @@
-.landing-page-body {
+.landing-page-body,
+.landing-page-content,
+.landing-page-header,
+.landing-page-popular,
+.landing-page-top-categories,
+.landing-page-popular > div,
+.landing-page-top-categories > div {
   display: flex;
 }
 
 .landing-page-content {
-  width: 85%;
+  max-width: 70rem;
+  margin: 0 auto;
   padding: 2rem 3rem 2rem;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-.landing-page-header {
-  display: flex;
+.landing-page-header,
+.landing-page-popular > div,
+.landing-page-top-categories > div {
   align-items: center;
+}
+
+.landing-page-content,
+.landing-page-header {
   justify-content: space-between;
 }
 
@@ -27,7 +37,6 @@
 
 .landing-page-popular,
 .landing-page-top-categories {
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 2.5rem;
@@ -41,14 +50,8 @@
 
 .landing-page-popular > div,
 .landing-page-top-categories > div {
-  display: flex;
-  align-items: center;
   flex-wrap: wrap;
   width: 100%;
-}
-
-.category-card-slider-button {
-  display: none;
 }
 
 @media screen and (max-width: 1024px) {
@@ -129,9 +132,5 @@
   .landing-page-popular > div::-webkit-scrollbar,
   .landing-page-top-categories > div::-webkit-scrollbar {
     display: none;
-  }
-
-  .category-card-slider-button {
-    display: flex;
   }
 }

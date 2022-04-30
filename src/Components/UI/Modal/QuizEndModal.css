@@ -1,0 +1,75 @@
+.backdrop {
+  backdrop-filter: blur(6px);
+}
+
+.quiz-end-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.quiz-end-modal .close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 8px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.quiz-end-modal .close-btn:hover {
+  background-color: var(--btn-hover);
+}
+
+.quiz-end-modal > div {
+  width: 35rem;
+  padding: 2.5rem 1rem;
+  border-radius: 10px;
+  position: relative;
+}
+
+.positive-score {
+  background-color: var(--background-color);
+}
+
+.positive-score h1 {
+  color: var(--success-text);
+}
+
+.zero-score {
+  background-color: var(--background-color);
+}
+
+.zero-score h1 {
+  color: var(--error-text);
+}
+
+.quiz-end-modal h1 {
+  margin: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.quiz-end-modal span {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 560px) {
+  .quiz-end-modal > div {
+    width: 22rem;
+  }
+
+  .quiz-end-modal h1 {
+    font-size: 1.6rem;
+  }
+
+  .quiz-end-modal-cta div button {
+    font-size: 1rem;
+  }
+}

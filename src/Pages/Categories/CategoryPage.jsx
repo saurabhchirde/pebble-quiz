@@ -7,7 +7,7 @@ import {
   Footer,
 } from "Components";
 import "./CategoryPage.css";
-import { categories } from "Data/tempData";
+import { quizQuestions } from "Data/tempData";
 import { useModal } from "Context";
 
 export const CategoryPage = () => {
@@ -25,19 +25,23 @@ export const CategoryPage = () => {
         }}
       >
         <div>
-          <div className="flex-row login-btn-desktop">
-            <Button label="Logout" btnClassName="btn primary-outline-btn-md" />
-            <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
+          <div className="category-page-header">
+            <h1>Select category to start</h1>
+            <div className="flex-row login-btn-desktop">
+              <Button
+                label="Logout"
+                btnClassName="btn primary-outline-btn-md"
+              />
+            </div>
           </div>
           <div className="category-page-cards">
             <h2>All Categories</h2>
             <div>
-              {categories.map((cat) => (
+              {quizQuestions.map((cat) => (
                 <CategoryCard
                   key={cat.name}
+                  category={cat}
                   cardSize="card-square"
-                  category={cat.name}
-                  img={cat.img}
                 />
               ))}
             </div>

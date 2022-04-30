@@ -1,11 +1,30 @@
 import "./NavBarTop.css";
 import { logo_light } from "Data/Logo/logo";
 import { Button } from "Components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useModal } from "Context";
 
-export const NavBarTop = () => {
+export const NavBarTop = ({
+  startQuiz,
+  startQuizClickHandler,
+  startNewQuizHandler,
+}) => {
   const { profileMenu, setProfileMenu } = useModal();
+  const { pathname } = useLocation();
+
+  const hideStartBtn =
+    pathname === "/category" || pathname === "/" ? false : true;
+  const onLanding = pathname === "/" ? true : false;
+  const startBtnLabel = onLanding ? "Start Quiz" : "Start New";
+
+  const startButtonClickHandler = () => {
+    if (!startQuiz) {
+      startNewQuizHandler();
+    } else {
+      startQuizClickHandler();
+    }
+  };
+
   return (
     <div className="nav-bar-top">
       <Link to="/">
@@ -13,7 +32,13 @@ export const NavBarTop = () => {
       </Link>
       <div className="flex-row-center">
         <div className="flex-row-center login-btn-mobile">
-          <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
+          {hideStartBtn && (
+            <Button
+              onClick={startButtonClickHandler}
+              label={!startQuiz ? startBtnLabel : "Stop Quiz"}
+              btnClassName="btn primary-btn-md"
+            />
+          )}
         </div>
         <div className="user-avatar">
           <div
@@ -30,6 +55,7 @@ export const NavBarTop = () => {
           </div>
           {profileMenu && (
             <div className="user-menu">
+              <Button label="Profile" btnClassName="btn primary-text-btn-md" />
               <Button label="Logout" btnClassName="btn primary-text-btn-md" />
             </div>
           )}
