@@ -19,6 +19,10 @@
   margin: 0 auto 10px;
 }
 
+.nav-bar-body a {
+  color: var(--text-white);
+}
+
 .user-image-name {
   display: flex;
   align-items: center;

@@ -1,0 +1,134 @@
+.profile-page-body,
+.profile-page-content,
+.profile-page-header,
+.profile-detail-section,
+.profile-detail-section-right,
+.profile-overview-section,
+.profile-overview,
+.profile-achievement-title,
+.profile-achievement-badges {
+  display: flex;
+}
+
+.profile-page-content {
+  width: 100%;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem 3rem 2rem;
+  flex-direction: column;
+}
+
+.profile-page-header {
+  align-items: center;
+}
+
+.profile-page-content,
+.profile-page-header {
+  justify-content: space-between;
+}
+
+.profile-page-header > div {
+  justify-content: flex-end;
+}
+
+.profile-page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.profile-detail-section {
+  margin: 2rem 0;
+}
+
+.profile-detail-section > img {
+  width: 12rem;
+  height: 12rem;
+  background-color: aqua;
+  margin-right: 1rem;
+  border-radius: 10px;
+}
+
+.profile-detail-section-right {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.profile-overview div {
+  text-align: left;
+  padding: 0 10px;
+}
+
+.profile-overview-section {
+  width: 85%;
+  justify-content: space-between;
+}
+
+.profile-overview img {
+  width: 3rem;
+}
+
+.profile-achievement-title {
+  justify-content: space-between;
+}
+
+.profile-achievement-badges {
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 2rem;
+  margin: 1.2rem 0;
+  border: 1px solid var(--text-dark);
+  border-radius: 15px;
+}
+
+.profile-achievement-badges img {
+  width: 6.9rem;
+  height: 5.8rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile-page-content {
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .profile-page-header h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-page-content {
+    width: 100%;
+    padding: 2rem 1rem 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .profile-page-header button {
+    font-size: 0.9rem;
+  }
+
+  .profile-page-header h1 {
+    font-size: 1.2rem;
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile-page-content {
+    padding: 2rem 5px 1rem;
+  }
+
+  .profile-page-header button {
+    font-size: 0.9rem;
+  }
+
+  .profile-page-header h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}

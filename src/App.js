@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { CategoryPage, LandingPage, QuestionPage } from "./Pages";
+import { CategoryPage, LandingPage, ProfilePage, QuestionPage } from "./Pages";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/category/:categoryId" element={<QuestionPage />} />
+        <Route path="/account" element={<ProfilePage />} />
       </Routes>
     </div>
   );
