@@ -76,7 +76,7 @@
 .answer-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  gap: 1rem;
   margin: 2rem 0 1rem;
 }
 
@@ -92,6 +92,12 @@
 
 .option-btn {
   background-color: var(--primary-bg);
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  transition: 150ms ease-in-out;
+  box-shadow: 0 4px 8px var(--option-btn-shadow);
 }
 
 .right-ans {
@@ -101,6 +107,7 @@
 
 .wrong-ans {
   background-color: var(--wrong-ans);
+  box-shadow: 0 4px 8px var(--option-btn-shadow);
 }
 
 @media screen and (max-width: 1024px) {

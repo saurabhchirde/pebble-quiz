@@ -6,6 +6,7 @@
   --wrong-ans: rgb(255, 178, 178);
   --positive-score: rgba(2, 255, 36, 0.238);
   --zero-score: rgba(255, 9, 9, 0.276);
+  --option-btn-shadow: rgba(21, 21, 21, 0.319);
 }
 
 body {

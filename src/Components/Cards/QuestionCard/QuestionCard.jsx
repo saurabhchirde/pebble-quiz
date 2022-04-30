@@ -13,6 +13,7 @@ export const QuestionCard = ({
   setSelectedChoice,
   score,
   setScore,
+  startQuiz,
 }) => {
   const optionSelectHandler = (option) => {
     setSelectedChoice(option);
@@ -74,7 +75,7 @@ export const QuestionCard = ({
           <button
             key={index}
             className={`option-btn ${selectedOptionStyle(option)}`}
-            disabled={selectedChoice}
+            disabled={!startQuiz || selectedChoice}
             onClick={() => optionSelectHandler(option)}
           >
             {option}

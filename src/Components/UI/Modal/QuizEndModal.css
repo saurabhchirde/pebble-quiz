@@ -14,12 +14,6 @@
   z-index: 3;
 }
 
-.quiz-end-modal .close-btn,
-.quiz-end-modal > div,
-.quiz-end-modal-cta div:nth-child(2) button {
-  color: var(--text-white);
-}
-
 .quiz-end-modal .close-btn {
   position: absolute;
   top: 1rem;
@@ -41,12 +35,19 @@
 }
 
 .positive-score {
-  background-color: var(--positive-score);
-  color: var(--text-dark);
+  background-color: var(--background-color);
+}
+
+.positive-score h1 {
+  color: var(--success-text);
 }
 
 .zero-score {
-  background-color: var(--zero-score);
+  background-color: var(--background-color);
+}
+
+.zero-score h1 {
+  color: var(--error-text);
 }
 
 .quiz-end-modal h1 {
@@ -57,10 +58,6 @@
 
 .quiz-end-modal span {
   font-weight: bold;
-}
-
-.quiz-end-modal-cta div:nth-child(2) button {
-  outline: 1px solid;
 }
 
 @media screen and (max-width: 560px) {

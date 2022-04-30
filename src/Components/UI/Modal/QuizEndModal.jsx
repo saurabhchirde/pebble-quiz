@@ -37,7 +37,7 @@ export const QuizEndModal = ({ finalScore, setShowResult }) => {
             <Button
               onClick={checkLeaderboardHandler}
               label="Check LeaderBoard"
-              btnClassName="btn primary-outline-btn-lg"
+              btnClassName="btn primary-text-btn-lg"
             />
           </div>
         </div>

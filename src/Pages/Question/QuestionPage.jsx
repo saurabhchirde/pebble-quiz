@@ -10,12 +10,14 @@ import { QuestionCard } from "Components/Cards";
 import { useModal } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const { setProfileMenu } = useModal();
   const { categoryId } = useParams();
+  const navigate = useNavigate();
+
   const [startQuiz, setStartQuiz] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(0);
   const [timer, setTimer] = useState(20);
@@ -30,6 +32,10 @@ export const QuestionPage = () => {
   const startQuizClickHandler = () => {
     setStartQuiz((pre) => !pre);
     setShowRules(false);
+  };
+
+  const startNewQuizHandler = () => {
+    navigate("/category");
   };
 
   const timerInterval = () => {
@@ -77,7 +83,11 @@ export const QuestionPage = () => {
     <div className="question-page-body">
       <NavBar />
       <NavBarBottom />
-      <NavBarTop />
+      <NavBarTop
+        startQuiz={startQuiz}
+        startQuizClickHandler={startQuizClickHandler}
+        startNewQuizHandler={startNewQuizHandler}
+      />
       {showResult && (
         <QuizEndModal setShowResult={setShowResult} finalScore={finalScore} />
       )}
@@ -106,13 +116,13 @@ export const QuestionPage = () => {
                     : "btn primary-outline-btn-md"
                 }
               />
-              {startQuiz && (
-                <Button
-                  onClick={startQuizClickHandler}
-                  label="Stop Quiz"
-                  btnClassName="btn primary-btn-md"
-                />
-              )}
+              <Button
+                onClick={
+                  !startQuiz ? startNewQuizHandler : startQuizClickHandler
+                }
+                label={!startQuiz ? "Start New" : "Stop Quiz"}
+                btnClassName="btn primary-btn-md"
+              />
             </div>
           </div>
 
@@ -131,6 +141,7 @@ export const QuestionPage = () => {
                   setSelectedChoice={setSelectedChoice}
                   score={score}
                   setScore={setScore}
+                  startQuiz={startQuiz}
                 />
               </div>
             ) : (
