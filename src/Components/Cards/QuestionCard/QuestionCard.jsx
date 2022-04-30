@@ -3,7 +3,7 @@ import "./QuestionCard.css";
 
 export const QuestionCard = ({
   img,
-  time,
+  timer,
   question,
   answer,
   options,
@@ -19,7 +19,7 @@ export const QuestionCard = ({
     if (answer === option) {
       setScore((preScore) => preScore + 5);
     } else {
-      setScore((preScore) => preScore - 5);
+      setScore((preScore) => preScore - 3);
     }
   };
 
@@ -46,7 +46,7 @@ export const QuestionCard = ({
             <div className="quiz-total-time">
               <img src={watch} />
               <div>
-                <h3>{time} sec</h3>
+                <h3>{timer} sec</h3>
                 <p>Time Left</p>
               </div>
             </div>

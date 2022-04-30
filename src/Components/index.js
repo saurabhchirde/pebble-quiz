@@ -22,3 +22,4 @@ export { NavBarBottom } from "./UI/Navigation/NavBarBottom";
 export { CategoryCard } from "./Cards";
 export { Footer } from "./UI/Footer/Footer";
 export { QuizEndModal } from "./UI/Modal/QuizEndModal";
+export { RulesModal } from "./UI/Modal/RulesModal";

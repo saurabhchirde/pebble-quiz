@@ -12,6 +12,7 @@
 }
 
 .question-page-content {
+  width: 100%;
   max-width: 70rem;
   padding: 2rem 3rem 2rem;
   margin: 0 auto;
@@ -20,6 +21,7 @@
 .question-page-header {
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .question-page-header h1 {
@@ -34,6 +36,11 @@
 .question-section {
   align-items: flex-start;
   margin-top: 2rem;
+}
+
+.error-loading-message {
+  font-size: 1.2rem;
+  margin: auto;
 }
 
 .question-section h2 {

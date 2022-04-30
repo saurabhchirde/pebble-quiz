@@ -14,7 +14,7 @@
 }
 
 .question-card {
-  max-width: 100%;
+  width: 100%;
   margin: auto;
 }
 
@@ -24,8 +24,8 @@
 }
 
 .question-img {
-  width: 20rem;
-  height: 23rem;
+  width: 22rem;
+  height: 24rem;
   object-fit: cover;
   border-radius: 15px;
   margin-right: 1rem;

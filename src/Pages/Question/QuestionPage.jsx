@@ -3,8 +3,8 @@ import {
   NavBarBottom,
   NavBarTop,
   Button,
-  Footer,
   QuizEndModal,
+  RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
 import { useModal } from "Context";
@@ -18,30 +18,32 @@ export const QuestionPage = () => {
   const { categoryId } = useParams();
   const [startQuiz, setStartQuiz] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(0);
-  const [timer, setTimer] = useState(6);
+  const [timer, setTimer] = useState(20);
   const [selectedChoice, setSelectedChoice] = useState("");
   const [score, setScore] = useState(0);
   const [finalScore, setFinalScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [showRules, setShowRules] = useState(true);
 
   const category = quizQuestions.find((cat) => cat._id === categoryId);
 
-  const startQuizToggler = () => {
+  const startQuizClickHandler = () => {
     setStartQuiz((pre) => !pre);
+    setShowRules(false);
   };
 
   const timerInterval = () => {
     setTimeout(() => {
       if (startQuiz) {
-        if (timer < 1) {
-          if (nextQuestion < category.questions.length - 1) {
+        if (timer < 1 || selectedChoice) {
+          if (nextQuestion < category?.questions.length - 1) {
             setNextQuestion((preQuestion) => preQuestion + 1);
             setSelectedChoice("");
           } else {
             setShowResult(true);
             setStartQuiz(false);
           }
-          setTimer(6);
+          setTimer(20);
         } else {
           setTimer((preTime) => preTime - 1);
         }
@@ -49,13 +51,13 @@ export const QuestionPage = () => {
     }, 1000);
   };
 
-  const currentQuestion = category.questions[nextQuestion].question;
-  const answer = category.questions[nextQuestion].answer;
-  const currentQuestionImg = category.questions[nextQuestion].img;
-  const options = category.questions[nextQuestion].options;
+  const currentQuestion = category?.questions[nextQuestion].question;
+  const answer = category?.questions[nextQuestion].answer;
+  const currentQuestionImg = category?.questions[nextQuestion].img;
+  const options = category?.questions[nextQuestion].options;
   const currentQuestionNumber =
-    category.questions.indexOf(category.questions[nextQuestion]) + 1;
-  const totalQuestions = category.questions.length;
+    category?.questions.indexOf(category?.questions[nextQuestion]) + 1;
+  const totalQuestions = category?.questions.length;
 
   useEffect(() => {
     timerInterval();
@@ -79,6 +81,13 @@ export const QuestionPage = () => {
       {showResult && (
         <QuizEndModal setShowResult={setShowResult} finalScore={finalScore} />
       )}
+      {currentQuestion && showRules && (
+        <RulesModal
+          onStartQuizClickHandler={startQuizClickHandler}
+          startQuiz={startQuiz}
+          setShowRules={setShowRules}
+        />
+      )}
       <div
         className="question-page-content"
         onClick={() => {
@@ -87,7 +96,7 @@ export const QuestionPage = () => {
       >
         <div>
           <div className="question-page-header">
-            <h1>Quiz - {category.name}</h1>
+            <h1>Quiz - {category?.name ? category.name : ""}</h1>
             <div className="flex-row login-btn-desktop">
               <Button
                 label="Logout"
@@ -97,29 +106,38 @@ export const QuestionPage = () => {
                     : "btn primary-outline-btn-md"
                 }
               />
-              <Button
-                onClick={startQuizToggler}
-                label={startQuiz ? "Stop Quiz" : "Start Quiz"}
-                btnClassName="btn primary-btn-md"
-              />
+              {startQuiz && (
+                <Button
+                  onClick={startQuizClickHandler}
+                  label="Stop Quiz"
+                  btnClassName="btn primary-btn-md"
+                />
+              )}
             </div>
           </div>
+
           <div className="question-section">
-            <div>
-              <QuestionCard
-                question={currentQuestion}
-                answer={answer}
-                options={options}
-                questionNum={currentQuestionNumber}
-                totalQuestions={totalQuestions}
-                img={currentQuestionImg}
-                time={timer}
-                selectedChoice={selectedChoice}
-                setSelectedChoice={setSelectedChoice}
-                score={score}
-                setScore={setScore}
-              />
-            </div>
+            {currentQuestion ? (
+              <div>
+                <QuestionCard
+                  question={currentQuestion}
+                  answer={answer}
+                  options={options}
+                  questionNum={currentQuestionNumber}
+                  totalQuestions={totalQuestions}
+                  img={currentQuestionImg}
+                  timer={timer}
+                  selectedChoice={selectedChoice}
+                  setSelectedChoice={setSelectedChoice}
+                  score={score}
+                  setScore={setScore}
+                />
+              </div>
+            ) : (
+              <p className="error-loading-message">
+                Error to load Question, try again
+              </p>
+            )}
           </div>
         </div>
       </div>
