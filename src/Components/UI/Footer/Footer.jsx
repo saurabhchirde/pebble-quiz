@@ -5,7 +5,7 @@ export const Footer = () => {
       <h3>
         Designed & Developed by
         <a href="https://twitter.com/SaurabhChirde" target="_blank">
-          Saurabh Chirde :)
+          Saurabh Chirde
         </a>
       </h3>
       <h3 className="github-icon">

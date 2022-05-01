@@ -1,48 +1,19 @@
 import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
 import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
-import {
-  badge_1,
-  badge_2,
-  badge_3,
-  badge_4,
-  badge_5,
-  badge_6,
-  badge_7,
-  badge_8,
-  badge_9,
-  badge_10,
-  badge_11,
-  badge_12,
-  badge_13,
-  badge_14,
-  placeholder,
-} from "Data/Badges/badges";
+import { allBadges, achievements } from "Data/tempAchievements";
 import "./ProfilePage.css";
 
 export const ProfilePage = () => {
-  const badges = [
-    badge_1,
-    badge_2,
-    badge_4,
-    badge_5,
-    badge_6,
-    badge_7,
-    badge_8,
-    badge_9,
-    badge_10,
-    badge_11,
-    badge_12,
-    badge_13,
-    badge_14,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-    placeholder,
-  ];
+  const totalAchivement = achievements.length;
+  const progressBarFill = (totalAchivement / 20) * 100;
+
+  const achievedBadges = allBadges?.map((badge, index) => (
+    <img key={index} src={badge.badge} alt="badge" />
+  ));
+
+  const profileImageSrc =
+    "https://scontent.fnag5-1.fna.fbcdn.net/v/t1.6435-9/151580883_4025926607469148_268572636116125368_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=174925&_nc_ohc=xI-ONWnsyqEAX9xfx9S&_nc_ht=scontent.fnag5-1.fna&oh=00_AT8DVdijFl1vPSvSR8ukmbUnV0KQ_NbkX8AepcpAzPB2DQ&oe=628C4E8B";
 
   return (
     <div className="profile-page-body">
@@ -52,7 +23,7 @@ export const ProfilePage = () => {
       <div className="profile-page-content">
         <div>
           <div className="profile-page-header">
-            <h1>Welcome, Saurabh</h1>
+            <h1>Hi, Saurabh</h1>
             <div className="flex-row login-btn-desktop">
               <Button
                 label="Logout"
@@ -64,32 +35,29 @@ export const ProfilePage = () => {
             </div>
           </div>
           <div className="profile-detail-section">
-            <img
-              src="https://scontent.fnag5-1.fna.fbcdn.net/v/t1.6435-9/151580883_4025926607469148_268572636116125368_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=174925&_nc_ohc=xI-ONWnsyqEAX9xfx9S&_nc_ht=scontent.fnag5-1.fna&oh=00_AT8DVdijFl1vPSvSR8ukmbUnV0KQ_NbkX8AepcpAzPB2DQ&oe=628C4E8B"
-              alt="user-profile"
-            />
+            <img src={profileImageSrc} alt="user-profile" />
             <div className="profile-detail-section-right">
               <div className="user-detail-overview">
                 <h2>Saurabh Chirde</h2>
-                <p>Level 7</p>
+                <p>Level {totalAchivement}</p>
               </div>
               <div className="profile-overview-section">
                 <div className="profile-overview">
-                  <img src={flag} alt="icon" />
+                  <img src={flag} alt="icon" className="overview-icon" />
                   <div>
                     <h3>35</h3>
                     <p>Game Wins</p>
                   </div>
                 </div>
                 <div className="profile-overview">
-                  <img src={highest} alt="icon" />
+                  <img src={highest} alt="icon" className="overview-icon" />
                   <div>
                     <h3>50</h3>
                     <p>Highest Score</p>
                   </div>
                 </div>
                 <div className="profile-overview">
-                  <img src={check_bg} alt="icon" />
+                  <img src={check_bg} alt="icon" className="overview-icon" />
                   <div>
                     <h3>101</h3>
                     <p>Correct Answers</p>
@@ -100,14 +68,18 @@ export const ProfilePage = () => {
           </div>
           <div className="profile-achievement-section">
             <div className="profile-achievement-title">
-              <p>Achievement</p>
-              <p>7/20 </p>
+              <p>Achievements</p>
+              <div className="total-achievements">
+                <p>{totalAchivement}/20 </p>
+                <div className="achievements-progress-bar">
+                  <div
+                    style={{ width: `${progressBarFill}%` }}
+                    className="achievements-progress-bar-fill"
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div className="profile-achievement-badges">
-              {badges.map((badge) => (
-                <img key={badge} src={badge} alt="badge" />
-              ))}
-            </div>
+            <div className="profile-achievement-badges">{achievedBadges}</div>
           </div>
         </div>
         <Footer />

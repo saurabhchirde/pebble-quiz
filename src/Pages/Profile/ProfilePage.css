@@ -6,8 +6,14 @@
 .profile-overview-section,
 .profile-overview,
 .profile-achievement-title,
-.profile-achievement-badges {
+.profile-achievement-badges,
+.total-achievements {
   display: flex;
+}
+
+.profile-page-content,
+.profile-detail-section-right {
+  flex-direction: column;
 }
 
 .profile-page-content {
@@ -15,7 +21,6 @@
   max-width: 70rem;
   margin: 0 auto;
   padding: 2rem 3rem 2rem;
-  flex-direction: column;
 }
 
 .profile-page-header {
@@ -23,7 +28,10 @@
 }
 
 .profile-page-content,
-.profile-page-header {
+.profile-page-header,
+.profile-detail-section-right,
+.profile-overview-section,
+.profile-achievement-title {
   justify-content: space-between;
 }
 
@@ -43,17 +51,19 @@
 .profile-detail-section > img {
   width: 12rem;
   height: 12rem;
-  background-color: aqua;
   margin-right: 1rem;
   border-radius: 10px;
 }
 
 .profile-detail-section-right {
-  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
   width: 100%;
   padding: 0 1rem;
+}
+
+.user-detail-overview {
+  text-align: left;
+  margin-bottom: 1rem;
 }
 
 .profile-overview div {
@@ -61,17 +71,38 @@
   padding: 0 10px;
 }
 
+.profile-overview h3 {
+  font-size: 1rem;
+}
+
 .profile-overview-section {
-  width: 85%;
-  justify-content: space-between;
+  width: 95%;
+}
+
+.profile-overview {
+  align-items: center;
 }
 
 .profile-overview img {
   width: 3rem;
 }
 
-.profile-achievement-title {
-  justify-content: space-between;
+.total-achievements {
+  align-items: center;
+}
+
+.achievements-progress-bar {
+  margin-left: 10px;
+  height: 6px;
+  border-radius: 30px;
+  width: 12rem;
+  background-color: var(--progress-bar-bg);
+}
+
+.achievements-progress-bar-fill {
+  height: 6px;
+  background-color: var(--progress-bar-color);
+  border-radius: 30px;
 }
 
 .profile-achievement-badges {
@@ -97,6 +128,43 @@
   .profile-page-header h1 {
     font-size: 1.4rem;
   }
+
+  .profile-detail-section > img {
+    width: 10rem;
+    height: 10rem;
+    margin-right: 10px;
+  }
+
+  .profile-detail-section-right {
+    padding: 0;
+  }
+
+  .profile-overview div {
+    text-align: left;
+    padding: 0 6px;
+  }
+
+  .profile-overview-section {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .profile-overview img {
+    width: 2.3rem;
+  }
+
+  .profile-achievement-title {
+    justify-content: space-between;
+  }
+
+  .profile-achievement-badges {
+    gap: 1.2rem;
+  }
+
+  .profile-achievement-badges img {
+    width: 5.5rem;
+    height: 5rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -116,9 +184,28 @@
     text-align: left;
     margin-top: 10px;
   }
+
+  .profile-detail-section > img {
+    width: 10rem;
+    height: 10rem;
+    margin-right: 1rem;
+  }
+
+  .profile-overview img {
+    width: 2.5rem;
+  }
+
+  .profile-achievement-badges {
+    gap: 1.4rem;
+  }
+
+  .profile-achievement-badges img {
+    width: 5.7rem;
+    height: 4.5rem;
+  }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .profile-page-content {
     padding: 2rem 5px 1rem;
   }
@@ -130,5 +217,34 @@
   .profile-page-header h1 {
     font-size: 1.1rem;
     font-weight: 500;
+  }
+
+  .profile-detail-section > img {
+    width: 8rem;
+    height: 8rem;
+    margin-right: 10px;
+  }
+
+  .user-detail-overview h2 {
+    font-size: 1.2rem;
+  }
+
+  .profile-overview {
+    margin: 3px 0;
+  }
+
+  .profile-overview img {
+    display: none;
+  }
+
+  .profile-achievement-badges {
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .profile-achievement-badges img {
+    width: 4.8rem;
+    height: 4.5rem;
   }
 }
