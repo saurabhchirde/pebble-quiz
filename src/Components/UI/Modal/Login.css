@@ -24,13 +24,22 @@
   text-align: center;
 }
 
-.signin-modal form p span {
+.signin-modal span {
   color: var(--primary-color);
   margin-left: 1rem;
 }
 
 .password-input-field input:focus {
   outline: none;
+}
+
+.google-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  width: 100%;
+  margin: 0 0 6px;
 }
 
 .password-input-field i:nth-child(3) {

@@ -7,14 +7,19 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useModal, useQuiz } from "Context";
+import { useAuth, useModal, useQuiz } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./QuestionPage.css";
 
 export const QuestionPage = () => {
-  const { setProfileMenu } = useModal();
+  const {
+    authState: { token },
+    authDispatch,
+  } = useAuth();
+
+  const { setProfileMenu, authClickHandler } = useModal();
   const { categoryId } = useParams();
   const [nextQuestion, setNextQuestion] = useState(0);
   const [timer, setTimer] = useState(20);
@@ -105,7 +110,8 @@ export const QuestionPage = () => {
             <h1>Quiz - {category?.name ? category.name : ""}</h1>
             <div className="flex-row login-btn-desktop">
               <Button
-                label="Logout"
+                onClick={authClickHandler}
+                label={token ? "Logout" : "Login"}
                 btnClassName={
                   startQuiz
                     ? "btn disabled-btn-md"

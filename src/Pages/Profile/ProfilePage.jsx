@@ -3,17 +3,21 @@ import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import { allBadges, achievements } from "Data/tempAchievements";
 import "./ProfilePage.css";
+import { useAuth, useModal } from "Context";
 
 export const ProfilePage = () => {
+  const {
+    authState: { token, profileImg },
+  } = useAuth();
+
+  const { authClickHandler } = useModal();
+
   const totalAchivement = achievements.length;
   const progressBarFill = (totalAchivement / 20) * 100;
 
   const achievedBadges = allBadges?.map((badge, index) => (
     <img key={index} src={badge.badge} alt="badge" />
   ));
-
-  const profileImageSrc =
-    "https://scontent.fnag5-1.fna.fbcdn.net/v/t1.6435-9/151580883_4025926607469148_268572636116125368_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=174925&_nc_ohc=xI-ONWnsyqEAX9xfx9S&_nc_ht=scontent.fnag5-1.fna&oh=00_AT8DVdijFl1vPSvSR8ukmbUnV0KQ_NbkX8AepcpAzPB2DQ&oe=628C4E8B";
 
   return (
     <div className="profile-page-body">
@@ -26,7 +30,8 @@ export const ProfilePage = () => {
             <h1>Hi, Saurabh</h1>
             <div className="flex-row login-btn-desktop">
               <Button
-                label="Logout"
+                onClick={authClickHandler}
+                label={token ? "Logout" : "Login"}
                 btnClassName="btn primary-outline-btn-md"
               />
               <Link to="/category">
@@ -35,7 +40,7 @@ export const ProfilePage = () => {
             </div>
           </div>
           <div className="profile-detail-section">
-            <img src={profileImageSrc} alt="user-profile" />
+            <img src={profileImg} alt="user-profile" />
             <div className="profile-detail-section-right">
               <div className="user-detail-overview">
                 <h2>Saurabh Chirde</h2>

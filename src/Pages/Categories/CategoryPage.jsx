@@ -9,10 +9,13 @@ import {
 import "../CommonStyling.css";
 import "./CategoryPage.css";
 import { quizQuestions } from "Data/tempData";
-import { useModal } from "Context";
+import { useAuth, useModal } from "Context";
 
 export const CategoryPage = () => {
-  const { setProfileMenu } = useModal();
+  const { setProfileMenu, authClickHandler } = useModal();
+  const {
+    authState: { token },
+  } = useAuth();
 
   const showCategories = quizQuestions.map((cat) => (
     <CategoryCard key={cat.name} category={cat} cardSize="card-square" />
@@ -34,7 +37,8 @@ export const CategoryPage = () => {
             <h1>Select category to start</h1>
             <div className="flex-row login-btn-desktop">
               <Button
-                label="Logout"
+                onClick={authClickHandler}
+                label={token ? "Logout" : "Login"}
                 btnClassName="btn primary-outline-btn-md"
               />
             </div>

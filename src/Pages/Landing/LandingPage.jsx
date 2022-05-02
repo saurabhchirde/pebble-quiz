@@ -13,7 +13,7 @@ import "../CommonStyling.css";
 import "./LandingPage.css";
 
 export const LandingPage = () => {
-  const { setProfileMenu } = useModal();
+  const { setProfileMenu, authClickHandler } = useModal();
 
   return (
     <div className="landing-page-body">
@@ -31,7 +31,8 @@ export const LandingPage = () => {
             <h1>Welcome, Saurabh</h1>
             <div className="flex-row login-btn-desktop">
               <Button
-                label="Logout"
+                onClick={authClickHandler}
+                label="Login"
                 btnClassName="btn primary-outline-btn-md"
               />
               <Link to="/category">

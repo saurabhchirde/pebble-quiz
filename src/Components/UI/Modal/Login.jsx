@@ -1,12 +1,14 @@
-import { useModal } from "Context";
+import { useModal, useNetwork } from "Context";
 import { Button, IconButton, InputTypeOne } from "Components";
 import { useState } from "react";
 import "./Login.css";
 import { InputTypePassword } from "../Input";
+import { LabelIconButton } from "../Button";
 
 export const Login = () => {
   const { setShowLogin, setShowSignup, setAlertText, setShowAlert } =
     useModal();
+  const { googleLoginHandler } = useNetwork();
   const [showPassword, setShowPassword] = useState(false);
   const [loginInput, setLoginInput] = useState({
     email: "",
@@ -44,8 +46,6 @@ export const Login = () => {
       };
     });
   };
-
-  const onTestButtonClickFormHandler = () => {};
 
   return (
     <>
@@ -100,28 +100,27 @@ export const Login = () => {
             btnClassName="btn primary-btn-md"
             onClick={onLoginClickFormHandler}
           />
-          <Button
-            btnWrapper="signin-btn"
-            type="submit"
-            label="Test User"
-            btnClassName="btn primary-outline-btn-md"
-            onClick={onTestButtonClickFormHandler}
-          />
-          <p>
-            Forgot your password? <span>Reset Password</span>
-          </p>
-          <button
-            className="btn primary-text-btn-sm create-account-btn"
-            onClick={() => {
-              setShowLogin(false);
-              setShowSignup(true);
-            }}
-          >
-            <h2>
-              Create New Account <i className="fas fa-angle-right"></i>
-            </h2>
-          </button>
         </form>
+        <LabelIconButton
+          icon="fab fa-google"
+          label="Login with Google"
+          btnClassName="btn label-icon-outline-btn-md google-login"
+          onClick={googleLoginHandler}
+        />
+        <p>
+          Forgot your password? <span>Reset Password</span>
+        </p>
+        <button
+          className="btn primary-text-btn-sm create-account-btn"
+          onClick={() => {
+            setShowLogin(false);
+            setShowSignup(true);
+          }}
+        >
+          <h2>
+            Create New Account <i className="fas fa-angle-right"></i>
+          </h2>
+        </button>
       </div>
     </>
   );

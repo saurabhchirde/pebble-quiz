@@ -2,8 +2,14 @@ import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
 import { Link } from "react-router-dom";
 import { allUsers } from "Data/tempUsers";
 import "./LeaderboardPage.css";
+import { useAuth, useModal } from "Context";
 
 export const LeaderboardPage = () => {
+  const {
+    authState: { token },
+  } = useAuth();
+  const { authClickHandler } = useModal();
+
   const showAllUsers = allUsers?.map((user) => (
     <div key={user.name} className="leaderboard-user-details">
       <div>
@@ -27,7 +33,11 @@ export const LeaderboardPage = () => {
         <div className="leaderboard-page-header">
           <h1>Hi, Saurabh</h1>
           <div className="flex-row login-btn-desktop">
-            <Button label="Logout" btnClassName="btn primary-outline-btn-md" />
+            <Button
+              onClick={authClickHandler}
+              label={token ? "Logout" : "Login"}
+              btnClassName="btn primary-outline-btn-md"
+            />
             <Link to="/category">
               <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
             </Link>
