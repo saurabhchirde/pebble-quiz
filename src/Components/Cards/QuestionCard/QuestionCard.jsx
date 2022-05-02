@@ -1,3 +1,4 @@
+import { useQuiz } from "Context";
 import { watch, check, paper } from "Data/Icons/icons";
 import "./QuestionCard.css";
 
@@ -13,8 +14,8 @@ export const QuestionCard = ({
   setSelectedChoice,
   score,
   setScore,
-  startQuiz,
 }) => {
+  const { startQuiz } = useQuiz();
   const optionSelectHandler = (option) => {
     setSelectedChoice(option);
     if (answer === option) {

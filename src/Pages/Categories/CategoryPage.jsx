@@ -6,12 +6,17 @@ import {
   CategoryCard,
   Footer,
 } from "Components";
+import "../CommonStyling.css";
 import "./CategoryPage.css";
 import { quizQuestions } from "Data/tempData";
 import { useModal } from "Context";
 
 export const CategoryPage = () => {
   const { setProfileMenu } = useModal();
+
+  const showCategories = quizQuestions.map((cat) => (
+    <CategoryCard key={cat.name} category={cat} cardSize="card-square" />
+  ));
 
   return (
     <div className="category-page-body">
@@ -36,15 +41,7 @@ export const CategoryPage = () => {
           </div>
           <div className="category-page-cards">
             <h2>All Categories</h2>
-            <div>
-              {quizQuestions.map((cat) => (
-                <CategoryCard
-                  key={cat.name}
-                  category={cat}
-                  cardSize="card-square"
-                />
-              ))}
-            </div>
+            <div>{showCategories}</div>
           </div>
         </div>
         <Footer />

@@ -12,7 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 export const NavBar = () => {
   const { pathname } = useLocation();
 
-  const activeLeaderboard = pathname.includes("leadeboard");
+  const activeLeaderboard = pathname.includes("leaderboard");
   const activeCategory = pathname.includes("category");
   const activeNotifications = pathname.includes("notifications");
   const activeSupport = pathname.includes("support");
@@ -34,10 +34,12 @@ export const NavBar = () => {
           </div>
         </Link>
         <div className="nav-bar-menu">
-          <div>
-            <img src={leaderboard} alt="icon" />
-            <h2>Leaderboard</h2>
-          </div>
+          <Link to="/leaderboard">
+            <div className={activeLeaderboard ? "active-nav" : ""}>
+              <img src={leaderboard} alt="icon" />
+              <h2>Leaderboard</h2>
+            </div>
+          </Link>
           <Link to="/category">
             <div className={activeCategory ? "active-nav" : ""}>
               <img src={category} alt="icon" />
@@ -48,14 +50,18 @@ export const NavBar = () => {
             <img src={notifications} alt="icon" />
             <h2>Notifications</h2>
           </div>
-          <div>
-            <img src={help} alt="icon" />
-            <h2>Support</h2>
-          </div>
-          <div>
-            <img src={settings} alt="icon" />
-            <h2>Settings</h2>
-          </div>
+          <Link to="/support">
+            <div className={activeSupport ? "active-nav" : ""}>
+              <img src={help} alt="icon" />
+              <h2>Support</h2>
+            </div>
+          </Link>
+          <Link to="/settings">
+            <div className={activeSettings ? "active-nav" : ""}>
+              <img src={settings} alt="icon" />
+              <h2>Settings</h2>
+            </div>
+          </Link>
         </div>
       </div>
       <Link to="/">

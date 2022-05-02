@@ -7,40 +7,43 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useModal } from "Context";
+import { useModal, useQuiz } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const { setProfileMenu } = useModal();
   const { categoryId } = useParams();
-  const navigate = useNavigate();
-
-  const [startQuiz, setStartQuiz] = useState(false);
   const [nextQuestion, setNextQuestion] = useState(0);
   const [timer, setTimer] = useState(20);
   const [selectedChoice, setSelectedChoice] = useState("");
   const [score, setScore] = useState(0);
-  const [finalScore, setFinalScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
   const [showRules, setShowRules] = useState(true);
+
+  const {
+    showResult,
+    startQuiz,
+    setShowResult,
+    setStartQuiz,
+    finalScore,
+    setFinalScore,
+    startQuizHandler,
+    startNewQuizHandler,
+  } = useQuiz();
 
   const category = quizQuestions.find((cat) => cat._id === categoryId);
 
   const startQuizClickHandler = () => {
-    setStartQuiz((pre) => !pre);
+    startQuizHandler();
     setShowRules(false);
-  };
-
-  const startNewQuizHandler = () => {
-    navigate("/category");
   };
 
   const timerInterval = () => {
     setTimeout(() => {
       if (startQuiz) {
+        setFinalScore(0);
         if (timer < 1 || selectedChoice) {
           if (nextQuestion < category?.questions.length - 1) {
             setNextQuestion((preQuestion) => preQuestion + 1);
@@ -83,18 +86,11 @@ export const QuestionPage = () => {
     <div className="question-page-body">
       <NavBar />
       <NavBarBottom />
-      <NavBarTop
-        startQuiz={startQuiz}
-        startQuizClickHandler={startQuizClickHandler}
-        startNewQuizHandler={startNewQuizHandler}
-      />
-      {showResult && (
-        <QuizEndModal setShowResult={setShowResult} finalScore={finalScore} />
-      )}
+      <NavBarTop />
+      {showResult && <QuizEndModal finalScore={finalScore} />}
       {currentQuestion && showRules && (
         <RulesModal
-          onStartQuizClickHandler={startQuizClickHandler}
-          startQuiz={startQuiz}
+          startQuizClickHandler={startQuizClickHandler}
           setShowRules={setShowRules}
         />
       )}
@@ -141,12 +137,11 @@ export const QuestionPage = () => {
                   setSelectedChoice={setSelectedChoice}
                   score={score}
                   setScore={setScore}
-                  startQuiz={startQuiz}
                 />
               </div>
             ) : (
               <p className="error-loading-message">
-                Error to load Question, try again
+                failed to load Question 🙁, try again
               </p>
             )}
           </div>

@@ -27,6 +27,11 @@
     justify-content: space-around;
   }
 
+  .nav-bar-bottom a {
+    display: flex;
+    align-items: center;
+  }
+
   .nav-bar-bottom img {
     width: 2rem;
     margin: 1px 5px;

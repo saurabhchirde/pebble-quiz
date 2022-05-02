@@ -9,6 +9,7 @@ import { NavBar } from "Components/UI/Navigation";
 import { useModal } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { Link } from "react-router-dom";
+import "../CommonStyling.css";
 import "./LandingPage.css";
 
 export const LandingPage = () => {

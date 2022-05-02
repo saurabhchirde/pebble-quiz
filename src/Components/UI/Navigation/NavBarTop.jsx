@@ -2,26 +2,24 @@ import "./NavBarTop.css";
 import { logo_light } from "Data/Logo/logo";
 import { Button } from "Components";
 import { Link, useLocation } from "react-router-dom";
-import { useModal } from "Context";
+import { useModal, useQuiz } from "Context";
 
-export const NavBarTop = ({
-  startQuiz,
-  startQuizClickHandler,
-  startNewQuizHandler,
-}) => {
+export const NavBarTop = () => {
+  const { startQuiz, startQuizHandler, startNewQuizHandler } = useQuiz();
   const { profileMenu, setProfileMenu } = useModal();
   const { pathname } = useLocation();
 
   const hideStartBtn =
     pathname === "/category" || pathname === "/" ? false : true;
-  const onLanding = pathname === "/" ? true : false;
-  const startBtnLabel = onLanding ? "Start Quiz" : "Start New";
+  const startQuizButton =
+    pathname === "/" || pathname === "/leaderboard" ? true : false;
+  const startBtnLabel = startQuizButton ? "Start Quiz" : "Start New";
 
   const startButtonClickHandler = () => {
     if (!startQuiz) {
       startNewQuizHandler();
     } else {
-      startQuizClickHandler();
+      startQuizHandler();
     }
   };
 

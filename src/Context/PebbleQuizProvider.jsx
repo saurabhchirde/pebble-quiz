@@ -5,6 +5,7 @@ import {
   ModalProvider,
   ScrollToTop,
   ThemeProvider,
+  QuizProvider,
 } from "./index";
 
 const PebbleQuizProvider = ({ children }) => {
@@ -14,7 +15,9 @@ const PebbleQuizProvider = ({ children }) => {
         <ScrollToTop>
           <AlertProvider>
             <AnimationProvider>
-              <ModalProvider>{children}</ModalProvider>
+              <ModalProvider>
+                <QuizProvider>{children}</QuizProvider>
+              </ModalProvider>
             </AnimationProvider>
           </AlertProvider>
         </ScrollToTop>
