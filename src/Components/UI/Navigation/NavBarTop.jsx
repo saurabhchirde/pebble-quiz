@@ -55,7 +55,12 @@ export const NavBarTop = ({
           </div>
           {profileMenu && (
             <div className="user-menu">
-              <Button label="Profile" btnClassName="btn primary-text-btn-md" />
+              <Link to="/account">
+                <Button
+                  label="Profile"
+                  btnClassName="btn primary-text-btn-md"
+                />
+              </Link>
               <Button label="Logout" btnClassName="btn primary-text-btn-md" />
             </div>
           )}
