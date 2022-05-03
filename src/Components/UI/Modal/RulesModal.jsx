@@ -1,13 +1,11 @@
+import { useQuiz } from "Context";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import "./RulesModal.css";
 
-export const RulesModal = ({
-  onStartQuizClickHandler,
-  startQuiz,
-  setShowRules,
-}) => {
+export const RulesModal = ({ setShowRules, startQuizClickHandler }) => {
   const navigate = useNavigate();
+  const { startQuiz } = useQuiz();
 
   const closeModalHandler = () => {
     navigate("/category");
@@ -45,7 +43,7 @@ export const RulesModal = ({
             </p> */}
           </div>
           <Button
-            onClick={onStartQuizClickHandler}
+            onClick={startQuizClickHandler}
             label={startQuiz ? "Stop Quiz" : "Start Quiz"}
             btnClassName="btn primary-btn-lg"
           />

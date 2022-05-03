@@ -1,0 +1,143 @@
+.landing-page-body,
+.landing-page-content,
+.landing-page-header,
+.landing-page-popular,
+.landing-page-top-categories,
+.landing-page-popular > div,
+.landing-page-top-categories > div,
+.category-page-body,
+.category-page-content,
+.category-page-header,
+.category-page-cards,
+.category-page-cards > div,
+.support-page-body,
+.support-page-content,
+.support-page-header,
+.setting-page-body,
+.setting-page-content,
+.setting-page-header {
+  display: flex;
+}
+
+.landing-page-content,
+.category-page-content,
+.support-page-content,
+.setting-page-content {
+  max-width: 70rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 3rem 2rem;
+  flex-direction: column;
+}
+
+.landing-page-content,
+.landing-page-header,
+.category-page-header,
+.category-page-content,
+.support-page-header,
+.setting-page-header {
+  justify-content: space-between;
+}
+
+.landing-page-header,
+.landing-page-popular > div,
+.landing-page-top-categories > div,
+.category-page-header,
+.support-page-header,
+.setting-page-header {
+  align-items: center;
+}
+
+.landing-page-header h1,
+.category-page-header h1,
+.support-page-header h1,
+.setting-page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.landing-page-popular,
+.landing-page-top-categories,
+.support-page-title,
+.setting-page-title {
+  margin-top: 2.5rem;
+}
+
+.landing-page-popular,
+.landing-page-top-categories,
+.landing-page-popular h2,
+.landing-page-top-categories h2,
+.category-page-cards h2,
+.support-page-title,
+.setting-page-title {
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .landing-page-content,
+  .category-page-content,
+  .support-page-content,
+  .setting-page-content {
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .landing-page-header h1,
+  .category-page-header h1,
+  .support-page-header h1,
+  .setting-page-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .landing-page-popular h2,
+  .landing-page-top-categories h2,
+  .category-page-cards h2,
+  .support-page-title,
+  .setting-page-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landing-page-content,
+  .category-page-content,
+  .support-page-content,
+  .setting-page-content {
+    width: 100%;
+    padding: 2rem 1rem 1rem;
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .category-page-header,
+  .category-page-cards > div,
+  .support-page-header,
+  .setting-page-header {
+    justify-content: center;
+  }
+
+  .landing-page-header h1,
+  .landing-page-popular h2,
+  .landing-page-top-categories h2,
+  .category-page-header h1,
+  .category-page-cards h2,
+  .support-page-header h1,
+  .setting-page-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .support-page-title,
+  .setting-page-title {
+    font-size: 1.2rem;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .landing-page-header h1,
+  .category-page-header h1,
+  .support-page-header h1,
+  .setting-page-header h1 {
+    font-size: 1.1rem;
+  }
+}

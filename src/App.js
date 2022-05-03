@@ -1,6 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { CategoryPage, LandingPage, ProfilePage, QuestionPage } from "./Pages";
+import {
+  CategoryPage,
+  LandingPage,
+  LeaderboardPage,
+  ProfilePage,
+  QuestionPage,
+  SettingPage,
+  SupportPage,
+} from "./Pages";
 
 function App() {
   return (
@@ -10,6 +18,9 @@ function App() {
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/category/:categoryId" element={<QuestionPage />} />
         <Route path="/account" element={<ProfilePage />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/support" element={<SupportPage />} />
+        <Route path="/settings" element={<SettingPage />} />
       </Routes>
     </div>
   );

@@ -1,9 +1,11 @@
+import { useQuiz } from "Context";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import "./QuizEndModal.css";
 
-export const QuizEndModal = ({ finalScore, setShowResult }) => {
+export const QuizEndModal = ({ finalScore }) => {
   const navigate = useNavigate();
+  const { setShowResult } = useQuiz();
 
   const closeModalHandler = () => {
     setShowResult(false);
@@ -12,6 +14,7 @@ export const QuizEndModal = ({ finalScore, setShowResult }) => {
 
   const checkLeaderboardHandler = () => {
     setShowResult(false);
+    navigate("/leaderboard");
   };
 
   const takeNewQuizHandler = () => {
@@ -26,7 +29,7 @@ export const QuizEndModal = ({ finalScore, setShowResult }) => {
         <div className={finalScore > 0 ? "positive-score" : "zero-score"}>
           <i onClick={closeModalHandler} className="fa fa-times close-btn"></i>
           <h1>
-            Your final score is <span> {finalScore}</span>
+            You scored <span>{finalScore}</span> points
           </h1>
           <div className="quiz-end-modal-cta flex-row-center">
             <Button
@@ -36,7 +39,7 @@ export const QuizEndModal = ({ finalScore, setShowResult }) => {
             />
             <Button
               onClick={checkLeaderboardHandler}
-              label="Check LeaderBoard"
+              label="LeaderBoard"
               btnClassName="btn primary-text-btn-lg"
             />
           </div>
