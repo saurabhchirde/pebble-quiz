@@ -4,7 +4,8 @@ import { alertReducer } from "./alertReducer";
 const AlertContext = createContext(null);
 
 const alertInitialState = {
-  showAlert: false,
+  showAlertCTABar: false,
+  showAlertBar: false,
   alertText: "",
   alertType: "",
   alertIcon: "",

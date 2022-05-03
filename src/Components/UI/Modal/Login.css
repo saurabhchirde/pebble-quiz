@@ -2,6 +2,10 @@
   z-index: 4;
 }
 
+.signin-modal h1 {
+  margin: 0 0 1rem;
+}
+
 .signin-modal .close-modal-btn {
   position: absolute;
   top: 1rem;
@@ -14,6 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
 }
 
 .create-account-btn:hover {
@@ -33,7 +38,15 @@
   outline: none;
 }
 
-.google-login {
+.section-break-line {
+  width: 50%;
+  margin: 6px 0 1.1rem;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.google-login,
+.facebook-login {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,8 +55,26 @@
   margin: 0 0 6px;
 }
 
+.signin-modal .password-reset {
+  color: var(--text-light);
+}
+
+.signin-modal .password-reset span {
+  cursor: pointer;
+}
+
 .password-input-field i:nth-child(3) {
   left: 100%;
   transform: translate(-100%, 0);
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .signin-modal {
+    width: 100%;
+  }
+
+  .signin-modal form {
+    width: 100%;
+  }
 }

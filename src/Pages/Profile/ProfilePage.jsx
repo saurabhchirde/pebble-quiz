@@ -2,12 +2,13 @@ import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
 import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import { allBadges, achievements } from "Data/tempAchievements";
+import avatar from "Data/Img/avatar.png";
 import "./ProfilePage.css";
 import { useAuth, useModal } from "Context";
 
 export const ProfilePage = () => {
   const {
-    authState: { token, profileImg },
+    authState: { token, profileImg, name },
   } = useAuth();
 
   const { authClickHandler } = useModal();
@@ -27,7 +28,7 @@ export const ProfilePage = () => {
       <div className="profile-page-content">
         <div>
           <div className="profile-page-header">
-            <h1>Hi, Saurabh</h1>
+            <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
             <div className="flex-row login-btn-desktop">
               <Button
                 onClick={authClickHandler}
@@ -40,10 +41,10 @@ export const ProfilePage = () => {
             </div>
           </div>
           <div className="profile-detail-section">
-            <img src={profileImg} alt="user-profile" />
+            <img src={profileImg ? profileImg : avatar} alt="user-profile" />
             <div className="profile-detail-section-right">
               <div className="user-detail-overview">
-                <h2>Saurabh Chirde</h2>
+                <h2>{name ? name : "Guest User"}</h2>
                 <p>Level {totalAchivement}</p>
               </div>
               <div className="profile-overview-section">

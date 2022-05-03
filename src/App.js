@@ -1,5 +1,12 @@
-import { Alert, AnimateLoader, Login, Signup } from "Components";
-import { useAnimation, useModal } from "Context";
+import {
+  Alert,
+  AlertWithCTA,
+  AnimateLoader,
+  Login,
+  ResetPassword,
+  Signup,
+} from "Components";
+import { useAlert, useAnimation, useModal } from "Context";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import {
@@ -13,15 +20,20 @@ import {
 } from "./Pages";
 
 function App() {
-  const { showLogin, showSignup, showAlert } = useModal();
+  const { showLogin, showSignup, showResetPassword } = useModal();
   const { loader } = useAnimation();
+  const {
+    alertState: { showAlertBar, showAlertCTABar },
+  } = useAlert();
 
   return (
     <div className="App">
       {loader && <AnimateLoader />}
       {showLogin && <Login />}
       {showSignup && <Signup />}
-      {showAlert && <Alert />}
+      {showResetPassword && <ResetPassword />}
+      {showAlertBar && <Alert />}
+      {showAlertCTABar && <AlertWithCTA />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/category" element={<CategoryPage />} />

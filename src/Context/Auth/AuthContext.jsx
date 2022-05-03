@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { authReducer } from "./authReducer";
 
 const AuthContext = createContext(null);
@@ -12,9 +12,15 @@ const initialAuthState = {
 };
 
 const AuthProvider = ({ children }) => {
-  const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
+  const [authState, authDispatch] = useReducer(
+    authReducer,
+    JSON.parse(localStorage.getItem("pebble-quiz-auth")) ?? initialAuthState
+  );
 
-  console.log(authState);
+  useEffect(() => {
+    localStorage.setItem("pebble-quiz-auth", JSON.stringify(authState));
+  }, [authState.token]);
+
   return (
     <AuthContext.Provider value={{ authState, authDispatch }}>
       {children}

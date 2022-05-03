@@ -6,7 +6,7 @@ import { useAuth, useModal } from "Context";
 
 export const LeaderboardPage = () => {
   const {
-    authState: { token },
+    authState: { token, name },
   } = useAuth();
   const { authClickHandler } = useModal();
 
@@ -31,7 +31,7 @@ export const LeaderboardPage = () => {
       <NavBarTop />
       <div className="leaderboard-page-content">
         <div className="leaderboard-page-header">
-          <h1>Hi, Saurabh</h1>
+          <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
           <div className="flex-row login-btn-desktop">
             <Button
               onClick={authClickHandler}
