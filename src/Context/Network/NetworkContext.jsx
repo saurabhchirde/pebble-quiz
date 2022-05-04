@@ -19,11 +19,9 @@ const NetworkProvider = ({ children }) => {
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
-  // console.log(firebaseConfig);
   const googleLoginHandler = async () => {
     try {
       const response = await signInWithPopup(firebaseAuth, googleProvider);
-      // console.log(response);
       authDispatch({
         type: "LOGIN_SIGNUP",
         payload: {
@@ -41,7 +39,6 @@ const NetworkProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      // console.log(response);
       alertDispatch({
         type: "ALERT",
         payload: {
@@ -56,7 +53,6 @@ const NetworkProvider = ({ children }) => {
   const facebookLoginHandler = async () => {
     try {
       const response = await signInWithPopup(firebaseAuth, facebookProvider);
-      // console.log(response);
       authDispatch({
         type: "LOGIN_SIGNUP",
         payload: {
@@ -74,7 +70,6 @@ const NetworkProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      // console.log(response);
       alertDispatch({
         type: "ALERT",
         payload: {
@@ -109,7 +104,6 @@ const NetworkProvider = ({ children }) => {
           alertIcon: "fas fa-check-circle alert-icon",
         },
       });
-      // console.log(response);
     } catch (error) {
       alertDispatch({
         type: "ALERT",
@@ -129,7 +123,6 @@ const NetworkProvider = ({ children }) => {
         email,
         password
       );
-      // console.log(response);
       authDispatch({
         type: "LOGIN_SIGNUP",
         payload: {
@@ -147,7 +140,6 @@ const NetworkProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      // console.log(error.message);
       alertDispatch({
         type: "ALERT",
         payload: {
@@ -172,7 +164,6 @@ const NetworkProvider = ({ children }) => {
         },
       });
     } catch (error) {
-      // console.log(error.message);
       alertDispatch({
         type: "ALERT",
         payload: {

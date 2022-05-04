@@ -13,6 +13,7 @@ import {
   CategoryPage,
   LandingPage,
   LeaderboardPage,
+  NotFound,
   ProfilePage,
   QuestionPage,
   SettingPage,
@@ -42,6 +43,7 @@ function App() {
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/support" element={<SupportPage />} />
         <Route path="/settings" element={<SettingPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

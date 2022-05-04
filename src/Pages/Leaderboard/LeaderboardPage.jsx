@@ -8,7 +8,7 @@ export const LeaderboardPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
-  const { authClickHandler } = useModal();
+  const { setProfileMenu, authClickHandler } = useModal();
 
   const showAllUsers = allUsers?.map((user) => (
     <div key={user.name} className="leaderboard-user-details">
@@ -29,7 +29,12 @@ export const LeaderboardPage = () => {
       <NavBar />
       <NavBarBottom />
       <NavBarTop />
-      <div className="leaderboard-page-content">
+      <div
+        className="leaderboard-page-content"
+        onClick={() => {
+          setProfileMenu(false);
+        }}
+      >
         <div className="leaderboard-page-header">
           <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
           <div className="flex-row login-btn-desktop">

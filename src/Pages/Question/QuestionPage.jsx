@@ -11,12 +11,12 @@ import { useAuth, useModal, useQuiz } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "../CommonStyling.css";
 import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const {
     authState: { token },
-    authDispatch,
   } = useAuth();
 
   const { setProfileMenu, authClickHandler } = useModal();

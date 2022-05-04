@@ -1,47 +1,9 @@
-.profile-page-body,
-.profile-page-content,
-.profile-page-header,
-.profile-detail-section,
-.profile-detail-section-right,
-.profile-overview-section,
-.profile-overview,
-.profile-achievement-title,
-.profile-achievement-badges,
-.total-achievements {
-  display: flex;
-}
-
-.profile-page-content,
-.profile-detail-section-right {
-  flex-direction: column;
-}
-
-.profile-page-content {
-  width: 100%;
-  max-width: 70rem;
-  margin: 0 auto;
-  padding: 2rem 3rem 2rem;
-}
-
 .profile-page-header {
   align-items: center;
 }
 
-.profile-page-content,
-.profile-page-header,
-.profile-detail-section-right,
-.profile-overview-section,
-.profile-achievement-title {
-  justify-content: space-between;
-}
-
 .profile-page-header > div {
   justify-content: flex-end;
-}
-
-.profile-page-header h1 {
-  font-size: 1.5rem;
-  font-weight: 500;
 }
 
 .profile-detail-section {
@@ -79,16 +41,8 @@
   width: 95%;
 }
 
-.profile-overview {
-  align-items: center;
-}
-
 .profile-overview img {
   width: 3rem;
-}
-
-.total-achievements {
-  align-items: center;
 }
 
 .achievements-progress-bar {
@@ -120,15 +74,12 @@
   height: 5.8rem;
 }
 
+.not-logged-message {
+  text-align: center;
+  margin-top: 3rem;
+}
+
 @media screen and (max-width: 1024px) {
-  .profile-page-content {
-    padding: 2rem 1.5rem 1rem;
-  }
-
-  .profile-page-header h1 {
-    font-size: 1.4rem;
-  }
-
   .profile-detail-section > img {
     width: 10rem;
     height: 10rem;
@@ -168,13 +119,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .profile-page-content {
-    width: 100%;
-    padding: 2rem 1rem 1rem;
-    margin-top: 2rem;
-    margin-bottom: 3.5rem;
-  }
-
   .profile-page-header button {
     font-size: 0.9rem;
   }
