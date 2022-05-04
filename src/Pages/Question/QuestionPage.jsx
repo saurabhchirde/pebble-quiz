@@ -7,25 +7,32 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAuth, useModal, useQuiz } from "Context";
+import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { storage, ref, getDownloadURL } from "firebase.config";
 import "../CommonStyling.css";
 import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const {
-    authState: { token },
+    authState: { token, email },
   } = useAuth();
 
+  const { updateFirestoreUserData } = useNetworkCalls();
+
   const { setProfileMenu, authClickHandler } = useModal();
+  const { playedQuizData, setPlayedQuizData } = useQuiz();
   const { categoryId } = useParams();
   const [nextQuestion, setNextQuestion] = useState(0);
   const [timer, setTimer] = useState(20);
   const [selectedChoice, setSelectedChoice] = useState("");
   const [score, setScore] = useState(0);
   const [showRules, setShowRules] = useState(true);
+  const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [badgeUrl, setBadgeUrl] = useState("");
 
   const {
     showResult,
@@ -56,6 +63,32 @@ export const QuestionPage = () => {
           } else {
             setShowResult(true);
             setStartQuiz(false);
+
+            // after finishing one quiz
+            if (wrongAnswers > 0) {
+              setPlayedQuizData((preData) => {
+                return {
+                  ...preData,
+                  winningStreak: 0,
+                };
+              });
+            } else {
+              setPlayedQuizData((preData) => {
+                return {
+                  ...preData,
+                  winningStreak: playedQuizData.winningStreak + 1,
+                  gameWin: playedQuizData.gameWin + 1,
+                  correctAnswers: playedQuizData.correctAnswers + correctAnswer,
+                };
+              });
+            }
+            setPlayedQuizData((preData) => {
+              return {
+                ...preData,
+                quizGiven: playedQuizData.quizGiven + 1,
+                totalScore: playedQuizData.totalScore + score,
+              };
+            });
           }
           setTimer(20);
         } else {
@@ -86,6 +119,62 @@ export const QuestionPage = () => {
       }
     }
   }, [score, startQuiz]);
+
+  useEffect(() => {
+    if (playedQuizData.level > 0) {
+      // function to fetch badge url
+      (async () => {
+        let imgReference = "";
+        if (playedQuizData.level === 0) {
+          imgReference = ref(storage, `/badges/badge_${1}.svg`);
+        } else {
+          imgReference = ref(
+            storage,
+            `/badges/badge_${playedQuizData.level}.svg`
+          );
+        }
+        try {
+          const res = await getDownloadURL(imgReference);
+          setBadgeUrl(res);
+        } catch (error) {
+          console.log(error.message);
+        }
+      })();
+    }
+
+    if (playedQuizData.winningStreak === 3) {
+      let level = 0;
+      if (playedQuizData.level === 0) {
+        level = 1;
+      } else {
+        level = playedQuizData.level;
+      }
+      setPlayedQuizData((preData) => {
+        return {
+          ...preData,
+          level: playedQuizData.level + level,
+          badges: [
+            ...playedQuizData.badges,
+            {
+              name: `Badge_${level}`,
+              badge: `${badgeUrl}`,
+            },
+          ],
+          winningStreak: 0,
+        };
+      });
+    }
+  }, [playedQuizData.winningStreak]);
+
+  useEffect(() => {
+    // if logged in update on server
+    if (timer === 20 && token && startQuiz) {
+      console.log("updating on server");
+      updateFirestoreUserData(email, playedQuizData);
+    }
+  }, [timer === 20, startQuiz, token]);
+
+  console.log(badgeUrl);
 
   return (
     <div className="question-page-body">
@@ -143,6 +232,8 @@ export const QuestionPage = () => {
                   setSelectedChoice={setSelectedChoice}
                   score={score}
                   setScore={setScore}
+                  setWrongAnswers={setWrongAnswers}
+                  setCorrectAnswer={setCorrectAnswer}
                 />
               </div>
             ) : (

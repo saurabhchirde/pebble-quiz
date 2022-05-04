@@ -14,13 +14,18 @@ export const QuestionCard = ({
   setSelectedChoice,
   score,
   setScore,
+  setWrongAnswers,
+  setCorrectAnswer,
 }) => {
   const { startQuiz } = useQuiz();
+
   const optionSelectHandler = (option) => {
     setSelectedChoice(option);
     if (answer === option) {
+      setCorrectAnswer((preData) => preData + 1);
       setScore((preScore) => preScore + 5);
     } else {
+      setWrongAnswers((preData) => preData + 1);
       setScore((preScore) => preScore - 3);
     }
   };

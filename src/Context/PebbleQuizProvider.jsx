@@ -19,9 +19,9 @@ const PebbleQuizProvider = ({ children }) => {
             <AnimationProvider>
               <AuthProvider>
                 <ModalProvider>
-                  <QuizProvider>
-                    <NetworkProvider>{children}</NetworkProvider>
-                  </QuizProvider>
+                  <NetworkProvider>
+                    <QuizProvider>{children} </QuizProvider>
+                  </NetworkProvider>
                 </ModalProvider>
               </AuthProvider>
             </AnimationProvider>
