@@ -6,14 +6,17 @@ import {
   NavBarTop,
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
-import { useModal } from "Context";
+import { useAuth, useModal, useNetworkCalls } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { Link } from "react-router-dom";
 import "../CommonStyling.css";
 import "./LandingPage.css";
 
 export const LandingPage = () => {
-  const { setProfileMenu } = useModal();
+  const { setProfileMenu, authClickHandler } = useModal();
+  const {
+    authState: { token, name },
+  } = useAuth();
 
   return (
     <div className="landing-page-body">
@@ -28,10 +31,11 @@ export const LandingPage = () => {
       >
         <div>
           <div className="landing-page-header">
-            <h1>Welcome, Saurabh</h1>
+            <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
             <div className="flex-row login-btn-desktop">
               <Button
-                label="Logout"
+                onClick={authClickHandler}
+                label={token ? "Logout" : "Login"}
                 btnClassName="btn primary-outline-btn-md"
               />
               <Link to="/category">

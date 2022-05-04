@@ -1,4 +1,5 @@
 export { Alert } from "./Alert/Alert";
+export { AlertWithCTA } from "./Alert/AlertWithCTA";
 export { AnimateLoader } from "./Animations/AnimateLoader";
 export { NotLogged } from "./NotLogged/NotLogged";
 export { BadgeIconButton } from "./UI/Button";
@@ -23,3 +24,4 @@ export { CategoryCard } from "./Cards";
 export { Footer } from "./UI/Footer/Footer";
 export { QuizEndModal } from "./UI/Modal/QuizEndModal";
 export { RulesModal } from "./UI/Modal/RulesModal";
+export { ResetPassword } from "./UI/Modal";

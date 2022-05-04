@@ -1,7 +1,7 @@
 import { Button } from "../Button/Button";
 import { IconButton, InputTypeOne } from "Components";
 import "./Signup.css";
-import { useModal } from "Context";
+import { useAlert, useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
 
 const initialSignupState = {
@@ -12,9 +12,10 @@ const initialSignupState = {
 };
 
 export const Signup = () => {
-  const { setShowLogin, setShowSignup, setAlertText, setShowAlert } =
-    useModal();
+  const { setShowLogin, setShowSignup } = useModal();
+  const { alertDispatch } = useAlert();
   const [user, setUser] = useState(initialSignupState);
+  const { userSignupHandler } = useNetworkCalls();
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const emailValidate =
@@ -29,22 +30,24 @@ export const Signup = () => {
       user.email.match(emailValidate)
     ) {
       if (user.password === confirmPassword) {
+        userSignupHandler(user.email, user.password);
         setShowSignup(false);
-        setAlertText(
-          "Account created Successfully, please login in to continue"
-        );
         setUser(initialSignupState);
         setConfirmPassword("");
       } else {
         setConfirmPassword("");
-        setAlertText("Password mismatched");
       }
     } else {
-      setAlertText(
-        "Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character required"
-      );
+      alertDispatch({
+        type: "ALERT_CTA",
+        payload: {
+          alertText:
+            "Password should be, Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character",
+          alertType: "alert-info",
+          alertIcon: "fas fa-info alert-icon",
+        },
+      });
     }
-    setShowAlert(true);
   };
 
   const onInputChangeHandler = (e) => {
@@ -143,6 +146,7 @@ export const Signup = () => {
             <span> Privacy Policy</span>
           </p>
           <Button
+            onClick={onSignupFormSubmitHandler}
             btnWrapper="signup-btn"
             type="submit"
             btnClassName="btn primary-btn-md"

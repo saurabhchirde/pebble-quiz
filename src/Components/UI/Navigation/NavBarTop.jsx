@@ -2,17 +2,19 @@ import "./NavBarTop.css";
 import { logo_light } from "Data/Logo/logo";
 import { Button } from "Components";
 import { Link, useLocation } from "react-router-dom";
-import { useModal, useQuiz } from "Context";
+import { useAuth, useModal, useQuiz } from "Context";
+import avatar from "Data/Img/avatar.png";
 
 export const NavBarTop = () => {
   const { startQuiz, startQuizHandler, startNewQuizHandler } = useQuiz();
-  const { profileMenu, setProfileMenu } = useModal();
+  const { profileMenu, setProfileMenu, authClickHandler } = useModal();
   const { pathname } = useLocation();
+  const {
+    authState: { token, profileImg },
+  } = useAuth();
 
-  const hideStartBtn =
-    pathname === "/category" || pathname === "/" ? false : true;
-  const startQuizButton =
-    pathname === "/" || pathname === "/leaderboard" ? true : false;
+  const hideStartBtn = pathname === "/category" ? false : true;
+  const startQuizButton = pathname !== "/category" ? true : false;
   const startBtnLabel = startQuizButton ? "Start Quiz" : "Start New";
 
   const startButtonClickHandler = () => {
@@ -29,40 +31,52 @@ export const NavBarTop = () => {
         <img src={logo_light} alt="logo" />
       </Link>
       <div className="flex-row-center">
-        <div className="flex-row-center login-btn-mobile">
-          {hideStartBtn && (
+        {hideStartBtn && (
+          <div className="flex-row-center login-btn-mobile">
             <Button
               onClick={startButtonClickHandler}
               label={!startQuiz ? startBtnLabel : "Stop Quiz"}
               btnClassName="btn primary-btn-md"
             />
-          )}
-        </div>
-        <div className="user-avatar">
-          <div
-            className="avatar avatar-sm-round"
-            onClick={() => {
-              setProfileMenu((show) => !show);
-            }}
-          >
-            <img
-              loading="lazy"
-              src="https://scontent.fnag5-1.fna.fbcdn.net/v/t1.6435-9/151580883_4025926607469148_268572636116125368_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=174925&_nc_ohc=xI-ONWnsyqEAX9xfx9S&_nc_ht=scontent.fnag5-1.fna&oh=00_AT8DVdijFl1vPSvSR8ukmbUnV0KQ_NbkX8AepcpAzPB2DQ&oe=628C4E8B"
-              alt="avatar"
-            />
           </div>
-          {profileMenu && (
-            <div className="user-menu">
-              <Link to="/account">
+        )}
+        {token ? (
+          <div className="user-avatar">
+            <div
+              className="avatar avatar-sm-round"
+              onClick={() => {
+                setProfileMenu((show) => !show);
+              }}
+            >
+              <img
+                loading="lazy"
+                src={profileImg ? profileImg : avatar}
+                alt="avatar"
+              />
+            </div>
+            {profileMenu && (
+              <div className="user-menu">
+                <Link to="/account">
+                  <Button
+                    label="Profile"
+                    btnClassName="btn primary-text-btn-md"
+                  />
+                </Link>
                 <Button
-                  label="Profile"
+                  onClick={authClickHandler}
+                  label="Logout"
                   btnClassName="btn primary-text-btn-md"
                 />
-              </Link>
-              <Button label="Logout" btnClassName="btn primary-text-btn-md" />
-            </div>
-          )}
-        </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Button
+            onClick={authClickHandler}
+            label={token ? "Logout" : "Login"}
+            btnClassName="btn primary-outline-btn-md"
+          />
+        )}
       </div>
     </div>
   );

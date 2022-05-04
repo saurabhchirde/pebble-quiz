@@ -6,6 +6,8 @@ import {
   ScrollToTop,
   ThemeProvider,
   QuizProvider,
+  AuthProvider,
+  NetworkProvider,
 } from "./index";
 
 const PebbleQuizProvider = ({ children }) => {
@@ -15,9 +17,13 @@ const PebbleQuizProvider = ({ children }) => {
         <ScrollToTop>
           <AlertProvider>
             <AnimationProvider>
-              <ModalProvider>
-                <QuizProvider>{children}</QuizProvider>
-              </ModalProvider>
+              <AuthProvider>
+                <ModalProvider>
+                  <QuizProvider>
+                    <NetworkProvider>{children}</NetworkProvider>
+                  </QuizProvider>
+                </ModalProvider>
+              </AuthProvider>
             </AnimationProvider>
           </AlertProvider>
         </ScrollToTop>

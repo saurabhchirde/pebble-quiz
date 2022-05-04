@@ -8,9 +8,14 @@ import {
 } from "Data/Icons/icons";
 import { logo_light } from "Data/Logo/logo";
 import { Link, useLocation } from "react-router-dom";
+import avatar from "Data/Img/avatar.png";
+import { useAuth } from "Context";
 
 export const NavBar = () => {
   const { pathname } = useLocation();
+  const {
+    authState: { profileImg, name },
+  } = useAuth();
 
   const activeLeaderboard = pathname.includes("leaderboard");
   const activeCategory = pathname.includes("category");
@@ -26,11 +31,11 @@ export const NavBar = () => {
             <div className="avatar avatar-sm-round">
               <img
                 loading="lazy"
-                src="https://scontent.fnag5-1.fna.fbcdn.net/v/t1.6435-9/151580883_4025926607469148_268572636116125368_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=174925&_nc_ohc=xI-ONWnsyqEAX9xfx9S&_nc_ht=scontent.fnag5-1.fna&oh=00_AT8DVdijFl1vPSvSR8ukmbUnV0KQ_NbkX8AepcpAzPB2DQ&oe=628C4E8B"
+                src={profileImg ? profileImg : avatar}
                 alt="avatar"
               />
             </div>
-            <h2>Saurabh Chirde</h2>
+            <h2>{name ? name : "Guest User"}</h2>
           </div>
         </Link>
         <div className="nav-bar-menu">

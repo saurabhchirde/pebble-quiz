@@ -160,6 +160,12 @@
 }
 
 @media screen and (max-width: 500px) {
+  .question-img {
+    width: 12rem;
+    height: 14.6rem;
+    margin-right: 10px;
+  }
+
   .question-text h1 {
     font-size: 1.2rem;
   }
@@ -205,8 +211,8 @@
   }
 
   .answer-options button {
-    padding: 1.7rem 1rem;
-    font-size: 1.1rem;
+    padding: 1rem 1rem;
+    font-size: 1rem;
   }
 
   .question-details {
@@ -220,7 +226,7 @@
   }
 
   .question-text {
-    margin-top: 3rem;
+    margin-top: 2.2rem;
   }
 
   .question-text h1 {

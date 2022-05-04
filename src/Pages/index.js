@@ -5,3 +5,4 @@ export { ProfilePage } from "./Profile/ProfilePage";
 export { LeaderboardPage } from "./Leaderboard/LeaderboardPage";
 export { SupportPage } from "./Support/SupportPage";
 export { SettingPage } from "./Settings/SettingPage";
+export { NotFound } from "./NotFound/NotFound";

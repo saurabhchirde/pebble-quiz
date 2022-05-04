@@ -1,9 +1,19 @@
+import {
+  Alert,
+  AlertWithCTA,
+  AnimateLoader,
+  Login,
+  ResetPassword,
+  Signup,
+} from "Components";
+import { useAlert, useAnimation, useModal } from "Context";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import {
   CategoryPage,
   LandingPage,
   LeaderboardPage,
+  NotFound,
   ProfilePage,
   QuestionPage,
   SettingPage,
@@ -11,8 +21,20 @@ import {
 } from "./Pages";
 
 function App() {
+  const { showLogin, showSignup, showResetPassword } = useModal();
+  const { loader } = useAnimation();
+  const {
+    alertState: { showAlertBar, showAlertCTABar },
+  } = useAlert();
+
   return (
     <div className="App">
+      {loader && <AnimateLoader />}
+      {showLogin && <Login />}
+      {showSignup && <Signup />}
+      {showResetPassword && <ResetPassword />}
+      {showAlertBar && <Alert />}
+      {showAlertCTABar && <AlertWithCTA />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/category" element={<CategoryPage />} />
@@ -21,6 +43,7 @@ function App() {
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/support" element={<SupportPage />} />
         <Route path="/settings" element={<SettingPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

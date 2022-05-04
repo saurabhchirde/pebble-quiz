@@ -10,6 +10,27 @@
 .category-page-header,
 .category-page-cards,
 .category-page-cards > div,
+.question-page-body,
+.question-page-content,
+.question-page-header,
+.question-section,
+.question-section > div,
+.profile-page-body,
+.profile-page-content,
+.profile-page-header,
+.profile-detail-section,
+.profile-detail-section-right,
+.profile-overview-section,
+.profile-overview,
+.profile-achievement-title,
+.profile-achievement-badges,
+.total-achievements,
+.leaderboard-page-body,
+.leaderboard-page-content,
+.leaderboard-page-header,
+.leaderboard-table,
+.leaderboard-user-details,
+.leaderboard-user-details > div,
 .support-page-body,
 .support-page-content,
 .support-page-header,
@@ -21,12 +42,27 @@
 
 .landing-page-content,
 .category-page-content,
+.question-page-content,
+.profile-page-content,
+.leaderboard-page-content,
 .support-page-content,
 .setting-page-content {
   max-width: 70rem;
   width: 100%;
   margin: 0 auto;
   padding: 2rem 3rem 2rem;
+}
+
+.landing-page-content,
+.category-page-content,
+.question-page-content,
+.question-section,
+.profile-page-content,
+.profile-detail-section-right,
+.leaderboard-page-content,
+.leaderboard-table,
+.support-page-content,
+.setting-page-content {
   flex-direction: column;
 }
 
@@ -34,6 +70,14 @@
 .landing-page-header,
 .category-page-header,
 .category-page-content,
+.question-page-header,
+.profile-page-content,
+.profile-page-header,
+.profile-detail-section-right,
+.profile-overview-section,
+.profile-achievement-title,
+.leaderboard-page-header,
+.leaderboard-user-details,
 .support-page-header,
 .setting-page-header {
   justify-content: space-between;
@@ -43,6 +87,12 @@
 .landing-page-popular > div,
 .landing-page-top-categories > div,
 .category-page-header,
+.question-page-header,
+.profile-overview,
+.total-achievements,
+.leaderboard-page-header,
+.leaderboard-user-details,
+.leaderboard-user-details > div,
 .support-page-header,
 .setting-page-header {
   align-items: center;
@@ -50,6 +100,9 @@
 
 .landing-page-header h1,
 .category-page-header h1,
+.question-page-header h1,
+.profile-page-header h1,
+.leaderboard-page-header h1,
 .support-page-header h1,
 .setting-page-header h1 {
   font-size: 1.5rem;
@@ -58,6 +111,7 @@
 
 .landing-page-popular,
 .landing-page-top-categories,
+.leaderboard-table-section,
 .support-page-title,
 .setting-page-title {
   margin-top: 2.5rem;
@@ -68,6 +122,8 @@
 .landing-page-popular h2,
 .landing-page-top-categories h2,
 .category-page-cards h2,
+.question-section h2,
+.leaderboard-table-section > h2,
 .support-page-title,
 .setting-page-title {
   font-weight: 500;
@@ -77,6 +133,9 @@
 @media screen and (max-width: 1024px) {
   .landing-page-content,
   .category-page-content,
+  .question-page-content,
+  .profile-page-content,
+  .leaderboard-page-content,
   .support-page-content,
   .setting-page-content {
     padding: 2rem 1.5rem 1rem;
@@ -84,6 +143,9 @@
 
   .landing-page-header h1,
   .category-page-header h1,
+  .question-page-header h1,
+  .profile-page-header h1,
+  .leaderboard-page-header h1,
   .support-page-header h1,
   .setting-page-header h1 {
     font-size: 1.4rem;
@@ -92,6 +154,7 @@
   .landing-page-popular h2,
   .landing-page-top-categories h2,
   .category-page-cards h2,
+  .leaderboard-table-section > h2,
   .support-page-title,
   .setting-page-title {
     font-size: 1.2rem;
@@ -101,6 +164,9 @@
 @media screen and (max-width: 768px) {
   .landing-page-content,
   .category-page-content,
+  .question-page-content,
+  .profile-page-content,
+  .leaderboard-page-content,
   .support-page-content,
   .setting-page-content {
     width: 100%;
@@ -111,6 +177,8 @@
 
   .category-page-header,
   .category-page-cards > div,
+  .question-page-header,
+  .leaderboard-page-header,
   .support-page-header,
   .setting-page-header {
     justify-content: center;
@@ -121,14 +189,18 @@
   .landing-page-top-categories h2,
   .category-page-header h1,
   .category-page-cards h2,
+  .question-page-header h1,
+  .leaderboard-page-header h1,
+  .leaderboard-table-section > h2,
   .support-page-header h1,
-  .setting-page-header h1 {
+  .setting-page-header h1,
+  .support-page-title,
+  .setting-page-title {
     font-size: 1.2rem;
   }
 
   .support-page-title,
   .setting-page-title {
-    font-size: 1.2rem;
     align-items: center;
   }
 }
@@ -136,6 +208,7 @@
 @media screen and (max-width: 400px) {
   .landing-page-header h1,
   .category-page-header h1,
+  .question-page-header h1,
   .support-page-header h1,
   .setting-page-header h1 {
     font-size: 1.1rem;
