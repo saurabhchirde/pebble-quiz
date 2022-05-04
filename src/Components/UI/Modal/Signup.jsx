@@ -3,6 +3,7 @@ import { IconButton, InputTypeOne } from "Components";
 import "./Signup.css";
 import { useAlert, useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
+import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 
 const initialSignupState = {
   firstName: "",
@@ -38,15 +39,12 @@ export const Signup = () => {
         setConfirmPassword("");
       }
     } else {
-      alertDispatch({
-        type: "ALERT_CTA",
-        payload: {
-          alertText:
-            "Password should be, Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character",
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT_CTA",
+        "INFO",
+        "Password should be, Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character"
+      );
     }
   };
 

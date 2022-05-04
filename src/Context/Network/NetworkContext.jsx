@@ -9,6 +9,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { firebaseAuth } from "firebase.config";
+import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 
 const NetworkContext = createContext({});
 
@@ -30,23 +31,14 @@ const NetworkProvider = ({ children }) => {
         },
       });
       setShowLogin(false);
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "Login Successfully",
-          alertType: "alert-success",
-          alertIcon: "fas fa-check-circle alert-icon",
-        },
-      });
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Login Successfully"
+      );
     } catch (error) {
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: error.message,
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };
 
@@ -61,23 +53,14 @@ const NetworkProvider = ({ children }) => {
         },
       });
       setShowLogin(false);
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "Login Successfully",
-          alertType: "alert-success",
-          alertIcon: "fas fa-check-circle alert-icon",
-        },
-      });
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Login Successfully"
+      );
     } catch (error) {
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: error.message,
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };
 
@@ -96,23 +79,14 @@ const NetworkProvider = ({ children }) => {
         },
       });
       setShowLogin(false);
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "Login Successfully",
-          alertType: "alert-success",
-          alertIcon: "fas fa-check-circle alert-icon",
-        },
-      });
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Login Successfully"
+      );
     } catch (error) {
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: error.message,
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };
 
@@ -131,23 +105,14 @@ const NetworkProvider = ({ children }) => {
         },
       });
       setShowSignup(false);
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "Account Created Successfully",
-          alertType: "alert-success",
-          alertIcon: "fas fa-check-circle alert-icon",
-        },
-      });
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Account Created Successfully"
+      );
     } catch (error) {
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: error.message,
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };
 
@@ -155,23 +120,14 @@ const NetworkProvider = ({ children }) => {
     try {
       sendPasswordResetEmail(firebaseAuth, email);
       setShowSignup(false);
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "Check your mailbox, to reset password",
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Check your mailbox, to reset password"
+      );
     } catch (error) {
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: error.message,
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };
 

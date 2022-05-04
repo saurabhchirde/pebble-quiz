@@ -6,7 +6,7 @@ import {
   NavBarTop,
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
-import { useAuth, useModal, useNetworkCalls } from "Context";
+import { useAuth, useModal } from "Context";
 import { quizQuestions } from "Data/tempData";
 import { Link } from "react-router-dom";
 import "../CommonStyling.css";
@@ -17,6 +17,23 @@ export const LandingPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
+
+  const popularQuiz = quizQuestions
+    .filter((cat) => cat.popular)
+    .map((cat) => (
+      <CategoryCard
+        key={cat._id}
+        cardSize="card-square"
+        time="3 min"
+        category={cat}
+      />
+    ));
+
+  const topCategoryQuiz = quizQuestions
+    .filter((cat) => cat.topCategory)
+    .map((cat) => (
+      <CategoryCard key={cat._id} cardSize="card-small" category={cat} />
+    ));
 
   return (
     <div className="landing-page-body">
@@ -45,32 +62,11 @@ export const LandingPage = () => {
           </div>
           <div className="landing-page-popular">
             <h2>Popular</h2>
-            <div>
-              {quizQuestions
-                .filter((cat) => cat.popular)
-                .map((cat) => (
-                  <CategoryCard
-                    key={cat._id}
-                    cardSize="card-square"
-                    time="3 min"
-                    category={cat}
-                  />
-                ))}
-            </div>
+            <div>{popularQuiz}</div>
           </div>
           <div className="landing-page-top-categories">
             <h2>Top Categories</h2>
-            <div>
-              {quizQuestions
-                .filter((cat) => cat.topCategory)
-                .map((cat) => (
-                  <CategoryCard
-                    key={cat._id}
-                    cardSize="card-small"
-                    category={cat}
-                  />
-                ))}
-            </div>
+            <div>{topCategoryQuiz}</div>
           </div>
         </div>
         <Footer />
