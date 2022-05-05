@@ -27,6 +27,10 @@
   background-color: var(--btn-hover);
 }
 
+.quiz-end-modal h1 {
+  text-align: center;
+}
+
 .quiz-end-modal > div {
   width: 35rem;
   padding: 2.5rem 1rem;

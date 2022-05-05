@@ -1,6 +1,18 @@
-import { useAuth, useNetworkCalls } from "Context";
+import { useAlert, useAuth } from "Context";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { alertDispatchHandler } from "Utils/alertDispatchHandler";
+import {
+  firestore,
+  doc,
+  getDoc,
+  setDoc,
+  get,
+  realTimeDBRef,
+  firebaseRealtimeDB,
+} from "firebase.config";
+import { child } from "firebase/database";
+import {} from "firebase/firestore";
 
 const initialplayedQuizData = {
   quizGiven: 0,
@@ -13,6 +25,8 @@ const initialplayedQuizData = {
   badges: [],
 };
 
+const initialQuizData = [];
+
 const QuizContext = createContext(null);
 
 const QuizProvider = ({ children }) => {
@@ -20,12 +34,18 @@ const QuizProvider = ({ children }) => {
   const {
     authState: { token, name, email, profileImg, id },
   } = useAuth();
-  const { getUserData } = useNetworkCalls();
+
+  const { alertDispatch } = useAlert();
 
   const [startQuiz, setStartQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const [playedQuizData, setPlayedQuizData] = useState(initialplayedQuizData);
+  const [allQuizQuestions, setAllQuizQuestions] = useState(
+    JSON.parse(localStorage.getItem("pebble-quiz-quiestions")) ??
+      initialQuizData
+  );
+  const [flag, setFlag] = useState(false);
 
   const startQuizHandler = () => {
     setStartQuiz((pre) => !pre);
@@ -35,17 +55,71 @@ const QuizProvider = ({ children }) => {
     navigate("/category");
   };
 
+  // get all question data
+  const getAllQuizQuestions = async () => {
+    const dbRef = realTimeDBRef(firebaseRealtimeDB);
+    try {
+      const allQuestions = await get(child(dbRef, "quizDB"));
+      setAllQuizQuestions(allQuestions.val());
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllQuizQuestions();
+    localStorage.setItem(
+      "pebble-quiz-quiestions",
+      JSON.stringify(allQuizQuestions)
+    );
+  }, []);
+
   useEffect(() => {
     setPlayedQuizData(initialplayedQuizData);
   }, [token]);
 
+  // all data - quiz and user
   const userData = { ...playedQuizData, name, email, id, profileImg };
+
+  const addUserToFirestore = async () => {
+    const addUser = doc(firestore, `users/${email}`);
+    try {
+      await setDoc(addUser, userData, { merge: true });
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
+  const getUserData = async () => {
+    const selectUser = doc(firestore, `users/${email}`);
+    try {
+      const userResponse = await getDoc(selectUser);
+      // check if user in database
+      if (userResponse.exists()) {
+        setPlayedQuizData(userResponse.data());
+      } else {
+        // add if user is not in database
+        addUserToFirestore();
+        setPlayedQuizData(userResponse.data());
+        setFlag(true);
+      }
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
 
   useEffect(() => {
     if (token) {
-      getUserData(userData, email, setPlayedQuizData);
+      getUserData();
     }
-  }, [email]);
+    // to refresh/render after adding new account
+    const flagTimer = setTimeout(() => {
+      setFlag(false);
+    }, 100);
+    return () => {
+      clearTimeout(flagTimer);
+    };
+  }, [email, token, flag]);
 
   return (
     <QuizContext.Provider
@@ -60,6 +134,8 @@ const QuizProvider = ({ children }) => {
         setPlayedQuizData,
         startQuizHandler,
         startNewQuizHandler,
+        allQuizQuestions,
+        setAllQuizQuestions,
       }}
     >
       {children}

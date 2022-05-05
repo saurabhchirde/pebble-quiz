@@ -6,9 +6,10 @@
   --wrong-ans: rgb(255, 178, 178);
   --positive-score: rgba(2, 255, 36, 0.238);
   --zero-score: rgba(255, 9, 9, 0.276);
-  --option-btn-shadow: rgba(21, 21, 21, 0.319);
+  --option-btn-shadow: hsla(201, 92%, 28%, 0.082);
   --progress-bar-bg: rgb(223, 223, 223);
   --progress-bar-color: var(--nav-bar-bg);
+  --button-click: rgba(133, 133, 133, 0.461);
 }
 
 body {

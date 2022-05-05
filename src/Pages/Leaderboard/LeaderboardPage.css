@@ -29,6 +29,7 @@
 
 .leaderboard-user-details span {
   color: var(--text-light);
+  margin-left: 8px;
 }
 
 .leaderboard-user-details img {
@@ -60,6 +61,10 @@
 }
 
 @media screen and (max-width: 450px) {
+  .leaderboard-user-name {
+    width: 15rem;
+  }
+
   .leaderboard-page-header button {
     font-size: 0.9rem;
   }

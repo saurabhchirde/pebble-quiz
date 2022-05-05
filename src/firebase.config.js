@@ -5,12 +5,14 @@ import {
   addDoc,
   setDoc,
   getDoc,
+  getDocs,
   updateDoc,
   doc,
   deleteDoc,
 } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { getDatabase, get, ref as realTimeDBRef } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -27,6 +29,7 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 const storage = getStorage(app);
 const firebaseAuth = getAuth(app);
+const firebaseRealtimeDB = getDatabase(app);
 
 export {
   app,
@@ -37,8 +40,12 @@ export {
   updateDoc,
   setDoc,
   getDoc,
+  getDocs,
   deleteDoc,
   storage,
+  get,
+  firebaseRealtimeDB,
+  realTimeDBRef,
   ref,
   getDownloadURL,
   firebaseAuth,

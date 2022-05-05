@@ -6,8 +6,8 @@ import {
   NavBarTop,
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
-import { useAuth, useModal } from "Context";
-import { quizQuestions } from "Data/tempData";
+import { useAuth, useModal, useQuiz } from "Context";
+// import { quizQuestions } from "Data/tempData";
 import { Link } from "react-router-dom";
 import "../CommonStyling.css";
 import "./LandingPage.css";
@@ -17,8 +17,9 @@ export const LandingPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
-
-  const popularQuiz = quizQuestions
+  const { allQuizQuestions } = useQuiz();
+  // console.log(allQuizQuestions);
+  const popularQuiz = allQuizQuestions
     .filter((cat) => cat.popular)
     .map((cat) => (
       <CategoryCard
@@ -29,7 +30,7 @@ export const LandingPage = () => {
       />
     ));
 
-  const topCategoryQuiz = quizQuestions
+  const topCategoryQuiz = allQuizQuestions
     .filter((cat) => cat.topCategory)
     .map((cat) => (
       <CategoryCard key={cat._id} cardSize="card-small" category={cat} />

@@ -7,24 +7,25 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
-import { quizQuestions } from "Data/tempData";
+import { useAlert, useAuth, useModal, useQuiz } from "Context";
+// import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 import { storage, ref, getDownloadURL } from "firebase.config";
 import "../CommonStyling.css";
 import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const {
-    authState: { token, email },
+    authState: { token },
   } = useAuth();
 
-  const { updateFirestoreUserData } = useNetworkCalls();
+  const { alertDispatch } = useAlert();
 
   const { setProfileMenu, authClickHandler } = useModal();
-  const { playedQuizData, setPlayedQuizData } = useQuiz();
   const { categoryId } = useParams();
+
   const [nextQuestion, setNextQuestion] = useState(0);
   const [timer, setTimer] = useState(20);
   const [selectedChoice, setSelectedChoice] = useState("");
@@ -32,7 +33,6 @@ export const QuestionPage = () => {
   const [showRules, setShowRules] = useState(true);
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [wrongAnswers, setWrongAnswers] = useState(0);
-  const [badgeUrl, setBadgeUrl] = useState("");
 
   const {
     showResult,
@@ -43,9 +43,18 @@ export const QuestionPage = () => {
     setFinalScore,
     startQuizHandler,
     startNewQuizHandler,
+    playedQuizData,
+    setPlayedQuizData,
+    allQuizQuestions,
   } = useQuiz();
 
-  const category = quizQuestions.find((cat) => cat._id === categoryId);
+  // console.log(allQuizQuestions);
+
+  // console.log(categoryId);
+
+  const category = allQuizQuestions.find((cat) => cat._id === categoryId);
+
+  // console.log(quizQuestions);
 
   const startQuizClickHandler = () => {
     startQuizHandler();
@@ -78,7 +87,6 @@ export const QuestionPage = () => {
                   ...preData,
                   winningStreak: playedQuizData.winningStreak + 1,
                   gameWin: playedQuizData.gameWin + 1,
-                  correctAnswers: playedQuizData.correctAnswers + correctAnswer,
                 };
               });
             }
@@ -87,6 +95,7 @@ export const QuestionPage = () => {
                 ...preData,
                 quizGiven: playedQuizData.quizGiven + 1,
                 totalScore: playedQuizData.totalScore + score,
+                correctAnswers: playedQuizData.correctAnswers + correctAnswer,
               };
             });
           }
@@ -121,60 +130,38 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (playedQuizData.level > 0) {
-      // function to fetch badge url
+    if (playedQuizData?.winningStreak === 3) {
+      let updatedLevel =
+        playedQuizData.level > 0 ? playedQuizData.level + 1 : 1;
+
+      // fetch badge url
       (async () => {
-        let imgReference = "";
-        if (playedQuizData.level === 0) {
-          imgReference = ref(storage, `/badges/badge_${1}.svg`);
-        } else {
-          imgReference = ref(
-            storage,
-            `/badges/badge_${playedQuizData.level}.svg`
-          );
-        }
+        const imgReference = ref(storage, `/badges/badge_${updatedLevel}.svg`);
         try {
-          const res = await getDownloadURL(imgReference);
-          setBadgeUrl(res);
+          const badgeUrl = await getDownloadURL(imgReference);
+          // console.log(badgeUrl);
+
+          // add badge in users account
+          setPlayedQuizData((preData) => {
+            return {
+              ...preData,
+              level: updatedLevel,
+              badges: [
+                ...playedQuizData.badges,
+                {
+                  name: `Badge_${updatedLevel}`,
+                  badge: `${badgeUrl}`,
+                },
+              ],
+              winningStreak: 0,
+            };
+          });
         } catch (error) {
-          console.log(error.message);
+          alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
         }
       })();
     }
-
-    if (playedQuizData.winningStreak === 3) {
-      let level = 0;
-      if (playedQuizData.level === 0) {
-        level = 1;
-      } else {
-        level = playedQuizData.level;
-      }
-      setPlayedQuizData((preData) => {
-        return {
-          ...preData,
-          level: playedQuizData.level + level,
-          badges: [
-            ...playedQuizData.badges,
-            {
-              name: `Badge_${level}`,
-              badge: `${badgeUrl}`,
-            },
-          ],
-          winningStreak: 0,
-        };
-      });
-    }
-  }, [playedQuizData.winningStreak]);
-
-  useEffect(() => {
-    // if logged in update on server
-    if (timer === 20 && token && startQuiz) {
-      console.log("updating on server");
-      updateFirestoreUserData(email, playedQuizData);
-    }
-  }, [timer === 20, startQuiz, token]);
-
-  console.log(badgeUrl);
+  }, [playedQuizData?.winningStreak]);
 
   return (
     <div className="question-page-body">

@@ -1,11 +1,16 @@
-import { useQuiz } from "Context";
+import { useAuth, useNetworkCalls, useQuiz } from "Context";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Button } from "../Button";
 import "./QuizEndModal.css";
 
 export const QuizEndModal = ({ finalScore }) => {
   const navigate = useNavigate();
-  const { setShowResult } = useQuiz();
+  const { startQuiz, showResult, setShowResult, playedQuizData } = useQuiz();
+  const {
+    authState: { token, email },
+  } = useAuth();
+  const { updateFirestoreUserData } = useNetworkCalls();
 
   const closeModalHandler = () => {
     setShowResult(false);
@@ -21,6 +26,13 @@ export const QuizEndModal = ({ finalScore }) => {
     setShowResult(false);
     navigate("/category");
   };
+
+  useEffect(() => {
+    // if logged in update data on server
+    if (token) {
+      updateFirestoreUserData(email, playedQuizData);
+    }
+  }, [showResult, token]);
 
   return (
     <>

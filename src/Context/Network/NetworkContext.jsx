@@ -15,8 +15,6 @@ import {
   doc,
   addDoc,
   updateDoc,
-  setDoc,
-  getDoc,
   deleteDoc,
 } from "firebase.config";
 import { alertDispatchHandler } from "Utils/alertDispatchHandler";
@@ -24,10 +22,7 @@ import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 const NetworkContext = createContext({});
 
 const NetworkProvider = ({ children }) => {
-  const {
-    // authState: { email },
-    authDispatch,
-  } = useAuth();
+  const { authDispatch } = useAuth();
   const { alertDispatch } = useAlert();
   const { setShowLogin, setShowSignup } = useModal();
 
@@ -35,31 +30,14 @@ const NetworkProvider = ({ children }) => {
   const facebookProvider = new FacebookAuthProvider();
 
   // add user to database after log in or signup
-  const addUserToFirestore = async (userData) => {
-    const addUser = doc(firestore, `users/${userData.email}`);
-
-    // const userData = {
-    //   // user info
-    //   name: response.user.providerData[0].displayName ?? "",
-    //   email: response.user.providerData[0].email,
-    //   id: response.user.providerData[0].uid ?? "",
-    //   profileImg: response.user.providerData[0].photoURL ?? "",
-    //   //  quiz info
-    //   quizGiven: 0,
-    //   winningStreak: 0,
-    //   level: 0,
-    //   gameWin: 0,
-    //   highestScore: 0,
-    //   correctAnswers: 0,
-    //   badges: [{ name: "", badge: "" }],
-    // };
-
-    try {
-      await setDoc(addUser, userData, { merge: true });
-    } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
-    }
-  };
+  // const addUserToFirestore = async (userData) => {
+  //   const addUser = doc(firestore, `users/${userData.email}`);
+  //   try {
+  //     await setDoc(addUser, userData, { merge: true });
+  //   } catch (error) {
+  //     alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+  //   }
+  // };
 
   // update userdata after playing quiz
   const updateFirestoreUserData = async (email, playedQuizData) => {
@@ -73,23 +51,22 @@ const NetworkProvider = ({ children }) => {
   };
 
   // get userdata
-  const getUserData = async (userData, email, setPlayedQuizData) => {
-    const selectUser = doc(firestore, `users/${email}`);
-    // console.log(playedQuizData);
-    try {
-      const userResponse = await getDoc(selectUser);
-      if (userResponse.exists()) {
-        console.log("skipped already exist", userResponse.data());
-        setPlayedQuizData(userResponse.data());
-      } else {
-        console.log("adding new", userResponse.data());
-        addUserToFirestore(userData);
-        setPlayedQuizData(userResponse.data());
-      }
-    } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
-    }
-  };
+  // const getUserData = async (userData, email, setPlayedQuizData) => {
+  //   const selectUser = doc(firestore, `users/${email}`);
+  //   try {
+  //     const userResponse = await getDoc(selectUser);
+  //     // check if in database
+  //     if (userResponse.exists()) {
+  //       setPlayedQuizData(userResponse.data());
+  //     } else {
+  //       // add if not in database
+  //       addUserToFirestore(userData);
+  //       setPlayedQuizData(userResponse.data());
+  //     }
+  //   } catch (error) {
+  //     alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+  //   }
+  // };
 
   const googleLoginHandler = async () => {
     try {
@@ -101,6 +78,7 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
+
       // check if user is exist in database
       // getUserData(response.user.providerData[0].email);
       // add user to database
@@ -226,9 +204,7 @@ const NetworkProvider = ({ children }) => {
         facebookLoginHandler,
         emailPasswordLoginHandler,
         userSignupHandler,
-        addUserToFirestore,
         updateFirestoreUserData,
-        getUserData,
         passwordResetEmailHandler,
       }}
     >
