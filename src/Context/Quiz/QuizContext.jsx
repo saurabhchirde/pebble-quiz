@@ -45,6 +45,7 @@ const QuizProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("pebble-quiz-quiestions")) ??
       initialQuizData
   );
+  const [earnedBadge, setEarnedBadge] = useState("");
   const [flag, setFlag] = useState(false);
 
   const startQuizHandler = () => {
@@ -67,16 +68,15 @@ const QuizProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getAllQuizQuestions();
-    localStorage.setItem(
-      "pebble-quiz-quiestions",
-      JSON.stringify(allQuizQuestions)
-    );
-  }, []);
+    if (allQuizQuestions.length < 1) {
+      getAllQuizQuestions();
 
-  useEffect(() => {
-    setPlayedQuizData(initialplayedQuizData);
-  }, [token]);
+      localStorage.setItem(
+        "pebble-quiz-quiestions",
+        JSON.stringify(allQuizQuestions)
+      );
+    }
+  }, [allQuizQuestions]);
 
   // all data - quiz and user
   const userData = { ...playedQuizData, name, email, id, profileImg };
@@ -131,6 +131,8 @@ const QuizProvider = ({ children }) => {
         finalScore,
         setFinalScore,
         playedQuizData,
+        earnedBadge,
+        setEarnedBadge,
         setPlayedQuizData,
         startQuizHandler,
         startNewQuizHandler,

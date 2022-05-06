@@ -13,7 +13,6 @@ export const LeaderboardPage = () => {
     authState: { token, name },
   } = useAuth();
   const { setProfileMenu, authClickHandler } = useModal();
-  const { showLoader } = useAnimation();
   const { alertDispatch } = useAlert();
   const [allUsers, setAllUsers] = useState([]);
   const [uniqueUsers, setUniqueUsers] = useState([]);
@@ -21,15 +20,12 @@ export const LeaderboardPage = () => {
   // get all users
   const getAllUsersFromFirestore = async () => {
     try {
-      showLoader();
       const usersList = await getDocs(collection(firestore, "users"));
 
       usersList.forEach((doc) =>
         setAllUsers((preData) => [...preData, doc.data()])
       );
-      showLoader();
     } catch (error) {
-      showLoader();
       alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };

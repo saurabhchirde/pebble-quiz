@@ -62,7 +62,10 @@
 
 @media screen and (max-width: 450px) {
   .leaderboard-user-name {
-    width: 15rem;
+    width: 10.4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .leaderboard-page-header button {

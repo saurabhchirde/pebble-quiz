@@ -4,9 +4,14 @@ const AnimationContext = createContext(null);
 
 const AnimationProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
+  const [celebrate, setCelebrate] = useState(false);
 
   const showLoader = () => {
     setLoader((loader) => !loader);
+  };
+
+  const showCelebration = () => {
+    setCelebrate((celebrate) => !celebrate);
   };
 
   return (
@@ -15,6 +20,9 @@ const AnimationProvider = ({ children }) => {
         loader,
         setLoader,
         showLoader,
+        celebrate,
+        setCelebrate,
+        showCelebration,
       }}
     >
       {children}

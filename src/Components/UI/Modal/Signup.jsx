@@ -4,6 +4,7 @@ import "./Signup.css";
 import { useAlert, useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
 import { alertDispatchHandler } from "Utils/alertDispatchHandler";
+import { LabelIconButton } from "../Button";
 
 const initialSignupState = {
   firstName: "",
@@ -14,9 +15,11 @@ const initialSignupState = {
 
 export const Signup = () => {
   const { setShowLogin, setShowSignup } = useModal();
+
   const { alertDispatch } = useAlert();
   const [user, setUser] = useState(initialSignupState);
-  const { userSignupHandler } = useNetworkCalls();
+  const { userSignupHandler, googleLoginHandler, facebookLoginHandler } =
+    useNetworkCalls();
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const emailValidate =
@@ -149,15 +152,27 @@ export const Signup = () => {
             type="submit"
             btnClassName="btn primary-btn-md"
             label=" Sign Up"
-          />
-          <div className="existing-account-btn" onClick={onLoginClick}>
-            <h2>
-              already have an account
-              <span>Login</span>
-              <i className="fas fa-angle-right"></i>
-            </h2>
-          </div>
+          />{" "}
         </form>
+        <LabelIconButton
+          icon="fab fa-google"
+          label="Continue with Google"
+          btnClassName="btn label-icon-outline-btn-md google-login"
+          onClick={googleLoginHandler}
+        />
+        <LabelIconButton
+          icon="fab fa-facebook"
+          label="Continue with Facebook"
+          btnClassName="btn label-icon-outline-btn-md facebook-login"
+          onClick={facebookLoginHandler}
+        />
+        <div className="existing-account-btn" onClick={onLoginClick}>
+          <h2>
+            already have an account
+            <span>Login</span>
+            <i className="fas fa-angle-right"></i>
+          </h2>
+        </div>
       </div>
     </>
   );

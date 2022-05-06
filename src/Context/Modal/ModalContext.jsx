@@ -12,6 +12,7 @@ const ModalProvider = ({ children }) => {
   const [showNavMenu, setShowNavMenu] = useState(false);
   const [profileMenu, setProfileMenu] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(false);
+  const [showBadgeModal, setShowBadgeModal] = useState(false);
 
   const {
     authState: { token },
@@ -55,6 +56,8 @@ const ModalProvider = ({ children }) => {
         authClickHandler,
         showResetPassword,
         setShowResetPassword,
+        showBadgeModal,
+        setShowBadgeModal,
       }}
     >
       {children}

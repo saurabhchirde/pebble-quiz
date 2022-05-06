@@ -52,7 +52,6 @@
   justify-content: center;
   grid-template-columns: 1fr;
   width: 100%;
-  margin: 0 0 6px;
 }
 
 .signin-modal .password-reset {
@@ -70,10 +69,7 @@
 }
 
 @media screen and (max-width: 400px) {
-  .signin-modal {
-    width: 100%;
-  }
-
+  .signin-modal,
   .signin-modal form {
     width: 100%;
   }

@@ -6,7 +6,7 @@ import "./QuizEndModal.css";
 
 export const QuizEndModal = ({ finalScore }) => {
   const navigate = useNavigate();
-  const { startQuiz, showResult, setShowResult, playedQuizData } = useQuiz();
+  const { showResult, setShowResult, playedQuizData } = useQuiz();
   const {
     authState: { token, email },
   } = useAuth();
@@ -47,12 +47,12 @@ export const QuizEndModal = ({ finalScore }) => {
             <Button
               onClick={takeNewQuizHandler}
               label="Take New Quiz"
-              btnClassName="btn primary-btn-lg"
+              btnClassName="btn primary-btn-md"
             />
             <Button
               onClick={checkLeaderboardHandler}
-              label="LeaderBoard"
-              btnClassName="btn primary-text-btn-lg"
+              label="Check Leaderboard"
+              btnClassName="btn primary-text-btn-md"
             />
           </div>
         </div>

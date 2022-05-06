@@ -7,7 +7,7 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAlert, useAuth, useModal, useQuiz } from "Context";
+import { useAlert, useAnimation, useAuth, useModal, useQuiz } from "Context";
 // import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -22,8 +22,9 @@ export const QuestionPage = () => {
   } = useAuth();
 
   const { alertDispatch } = useAlert();
+  const { showCelebration } = useAnimation();
 
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { setProfileMenu, authClickHandler, setShowBadgeModal } = useModal();
   const { categoryId } = useParams();
 
   const [nextQuestion, setNextQuestion] = useState(0);
@@ -44,6 +45,7 @@ export const QuestionPage = () => {
     startQuizHandler,
     startNewQuizHandler,
     playedQuizData,
+    setEarnedBadge,
     setPlayedQuizData,
     allQuizQuestions,
   } = useQuiz();
@@ -130,7 +132,7 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (playedQuizData?.winningStreak === 3) {
+    if (playedQuizData?.winningStreak === 3 && token) {
       let updatedLevel =
         playedQuizData.level > 0 ? playedQuizData.level + 1 : 1;
 
@@ -139,8 +141,8 @@ export const QuestionPage = () => {
         const imgReference = ref(storage, `/badges/badge_${updatedLevel}.svg`);
         try {
           const badgeUrl = await getDownloadURL(imgReference);
-          // console.log(badgeUrl);
-
+          // for badge earned modal
+          setEarnedBadge(badgeUrl);
           // add badge in users account
           setPlayedQuizData((preData) => {
             return {
@@ -156,10 +158,25 @@ export const QuestionPage = () => {
               winningStreak: 0,
             };
           });
+
+          // showing badge earned modal
+          setShowBadgeModal(true);
+
+          // showing celebration
+          showCelebration();
         } catch (error) {
           alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
         }
       })();
+
+      setTimeout(() => {
+        showCelebration();
+      }, 5000);
+
+      setTimeout(() => {
+        setShowBadgeModal(false);
+        setEarnedBadge("");
+      }, 4300);
     }
   }, [playedQuizData?.winningStreak]);
 
