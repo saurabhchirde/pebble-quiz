@@ -12,7 +12,6 @@ import {
   firebaseRealtimeDB,
 } from "firebase.config";
 import { child } from "firebase/database";
-import {} from "firebase/firestore";
 
 const initialplayedQuizData = {
   quizGiven: 0,
