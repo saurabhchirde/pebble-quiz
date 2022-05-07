@@ -4,8 +4,6 @@ import "./BadgeModal.css";
 export const BadgeModal = () => {
   const { earnedBadge } = useQuiz();
 
-  console.log(earnedBadge);
-
   return (
     <div className="badge-modal-container">
       <div>

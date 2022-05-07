@@ -90,6 +90,7 @@ const QuizProvider = ({ children }) => {
     }
   };
 
+  // get users previous data for updating after quiz
   const getUserData = async () => {
     const selectUser = doc(firestore, `users/${email}`);
     try {
@@ -109,10 +110,12 @@ const QuizProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    // reset data after logout
+    setPlayedQuizData(initialplayedQuizData);
     if (token) {
       getUserData();
     }
-    // to refresh/render after adding new account
+    // to refresh after adding new account
     const flagTimer = setTimeout(() => {
       setFlag(false);
     }, 100);

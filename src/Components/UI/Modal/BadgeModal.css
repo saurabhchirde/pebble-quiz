@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  animation: badge 250ms ease-in;
 }
 
 .badge-modal-container div {
@@ -19,24 +18,4 @@
   width: 30rem;
   padding: 2.5rem 1rem;
   border-radius: 10px;
-}
-
-@keyframes badge {
-  0% {
-    filter: opacity(0);
-    transform: scale(1);
-  }
-  30% {
-    filter: opacity(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  90% {
-    filter: opacity(1);
-  }
-  100% {
-    filter: opacity(0);
-    transform: scale(1);
-  }
 }

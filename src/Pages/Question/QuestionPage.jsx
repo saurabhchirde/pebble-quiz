@@ -7,7 +7,14 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAlert, useAnimation, useAuth, useModal, useQuiz } from "Context";
+import {
+  useAlert,
+  useAnimation,
+  useAuth,
+  useModal,
+  useNetworkCalls,
+  useQuiz,
+} from "Context";
 // import { quizQuestions } from "Data/tempData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -18,7 +25,7 @@ import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const {
-    authState: { token },
+    authState: { token, email },
   } = useAuth();
 
   const { alertDispatch } = useAlert();
@@ -50,13 +57,9 @@ export const QuestionPage = () => {
     allQuizQuestions,
   } = useQuiz();
 
-  // console.log(allQuizQuestions);
-
-  // console.log(categoryId);
+  const { updateFirestoreUserData } = useNetworkCalls();
 
   const category = allQuizQuestions.find((cat) => cat._id === categoryId);
-
-  // console.log(quizQuestions);
 
   const startQuizClickHandler = () => {
     startQuizHandler();
@@ -159,24 +162,28 @@ export const QuestionPage = () => {
             };
           });
 
-          // showing badge earned modal
-          setShowBadgeModal(true);
-
           // showing celebration
           showCelebration();
+
+          // showing badge earned modal
+          setShowBadgeModal(true);
         } catch (error) {
           alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
         }
       })();
 
+      // update winningStreak after celebration
+      // console.log(playedQuizData);
+      // updateFirestoreUserData(email, playedQuizData);
+
       setTimeout(() => {
         showCelebration();
-      }, 5000);
+      }, 5500);
 
       setTimeout(() => {
         setShowBadgeModal(false);
         setEarnedBadge("");
-      }, 4300);
+      }, 5500);
     }
   }, [playedQuizData?.winningStreak]);
 

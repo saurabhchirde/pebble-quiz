@@ -17,7 +17,7 @@ export const LeaderboardPage = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [uniqueUsers, setUniqueUsers] = useState([]);
 
-  // get all users
+  // get all users data to show on leaderboard
   const getAllUsersFromFirestore = async () => {
     try {
       const usersList = await getDocs(collection(firestore, "users"));

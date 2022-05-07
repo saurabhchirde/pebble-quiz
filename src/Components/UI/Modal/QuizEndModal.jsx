@@ -30,6 +30,7 @@ export const QuizEndModal = ({ finalScore }) => {
   useEffect(() => {
     // if logged in update data on server
     if (token) {
+      // console.log(playedQuizData.winningStreak);
       updateFirestoreUserData(email, playedQuizData);
     }
   }, [showResult, token]);
