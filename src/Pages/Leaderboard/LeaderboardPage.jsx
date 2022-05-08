@@ -2,7 +2,7 @@ import { NavBar, NavBarTop, NavBarBottom, Button } from "Components";
 import { Link } from "react-router-dom";
 // import { allUsers } from "Data/tempUsers";
 import "./LeaderboardPage.css";
-import { useAlert, useAnimation, useAuth, useModal } from "Context";
+import { useAlert, useAuth, useModal } from "Context";
 import { useState, useEffect } from "react";
 import { getDocs, collection, firestore } from "firebase.config";
 import { alertDispatchHandler } from "Utils/alertDispatchHandler";

@@ -12,7 +12,6 @@ import {
   useAnimation,
   useAuth,
   useModal,
-  useNetworkCalls,
   useQuiz,
 } from "Context";
 // import { quizQuestions } from "Data/tempData";
@@ -25,7 +24,7 @@ import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const {
-    authState: { token, email },
+    authState: { token },
   } = useAuth();
 
   const { alertDispatch } = useAlert();
@@ -56,8 +55,6 @@ export const QuestionPage = () => {
     setPlayedQuizData,
     allQuizQuestions,
   } = useQuiz();
-
-  const { updateFirestoreUserData } = useNetworkCalls();
 
   const category = allQuizQuestions.find((cat) => cat._id === categoryId);
 
@@ -135,7 +132,7 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (playedQuizData?.winningStreak === 3 && token) {
+    if (playedQuizData?.winningStreak === 7 && token) {
       let updatedLevel =
         playedQuizData.level > 0 ? playedQuizData.level + 1 : 1;
 
