@@ -120,13 +120,13 @@ export const Login = () => {
         <hr className="section-break-line" />
         <LabelIconButton
           icon="fab fa-google"
-          label="Continue with Google"
+          label="Sign-In with Google"
           btnClassName="btn label-icon-outline-btn-md google-login"
           onClick={googleLoginHandler}
         />
         <LabelIconButton
           icon="fab fa-facebook"
-          label="Continue with Facebook"
+          label="Sign-In with Facebook"
           btnClassName="btn label-icon-outline-btn-md facebook-login"
           onClick={facebookLoginHandler}
         />

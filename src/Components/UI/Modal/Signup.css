@@ -25,3 +25,10 @@
   font-weight: 500;
   color: var(--primary-color);
 }
+
+@media screen and (max-width: 400px) {
+  .signup-modal-one,
+  .signup-modal-one form {
+    width: 100%;
+  }
+}

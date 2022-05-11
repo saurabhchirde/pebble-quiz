@@ -1,28 +1,58 @@
-import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
+import { NavBar, NavBarTop, NavBarBottom, Button } from "Components";
 import { Link } from "react-router-dom";
-import { allUsers } from "Data/tempUsers";
 import "./LeaderboardPage.css";
-import { useAuth, useModal } from "Context";
+import { useAlert, useAuth, useModal } from "Context";
+import { useState, useEffect } from "react";
+import { getDocs, collection, firestore } from "firebase.config";
+import { alertDispatchHandler } from "Utils/alertDispatchHandler";
+import { sortByPoints } from "Utils/sortByPoints";
 
 export const LeaderboardPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
   const { setProfileMenu, authClickHandler } = useModal();
+  const { alertDispatch } = useAlert();
+  const [allUsers, setAllUsers] = useState([]);
+  const [uniqueUsers, setUniqueUsers] = useState([]);
 
-  const showAllUsers = allUsers?.map((user) => (
-    <div key={user.name} className="leaderboard-user-details">
+  // get all users data to show on leaderboard
+  const getAllUsersFromFirestore = async () => {
+    try {
+      const usersList = await getDocs(collection(firestore, "users"));
+
+      usersList.forEach((doc) =>
+        setAllUsers((preData) => [...preData, doc.data()])
+      );
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
+  useEffect(() => {
+    // removing repeated entries if any
+    const uniqueUsersJSON = new Set(allUsers.map(JSON.stringify));
+    setUniqueUsers(Array.from(uniqueUsersJSON).map(JSON.parse));
+  }, [allUsers]);
+
+  const showAllUsers = sortByPoints(uniqueUsers)?.map((user) => (
+    <div key={user.email} className="leaderboard-user-details">
       <div>
-        <img src={user.img} alt="user" />
+        <img src={user?.profileImg} alt="user" />
         <li>
-          <h2>{user.name}</h2>
+          <h2 className="leaderboard-user-name">{user.name}</h2>
         </li>
       </div>
       <h2>
-        {user.score} <span>Points</span>
+        {user.totalScore}
+        <span>Points</span>
       </h2>
     </div>
   ));
+
+  useEffect(() => {
+    getAllUsersFromFirestore();
+  }, []);
 
   return (
     <div className="leaderboard-page-body">

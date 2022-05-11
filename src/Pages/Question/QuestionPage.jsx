@@ -7,10 +7,11 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAuth, useModal, useQuiz } from "Context";
-import { quizQuestions } from "Data/tempData";
+import { useAlert, useAnimation, useAuth, useModal, useQuiz } from "Context";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { alertDispatchHandler } from "Utils/alertDispatchHandler";
+import { storage, ref, getDownloadURL } from "firebase.config";
 import "../CommonStyling.css";
 import "./QuestionPage.css";
 
@@ -19,13 +20,19 @@ export const QuestionPage = () => {
     authState: { token },
   } = useAuth();
 
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { alertDispatch } = useAlert();
+  const { showCelebration } = useAnimation();
+
+  const { setProfileMenu, authClickHandler, setShowBadgeModal } = useModal();
   const { categoryId } = useParams();
+
   const [nextQuestion, setNextQuestion] = useState(0);
   const [timer, setTimer] = useState(20);
   const [selectedChoice, setSelectedChoice] = useState("");
   const [score, setScore] = useState(0);
   const [showRules, setShowRules] = useState(true);
+  const [correctAnswer, setCorrectAnswer] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
 
   const {
     showResult,
@@ -36,9 +43,13 @@ export const QuestionPage = () => {
     setFinalScore,
     startQuizHandler,
     startNewQuizHandler,
+    playedQuizData,
+    setEarnedBadge,
+    setPlayedQuizData,
+    allQuizQuestions,
   } = useQuiz();
 
-  const category = quizQuestions.find((cat) => cat._id === categoryId);
+  const category = allQuizQuestions.find((cat) => cat._id === categoryId);
 
   const startQuizClickHandler = () => {
     startQuizHandler();
@@ -56,6 +67,32 @@ export const QuestionPage = () => {
           } else {
             setShowResult(true);
             setStartQuiz(false);
+
+            // after finishing one quiz
+            if (wrongAnswers > 0) {
+              setPlayedQuizData((preData) => {
+                return {
+                  ...preData,
+                  winningStreak: 0,
+                };
+              });
+            } else {
+              setPlayedQuizData((preData) => {
+                return {
+                  ...preData,
+                  winningStreak: playedQuizData.winningStreak + 1,
+                  gameWin: playedQuizData.gameWin + 1,
+                };
+              });
+            }
+            setPlayedQuizData((preData) => {
+              return {
+                ...preData,
+                quizGiven: playedQuizData.quizGiven + 1,
+                totalScore: playedQuizData.totalScore + score,
+                correctAnswers: playedQuizData.correctAnswers + correctAnswer,
+              };
+            });
           }
           setTimer(20);
         } else {
@@ -86,6 +123,55 @@ export const QuestionPage = () => {
       }
     }
   }, [score, startQuiz]);
+
+  useEffect(() => {
+    if (playedQuizData?.winningStreak === 7 && token) {
+      let updatedLevel =
+        playedQuizData.level > 0 ? playedQuizData.level + 1 : 1;
+
+      // fetch badge url
+      (async () => {
+        const imgReference = ref(storage, `/badges/badge_${updatedLevel}.svg`);
+        try {
+          const badgeUrl = await getDownloadURL(imgReference);
+          // for badge earned modal
+          setEarnedBadge(badgeUrl);
+          // add badge in users account
+          setPlayedQuizData((preData) => {
+            return {
+              ...preData,
+              level: updatedLevel,
+              badges: [
+                ...playedQuizData.badges,
+                {
+                  name: `Badge_${updatedLevel}`,
+                  badge: `${badgeUrl}`,
+                },
+              ],
+              winningStreak: 0,
+            };
+          });
+
+          // showing celebration
+          showCelebration();
+
+          // showing badge earned modal
+          setShowBadgeModal(true);
+        } catch (error) {
+          alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+        }
+      })();
+
+      setTimeout(() => {
+        showCelebration();
+      }, 5500);
+
+      setTimeout(() => {
+        setShowBadgeModal(false);
+        setEarnedBadge("");
+      }, 5500);
+    }
+  }, [playedQuizData?.winningStreak]);
 
   return (
     <div className="question-page-body">
@@ -143,6 +229,8 @@ export const QuestionPage = () => {
                   setSelectedChoice={setSelectedChoice}
                   score={score}
                   setScore={setScore}
+                  setWrongAnswers={setWrongAnswers}
+                  setCorrectAnswer={setCorrectAnswer}
                 />
               </div>
             ) : (

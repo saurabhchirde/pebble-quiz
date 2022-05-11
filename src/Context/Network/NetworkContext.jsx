@@ -1,4 +1,4 @@
-import { useAlert, useAuth, useModal } from "Context";
+import { useAlert, useAuth, useModal, useQuiz } from "Context";
 import { createContext, useContext } from "react";
 import {
   signInWithPopup,
@@ -8,7 +8,15 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { firebaseAuth } from "firebase.config";
+import {
+  firebaseAuth,
+  firestore,
+  collection,
+  doc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase.config";
 import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 
 const NetworkContext = createContext({});
@@ -20,6 +28,17 @@ const NetworkProvider = ({ children }) => {
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
+
+  // update userdata after playing quiz
+  const updateFirestoreUserData = async (email, playedQuizData) => {
+    const selectUser = doc(firestore, `users/${email}`);
+    try {
+      await updateDoc(selectUser, playedQuizData);
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
   const googleLoginHandler = async () => {
     try {
       const response = await signInWithPopup(firebaseAuth, googleProvider);
@@ -30,6 +49,7 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
+
       setShowLogin(false);
       alertDispatchHandler(
         alertDispatch,
@@ -52,6 +72,7 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
+
       setShowLogin(false);
       alertDispatchHandler(
         alertDispatch,
@@ -78,6 +99,7 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
+
       setShowLogin(false);
       alertDispatchHandler(
         alertDispatch,
@@ -104,6 +126,7 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
+
       setShowSignup(false);
       alertDispatchHandler(
         alertDispatch,
@@ -138,6 +161,7 @@ const NetworkProvider = ({ children }) => {
         facebookLoginHandler,
         emailPasswordLoginHandler,
         userSignupHandler,
+        updateFirestoreUserData,
         passwordResetEmailHandler,
       }}
     >

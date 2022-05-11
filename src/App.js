@@ -1,7 +1,9 @@
 import {
   Alert,
   AlertWithCTA,
+  AnimateCelebration,
   AnimateLoader,
+  BadgeModal,
   Login,
   ResetPassword,
   Signup,
@@ -21,8 +23,9 @@ import {
 } from "./Pages";
 
 function App() {
-  const { showLogin, showSignup, showResetPassword } = useModal();
-  const { loader } = useAnimation();
+  const { showLogin, showSignup, showResetPassword, showBadgeModal } =
+    useModal();
+  const { loader, celebrate } = useAnimation();
   const {
     alertState: { showAlertBar, showAlertCTABar },
   } = useAlert();
@@ -33,6 +36,8 @@ function App() {
       {showLogin && <Login />}
       {showSignup && <Signup />}
       {showResetPassword && <ResetPassword />}
+      {showBadgeModal && <BadgeModal />}
+      {celebrate && <AnimateCelebration />}
       {showAlertBar && <Alert />}
       {showAlertCTABar && <AlertWithCTA />}
       <Routes>

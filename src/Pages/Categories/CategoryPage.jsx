@@ -8,16 +8,16 @@ import {
 } from "Components";
 import "../CommonStyling.css";
 import "./CategoryPage.css";
-import { quizQuestions } from "Data/tempData";
-import { useAuth, useModal } from "Context";
+import { useAuth, useModal, useQuiz } from "Context";
 
 export const CategoryPage = () => {
   const { setProfileMenu, authClickHandler } = useModal();
   const {
     authState: { token },
   } = useAuth();
+  const { allQuizQuestions } = useQuiz();
 
-  const showCategories = quizQuestions.map((cat) => (
+  const showCategories = allQuizQuestions.map((cat) => (
     <CategoryCard key={cat.name} category={cat} cardSize="card-square" />
   ));
 
