@@ -12,8 +12,6 @@ export const ProfilePage = () => {
   } = useAuth();
   const { playedQuizData } = useQuiz();
 
-  // console.log(badges);
-
   const { setProfileMenu, authClickHandler } = useModal();
   const progressBarFill = (playedQuizData?.level / 20) * 100;
 

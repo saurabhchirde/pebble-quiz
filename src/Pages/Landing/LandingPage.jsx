@@ -7,7 +7,6 @@ import {
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
 import { useAuth, useModal, useQuiz } from "Context";
-// import { quizQuestions } from "Data/tempData";
 import { Link } from "react-router-dom";
 import "../CommonStyling.css";
 import "./LandingPage.css";
@@ -18,7 +17,6 @@ export const LandingPage = () => {
     authState: { token, name },
   } = useAuth();
   const { allQuizQuestions } = useQuiz();
-  // console.log(allQuizQuestions);
   const popularQuiz = allQuizQuestions
     .filter((cat) => cat.popular)
     .map((cat) => (

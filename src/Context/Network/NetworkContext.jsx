@@ -29,44 +29,15 @@ const NetworkProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
 
-  // add user to database after log in or signup
-  // const addUserToFirestore = async (userData) => {
-  //   const addUser = doc(firestore, `users/${userData.email}`);
-  //   try {
-  //     await setDoc(addUser, userData, { merge: true });
-  //   } catch (error) {
-  //     alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
-  //   }
-  // };
-
   // update userdata after playing quiz
   const updateFirestoreUserData = async (email, playedQuizData) => {
     const selectUser = doc(firestore, `users/${email}`);
-    // console.log(playedQuizData);
     try {
       await updateDoc(selectUser, playedQuizData);
     } catch (error) {
       alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
   };
-
-  // get userdata
-  // const getUserData = async (userData, email, setPlayedQuizData) => {
-  //   const selectUser = doc(firestore, `users/${email}`);
-  //   try {
-  //     const userResponse = await getDoc(selectUser);
-  //     // check if in database
-  //     if (userResponse.exists()) {
-  //       setPlayedQuizData(userResponse.data());
-  //     } else {
-  //       // add if not in database
-  //       addUserToFirestore(userData);
-  //       setPlayedQuizData(userResponse.data());
-  //     }
-  //   } catch (error) {
-  //     alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
-  //   }
-  // };
 
   const googleLoginHandler = async () => {
     try {
@@ -78,11 +49,6 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
-
-      // check if user is exist in database
-      // getUserData(response.user.providerData[0].email);
-      // add user to database
-      // addUserToFirestore(response);
 
       setShowLogin(false);
       alertDispatchHandler(
@@ -106,9 +72,6 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
-
-      // add user to database
-      // addUserToFirestore(response);
 
       setShowLogin(false);
       alertDispatchHandler(
@@ -137,9 +100,6 @@ const NetworkProvider = ({ children }) => {
         },
       });
 
-      // add user to database
-      // addUserToFirestore(response);
-
       setShowLogin(false);
       alertDispatchHandler(
         alertDispatch,
@@ -166,9 +126,6 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
-
-      // add user to database
-      // addUserToFirestore(response);
 
       setShowSignup(false);
       alertDispatchHandler(

@@ -1,6 +1,5 @@
 import { NavBar, NavBarTop, NavBarBottom, Button } from "Components";
 import { Link } from "react-router-dom";
-// import { allUsers } from "Data/tempUsers";
 import "./LeaderboardPage.css";
 import { useAlert, useAuth, useModal } from "Context";
 import { useState, useEffect } from "react";

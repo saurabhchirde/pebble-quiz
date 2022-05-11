@@ -8,7 +8,6 @@ import {
 } from "Components";
 import "../CommonStyling.css";
 import "./CategoryPage.css";
-// import { quizQuestions } from "Data/tempData";
 import { useAuth, useModal, useQuiz } from "Context";
 
 export const CategoryPage = () => {

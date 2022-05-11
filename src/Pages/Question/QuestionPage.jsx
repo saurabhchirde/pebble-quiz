@@ -7,14 +7,7 @@ import {
   RulesModal,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import {
-  useAlert,
-  useAnimation,
-  useAuth,
-  useModal,
-  useQuiz,
-} from "Context";
-// import { quizQuestions } from "Data/tempData";
+import { useAlert, useAnimation, useAuth, useModal, useQuiz } from "Context";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { alertDispatchHandler } from "Utils/alertDispatchHandler";
@@ -168,10 +161,6 @@ export const QuestionPage = () => {
           alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
         }
       })();
-
-      // update winningStreak after celebration
-      // console.log(playedQuizData);
-      // updateFirestoreUserData(email, playedQuizData);
 
       setTimeout(() => {
         showCelebration();
