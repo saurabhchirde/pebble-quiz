@@ -125,7 +125,7 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (playedQuizData?.winningStreak === 1 && token) {
+    if (playedQuizData?.winningStreak === 7 && token) {
       let updatedLevel =
         playedQuizData.level > 0 ? playedQuizData.level + 1 : 1;
 
