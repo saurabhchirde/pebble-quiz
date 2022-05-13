@@ -24,6 +24,8 @@ summary {
 
 summary i {
   font-size: 1.1rem;
+  padding: 10px;
+  margin-left: 10px;
 }
 
 summary i.fas {

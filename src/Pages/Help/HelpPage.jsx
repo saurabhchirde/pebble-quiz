@@ -7,6 +7,7 @@ import {
 } from "Components";
 import { useAuth, useModal, useQuiz } from "Context";
 import badges from "Data/Img/badges.png";
+import { Link } from "react-router-dom";
 import "../CommonStyling.css";
 import "./HelpPage.css";
 
@@ -36,6 +37,9 @@ export const HelpPage = () => {
               label={token ? "Logout" : "Login"}
               btnClassName="btn primary-outline-btn-md"
             />
+            <Link to="/category">
+              <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
+            </Link>
           </div>
         </div>
         <div className="help-page-faq">

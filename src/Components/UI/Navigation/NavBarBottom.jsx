@@ -33,12 +33,14 @@ export const NavBarBottom = () => {
         <Link to="/category" className={activeCategory ? "active-nav" : ""}>
           <img src={category} alt="icon" />
         </Link>
-        <Link
-          to="/notifications"
-          className={activeNotifications ? "active-nav" : ""}
-        >
-          <img src={notifications} alt="icon" />
-        </Link>
+        {token && (
+          <Link
+            to="/notifications"
+            className={activeNotifications ? "active-nav" : ""}
+          >
+            <img src={notifications} alt="icon" />
+          </Link>
+        )}
         <Link to="/help" className={activeSupport ? "active-nav" : ""}>
           <img src={help} alt="icon" />
         </Link>
