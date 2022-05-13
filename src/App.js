@@ -20,34 +20,33 @@ import {
   ProfilePage,
   QuestionPage,
   SettingPage,
-  SupportPage,
+  HelpPage,
+  NotificationPage,
 } from "./Pages";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { showLogin, showSignup, showResetPassword, showBadgeModal } =
     useModal();
   const { loader, celebrate } = useAnimation();
-  const {
-    alertState: { showAlertBar, showAlertCTABar },
-  } = useAlert();
 
   return (
     <div className="App">
+      <ToastContainer />
       {loader && <AnimateLoader />}
       {showLogin && <Login />}
       {showSignup && <Signup />}
       {showResetPassword && <ResetPassword />}
       {showBadgeModal && <BadgeModal />}
       {celebrate && <AnimateCelebration />}
-      {showAlertBar && <Alert />}
-      {showAlertCTABar && <AlertWithCTA />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/category/:categoryId" element={<QuestionPage />} />
         <Route path="/account" element={<ProfilePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/support" element={<SupportPage />} />
+        <Route path="/notifications" element={<NotificationPage />} />
+        <Route path="/help" element={<HelpPage />} />
         <Route
           path="/settings"
           element={

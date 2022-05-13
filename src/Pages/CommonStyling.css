@@ -32,9 +32,9 @@
 .leaderboard-table,
 .leaderboard-user-details,
 .leaderboard-user-details > div,
-.support-page-body,
-.support-page-content,
-.support-page-header,
+.help-page-body,
+.help-page-content,
+.help-page-header,
 .setting-page-body,
 .setting-page-content,
 .setting-page-header {
@@ -46,7 +46,7 @@
 .question-page-content,
 .profile-page-content,
 .leaderboard-page-content,
-.support-page-content,
+.help-page-content,
 .setting-page-content {
   max-width: 70rem;
   width: 100%;
@@ -63,7 +63,7 @@
 .profile-detail-section-right,
 .leaderboard-page-content,
 .leaderboard-table,
-.support-page-content,
+.help-page-content,
 .setting-page-content {
   flex-direction: column;
 }
@@ -80,7 +80,7 @@
 .profile-achievement-title,
 .leaderboard-page-header,
 .leaderboard-user-details,
-.support-page-header,
+.help-page-header,
 .setting-page-header,
 .setting-page-content {
   justify-content: space-between;
@@ -96,7 +96,7 @@
 .leaderboard-page-header,
 .leaderboard-user-details,
 .leaderboard-user-details > div,
-.support-page-header,
+.help-page-header,
 .setting-page-header {
   align-items: center;
 }
@@ -106,7 +106,7 @@
 .question-page-header h1,
 .profile-page-header h1,
 .leaderboard-page-header h1,
-.support-page-header h1,
+.help-page-header h1,
 .setting-page-header h1 {
   font-size: 1.5rem;
   font-weight: 500;
@@ -115,7 +115,7 @@
 .landing-page-popular,
 .landing-page-top-categories,
 .leaderboard-table-section,
-.support-page-title,
+.help-page-title,
 .setting-page-title {
   margin-top: 2.5rem;
 }
@@ -127,7 +127,7 @@
 .category-page-cards h2,
 .question-section h2,
 .leaderboard-table-section > h2,
-.support-page-title,
+.help-page-title,
 .setting-page-title {
   font-weight: 500;
   font-size: 1.3rem;
@@ -139,7 +139,7 @@
   .question-page-content,
   .profile-page-content,
   .leaderboard-page-content,
-  .support-page-content,
+  .help-page-content,
   .setting-page-content {
     padding: 2rem 1.5rem 1rem;
   }
@@ -149,7 +149,7 @@
   .question-page-header h1,
   .profile-page-header h1,
   .leaderboard-page-header h1,
-  .support-page-header h1,
+  .help-page-header h1,
   .setting-page-header h1 {
     font-size: 1.4rem;
   }
@@ -158,7 +158,7 @@
   .landing-page-top-categories h2,
   .category-page-cards h2,
   .leaderboard-table-section > h2,
-  .support-page-title,
+  .help-page-title,
   .setting-page-title {
     font-size: 1.2rem;
   }
@@ -170,7 +170,7 @@
   .question-page-content,
   .profile-page-content,
   .leaderboard-page-content,
-  .support-page-content,
+  .help-page-content,
   .setting-page-content {
     width: 100%;
     padding: 2rem 1rem 1rem;
@@ -183,7 +183,7 @@
   .category-page-cards > div,
   .question-page-header,
   .leaderboard-page-header,
-  .support-page-header,
+  .help-page-header,
   .setting-page-header {
     justify-content: center;
   }
@@ -196,14 +196,14 @@
   .question-page-header h1,
   .leaderboard-page-header h1,
   .leaderboard-table-section > h2,
-  .support-page-header h1,
+  .help-page-header h1,
   .setting-page-header h1,
-  .support-page-title,
+  .help-page-title,
   .setting-page-title {
     font-size: 1.2rem;
   }
 
-  .support-page-title,
+  .help-page-title,
   .setting-page-title {
     align-items: center;
   }
@@ -213,7 +213,7 @@
   .landing-page-header h1,
   .category-page-header h1,
   .question-page-header h1,
-  .support-page-header h1,
+  .help-page-header h1,
   .setting-page-header h1 {
     font-size: 1.1rem;
   }

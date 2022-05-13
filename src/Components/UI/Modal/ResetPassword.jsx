@@ -1,3 +1,4 @@
+import { AlertToast } from "Components";
 import { useAlert, useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
 import { Button, IconButton } from "../Button";
@@ -5,20 +6,12 @@ import "./ResetPassword.css";
 export const ResetPassword = () => {
   const { setShowResetPassword } = useModal();
   const { passwordResetEmailHandler } = useNetworkCalls();
-  const { alertDispatch } = useAlert();
 
   const [email, setEmail] = useState("");
 
   const sendResetClickHandler = () => {
     if (email.trim() === "") {
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "Email cannot be blank",
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      AlertToast("info", "Enter a valid email");
     } else {
       passwordResetEmailHandler(email);
       setShowResetPassword(false);

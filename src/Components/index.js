@@ -1,5 +1,3 @@
-export { Alert } from "./Alert/Alert";
-export { AlertWithCTA } from "./Alert/AlertWithCTA";
 export { AnimateLoader } from "./Animations/AnimateLoader";
 export { AnimateCelebration } from "./Animations/Celebration";
 export { NotLogged } from "./NotLogged/NotLogged";
@@ -29,3 +27,5 @@ export { ResetPassword } from "./UI/Modal";
 export { BadgeModal } from "./UI/Modal/BadgeModal";
 export { ConfirmDeleteModal } from "./UI/Modal/ConfirmDeleteModal";
 export { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
+export { AccordionSummary } from "./Cards/Accordion/AccordionSummary";
+export { AlertToast } from "./Alert/AlertToast";

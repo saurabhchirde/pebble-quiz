@@ -1,14 +1,11 @@
 import { Button } from "../Button/Button";
-import { IconButton, InputTypeOne } from "Components";
+import { AlertToast, IconButton, InputTypeOne } from "Components";
 import "./Signup.css";
-import { useAlert, useModal, useNetworkCalls } from "Context";
+import { useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
-import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 import { LabelIconButton } from "../Button";
 
 const initialSignupState = {
-  firstName: "",
-  lastName: "",
   email: "",
   password: "",
 };
@@ -16,7 +13,6 @@ const initialSignupState = {
 export const Signup = () => {
   const { setShowLogin, setShowSignup } = useModal();
 
-  const { alertDispatch } = useAlert();
   const [user, setUser] = useState(initialSignupState);
   const { userSignupHandler, googleLoginHandler, facebookLoginHandler } =
     useNetworkCalls();
@@ -29,25 +25,28 @@ export const Signup = () => {
 
   const onSignupFormSubmitHandler = (e) => {
     e.preventDefault();
-    if (
-      user.password.match(passwordValidate) &&
-      user.email.match(emailValidate)
-    ) {
-      if (user.password === confirmPassword) {
-        userSignupHandler(user.email, user.password);
-        setShowSignup(false);
-        setUser(initialSignupState);
-        setConfirmPassword("");
-      } else {
-        setConfirmPassword("");
-      }
+    if (user.email.trim() === "") {
+      AlertToast("error", "Enter valid email");
     } else {
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT_CTA",
-        "INFO",
-        "Password should be, Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character"
-      );
+      if (
+        user.password.match(passwordValidate) &&
+        user.email.match(emailValidate)
+      ) {
+        if (user.password === confirmPassword) {
+          userSignupHandler(user.email, user.password);
+          setShowSignup(false);
+          setUser(initialSignupState);
+          setConfirmPassword("");
+        } else {
+          AlertToast("error", "Password Mismatched");
+          setConfirmPassword("");
+        }
+      } else {
+        AlertToast(
+          "error",
+          "Password should be, Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character"
+        );
+      }
     }
   };
 
@@ -90,26 +89,6 @@ export const Signup = () => {
         />
 
         <form onSubmit={onSignupFormSubmitHandler}>
-          <InputTypeOne
-            label="First Name"
-            type="text"
-            name="firstName"
-            autoComplete="on"
-            placeholder="Enter your first name"
-            inputWrapper="outline-text-input"
-            onChange={onInputChangeHandler}
-            value={user.firstName}
-          />
-          <InputTypeOne
-            label="Last Name"
-            type="text"
-            name="lastName"
-            autoComplete="on"
-            placeholder="Enter your last name"
-            inputWrapper="outline-text-input"
-            onChange={onInputChangeHandler}
-            value={user.lastName}
-          />
           <InputTypeOne
             label="Email *"
             type="email"
