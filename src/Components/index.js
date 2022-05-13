@@ -28,3 +28,4 @@ export { RulesModal } from "./UI/Modal/RulesModal";
 export { ResetPassword } from "./UI/Modal";
 export { BadgeModal } from "./UI/Modal/BadgeModal";
 export { ConfirmDeleteModal } from "./UI/Modal/ConfirmDeleteModal";
+export { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";

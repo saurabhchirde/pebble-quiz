@@ -46,7 +46,6 @@ const NetworkProvider = ({ children }) => {
     const selectUser = doc(firestore, `users/${email}`);
     try {
       await updateDoc(selectUser, { name: newName });
-      console.log("name updated");
     } catch (error) {
       alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }

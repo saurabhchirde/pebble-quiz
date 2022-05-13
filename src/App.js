@@ -7,6 +7,7 @@ import {
   Login,
   ResetPassword,
   Signup,
+  ProtectedRoute,
 } from "Components";
 import { useAlert, useAnimation, useModal } from "Context";
 import { Route, Routes } from "react-router-dom";
@@ -47,7 +48,14 @@ function App() {
         <Route path="/account" element={<ProfilePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/support" element={<SupportPage />} />
-        <Route path="/settings" element={<SettingPage />} />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <SettingPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

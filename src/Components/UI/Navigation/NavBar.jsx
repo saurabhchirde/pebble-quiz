@@ -14,7 +14,7 @@ import { useAuth, useQuiz } from "Context";
 export const NavBar = () => {
   const { pathname } = useLocation();
   const {
-    authState: { profileImg, name },
+    authState: { profileImg, name, token },
   } = useAuth();
   const { userQuizData } = useQuiz();
 
@@ -64,12 +64,14 @@ export const NavBar = () => {
               <h2>Support</h2>
             </div>
           </Link>
-          <Link to="/settings">
-            <div className={activeSettings ? "active-nav" : ""}>
-              <img src={settings} alt="icon" />
-              <h2>Settings</h2>
-            </div>
-          </Link>
+          {token && (
+            <Link to="/settings">
+              <div className={activeSettings ? "active-nav" : ""}>
+                <img src={settings} alt="icon" />
+                <h2>Settings</h2>
+              </div>
+            </Link>
+          )}
         </div>
       </div>
       <Link to="/">
