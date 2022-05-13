@@ -28,7 +28,7 @@ export const SettingPage = () => {
   const [newName, setNewName] = useState(userQuizData?.name ?? name);
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { updateUserDBHandler, passwordChangeHandler } = useNetworkCalls();
+  const { updateUserNameDBHandler, passwordChangeHandler } = useNetworkCalls();
 
   const deleteAccountHandler = () => {
     setShowDeleteModal(true);
@@ -38,7 +38,7 @@ export const SettingPage = () => {
     if (newName.trim() === "") {
       AlertToast("error", "Enter a valid Name");
     } else {
-      updateUserDBHandler(email, newName);
+      updateUserNameDBHandler(email, newName);
     }
   };
 

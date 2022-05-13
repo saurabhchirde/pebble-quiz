@@ -30,6 +30,9 @@ export const QuizEndModal = ({ finalScore }) => {
   useEffect(() => {
     // if logged in update data on server
     if (token) {
+      if (userQuizData.totalScore < 0) {
+        userQuizData.totalScore = 0;
+      }
       updateFirestoreUserData(email, userQuizData);
     }
   }, [showResult, token]);

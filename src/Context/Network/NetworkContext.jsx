@@ -1,4 +1,4 @@
-import { useAlert, useAuth, useModal, useQuiz } from "Context";
+import { useAuth, useModal } from "Context";
 import { createContext, useContext } from "react";
 import {
   signInWithPopup,
@@ -12,9 +12,7 @@ import {
 import {
   firebaseAuth,
   firestore,
-  collection,
   doc,
-  addDoc,
   updateDoc,
   deleteDoc,
 } from "firebase.config";
@@ -39,8 +37,8 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
-  // update users in firestore
-  const updateUserDBHandler = async (email, newName) => {
+  // update user name in firestore
+  const updateUserNameDBHandler = async (email, newName) => {
     const selectUser = doc(firestore, `users/${email}`);
     try {
       await updateDoc(selectUser, { name: newName });
@@ -174,7 +172,7 @@ const NetworkProvider = ({ children }) => {
         passwordResetEmailHandler,
         accountDeleteHandler,
         passwordChangeHandler,
-        updateUserDBHandler,
+        updateUserNameDBHandler,
       }}
     >
       {children}
