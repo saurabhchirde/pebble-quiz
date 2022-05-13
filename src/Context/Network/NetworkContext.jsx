@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  updateProfile,
+  updatePassword,
 } from "firebase/auth";
 import {
   firebaseAuth,
@@ -30,10 +32,21 @@ const NetworkProvider = ({ children }) => {
   const facebookProvider = new FacebookAuthProvider();
 
   // update userdata after playing quiz
-  const updateFirestoreUserData = async (email, playedQuizData) => {
+  const updateFirestoreUserData = async (email, userQuizData) => {
     const selectUser = doc(firestore, `users/${email}`);
     try {
-      await updateDoc(selectUser, playedQuizData);
+      await updateDoc(selectUser, userQuizData);
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
+  // update users in firestore
+  const updateUserDBHandler = async (email, newName) => {
+    const selectUser = doc(firestore, `users/${email}`);
+    try {
+      await updateDoc(selectUser, { name: newName });
+      console.log("name updated");
     } catch (error) {
       alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
     }
@@ -51,6 +64,7 @@ const NetworkProvider = ({ children }) => {
       });
 
       setShowLogin(false);
+      setShowSignup(false);
       alertDispatchHandler(
         alertDispatch,
         "ALERT",
@@ -74,6 +88,7 @@ const NetworkProvider = ({ children }) => {
       });
 
       setShowLogin(false);
+      setShowSignup(false);
       alertDispatchHandler(
         alertDispatch,
         "ALERT",
@@ -101,6 +116,7 @@ const NetworkProvider = ({ children }) => {
       });
 
       setShowLogin(false);
+      setShowSignup(false);
       alertDispatchHandler(
         alertDispatch,
         "ALERT",
@@ -142,12 +158,42 @@ const NetworkProvider = ({ children }) => {
   const passwordResetEmailHandler = (email) => {
     try {
       sendPasswordResetEmail(firebaseAuth, email);
-      setShowSignup(false);
       alertDispatchHandler(
         alertDispatch,
         "ALERT",
         "SUCCESS",
         "Check your mailbox, to reset password"
+      );
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
+  // change account password
+  const passwordChangeHandler = (newPassword) => {
+    const selectUser = firebaseAuth.currentUser;
+
+    try {
+      updatePassword(selectUser, newPassword);
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Password Updated, Login with new Password"
+      );
+    } catch (error) {
+      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+    }
+  };
+
+  const accountDeleteHandler = async (email) => {
+    try {
+      await deleteDoc(doc(firestore, `users/${email}`));
+      alertDispatchHandler(
+        alertDispatch,
+        "ALERT",
+        "SUCCESS",
+        "Account Deleted Successfully"
       );
     } catch (error) {
       alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
@@ -163,6 +209,9 @@ const NetworkProvider = ({ children }) => {
         userSignupHandler,
         updateFirestoreUserData,
         passwordResetEmailHandler,
+        accountDeleteHandler,
+        passwordChangeHandler,
+        updateUserDBHandler,
       }}
     >
       {children}

@@ -1,0 +1,44 @@
+.setting-page-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
+  margin-top: 2.5rem;
+}
+
+.delete-account-btn {
+  align-self: flex-end;
+}
+
+.delete-page-user-details {
+  width: 100%;
+}
+
+.delete-page-user-details input {
+  width: 100%;
+}
+
+.delete-page-user-details h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 1rem 0 0 0.6rem;
+}
+
+.edit-user-name input,
+.edit-user-password input {
+  padding-left: 0;
+}
+
+.edit-user-name,
+.edit-user-password {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 0;
+  padding-right: 0;
+}
+
+.not-logged-message {
+  text-align: center;
+}

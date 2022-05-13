@@ -9,19 +9,22 @@ import {
 import { logo_light } from "Data/Logo/logo";
 import { Link, useLocation } from "react-router-dom";
 import avatar from "Data/Img/avatar.png";
-import { useAuth } from "Context";
+import { useAuth, useQuiz } from "Context";
 
 export const NavBar = () => {
   const { pathname } = useLocation();
   const {
     authState: { profileImg, name },
   } = useAuth();
+  const { userQuizData } = useQuiz();
 
   const activeLeaderboard = pathname.includes("leaderboard");
   const activeCategory = pathname.includes("category");
   const activeNotifications = pathname.includes("notifications");
   const activeSupport = pathname.includes("support");
   const activeSettings = pathname.includes("settings");
+
+  const userName = userQuizData?.name ? userQuizData?.name : name;
 
   return (
     <div className="nav-bar-body">
@@ -35,7 +38,7 @@ export const NavBar = () => {
                 alt="avatar"
               />
             </div>
-            <h2>{name ? name : "Guest User"}</h2>
+            <h2>{userName ? userName : "Guest User"}</h2>
           </div>
         </Link>
         <div className="nav-bar-menu">

@@ -13,7 +13,7 @@ import {
 } from "firebase.config";
 import { child } from "firebase/database";
 
-const initialplayedQuizData = {
+const initialUserQuizData = {
   quizGiven: 0,
   winningStreak: 0,
   level: 0,
@@ -39,7 +39,7 @@ const QuizProvider = ({ children }) => {
   const [startQuiz, setStartQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
-  const [playedQuizData, setPlayedQuizData] = useState(initialplayedQuizData);
+  const [userQuizData, setUserQuizData] = useState(initialUserQuizData);
   const [allQuizQuestions, setAllQuizQuestions] = useState(
     JSON.parse(localStorage.getItem("pebble-quiz-quiestions")) ??
       initialQuizData
@@ -77,8 +77,8 @@ const QuizProvider = ({ children }) => {
     }
   }, [allQuizQuestions]);
 
-  // all data - quiz and user
-  const userData = { ...playedQuizData, name, email, id, profileImg };
+  // ad all data - quiz and user
+  const userData = { ...userQuizData, name, email, id, profileImg };
 
   const addUserToFirestore = async () => {
     const addUser = doc(firestore, `users/${email}`);
@@ -96,11 +96,11 @@ const QuizProvider = ({ children }) => {
       const userResponse = await getDoc(selectUser);
       // check if user in database
       if (userResponse.exists()) {
-        setPlayedQuizData(userResponse.data());
+        setUserQuizData(userResponse.data());
       } else {
         // add if user is not in database
         addUserToFirestore();
-        setPlayedQuizData(userResponse.data());
+        setUserQuizData(userResponse.data());
         setFlag(true);
       }
     } catch (error) {
@@ -110,7 +110,7 @@ const QuizProvider = ({ children }) => {
 
   useEffect(() => {
     // reset data after logout
-    setPlayedQuizData(initialplayedQuizData);
+    setUserQuizData(initialUserQuizData);
     if (token) {
       getUserData();
     }
@@ -132,10 +132,10 @@ const QuizProvider = ({ children }) => {
         setShowResult,
         finalScore,
         setFinalScore,
-        playedQuizData,
+        userQuizData,
         earnedBadge,
         setEarnedBadge,
-        setPlayedQuizData,
+        setUserQuizData,
         startQuizHandler,
         startNewQuizHandler,
         allQuizQuestions,

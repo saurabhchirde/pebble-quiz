@@ -6,7 +6,7 @@ import "./QuizEndModal.css";
 
 export const QuizEndModal = ({ finalScore }) => {
   const navigate = useNavigate();
-  const { showResult, setShowResult, playedQuizData } = useQuiz();
+  const { showResult, setShowResult, userQuizData } = useQuiz();
   const {
     authState: { token, email },
   } = useAuth();
@@ -30,7 +30,7 @@ export const QuizEndModal = ({ finalScore }) => {
   useEffect(() => {
     // if logged in update data on server
     if (token) {
-      updateFirestoreUserData(email, playedQuizData);
+      updateFirestoreUserData(email, userQuizData);
     }
   }, [showResult, token]);
 

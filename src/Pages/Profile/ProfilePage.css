@@ -14,11 +14,25 @@
   margin: 2rem 0;
 }
 
-.profile-detail-section > img {
+.profile-detail-img {
+  position: relative;
+}
+
+.profile-detail-img img {
   width: 12rem;
   height: 12rem;
   margin-right: 1rem;
   border-radius: 10px;
+}
+
+.edit-photo {
+  padding: 1rem;
+  border-radius: 50%;
+  position: absolute;
+  padding: 10px;
+  right: 15px;
+  bottom: 0px;
+  font-size: 1.2rem;
 }
 
 .profile-detail-section-right {

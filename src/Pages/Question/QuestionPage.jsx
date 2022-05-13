@@ -43,9 +43,9 @@ export const QuestionPage = () => {
     setFinalScore,
     startQuizHandler,
     startNewQuizHandler,
-    playedQuizData,
+    userQuizData,
     setEarnedBadge,
-    setPlayedQuizData,
+    setUserQuizData,
     allQuizQuestions,
   } = useQuiz();
 
@@ -70,27 +70,27 @@ export const QuestionPage = () => {
 
             // after finishing one quiz
             if (wrongAnswers > 0) {
-              setPlayedQuizData((preData) => {
+              setUserQuizData((preData) => {
                 return {
                   ...preData,
                   winningStreak: 0,
                 };
               });
             } else {
-              setPlayedQuizData((preData) => {
+              setUserQuizData((preData) => {
                 return {
                   ...preData,
-                  winningStreak: playedQuizData.winningStreak + 1,
-                  gameWin: playedQuizData.gameWin + 1,
+                  winningStreak: userQuizData.winningStreak + 1,
+                  gameWin: userQuizData.gameWin + 1,
                 };
               });
             }
-            setPlayedQuizData((preData) => {
+            setUserQuizData((preData) => {
               return {
                 ...preData,
-                quizGiven: playedQuizData.quizGiven + 1,
-                totalScore: playedQuizData.totalScore + score,
-                correctAnswers: playedQuizData.correctAnswers + correctAnswer,
+                quizGiven: userQuizData.quizGiven + 1,
+                totalScore: userQuizData.totalScore + score,
+                correctAnswers: userQuizData.correctAnswers + correctAnswer,
               };
             });
           }
@@ -125,9 +125,8 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (playedQuizData?.winningStreak === 7 && token) {
-      let updatedLevel =
-        playedQuizData.level > 0 ? playedQuizData.level + 1 : 1;
+    if (userQuizData?.winningStreak === 7 && token) {
+      let updatedLevel = userQuizData.level > 0 ? userQuizData.level + 1 : 1;
 
       // fetch badge url
       (async () => {
@@ -137,12 +136,12 @@ export const QuestionPage = () => {
           // for badge earned modal
           setEarnedBadge(badgeUrl);
           // add badge in users account
-          setPlayedQuizData((preData) => {
+          setUserQuizData((preData) => {
             return {
               ...preData,
               level: updatedLevel,
               badges: [
-                ...playedQuizData.badges,
+                ...userQuizData.badges,
                 {
                   name: `Badge_${updatedLevel}`,
                   badge: `${badgeUrl}`,
@@ -171,7 +170,7 @@ export const QuestionPage = () => {
         setEarnedBadge("");
       }, 5500);
     }
-  }, [playedQuizData?.winningStreak]);
+  }, [userQuizData?.winningStreak]);
 
   return (
     <div className="question-page-body">

@@ -1,7 +1,7 @@
 import { NavBar, NavBarTop, NavBarBottom, Button } from "Components";
 import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
-import { useAlert, useAuth, useModal } from "Context";
+import { useAlert, useAuth, useModal, useQuiz } from "Context";
 import { useState, useEffect } from "react";
 import { getDocs, collection, firestore } from "firebase.config";
 import { alertDispatchHandler } from "Utils/alertDispatchHandler";
@@ -11,6 +11,8 @@ export const LeaderboardPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
+  const { userQuizData } = useQuiz();
+
   const { setProfileMenu, authClickHandler } = useModal();
   const { alertDispatch } = useAlert();
   const [allUsers, setAllUsers] = useState([]);
@@ -50,6 +52,8 @@ export const LeaderboardPage = () => {
     </div>
   ));
 
+  const userName = userQuizData?.name ? userQuizData?.name : name;
+
   useEffect(() => {
     getAllUsersFromFirestore();
   }, []);
@@ -66,7 +70,7 @@ export const LeaderboardPage = () => {
         }}
       >
         <div className="leaderboard-page-header">
-          <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
+          <h1>Hi, {userName ? userName.split(" ")[0] : "Guest"}</h1>
           <div className="flex-row login-btn-desktop">
             <Button
               onClick={authClickHandler}

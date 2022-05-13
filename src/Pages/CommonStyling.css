@@ -81,7 +81,8 @@
 .leaderboard-page-header,
 .leaderboard-user-details,
 .support-page-header,
-.setting-page-header {
+.setting-page-header,
+.setting-page-content {
   justify-content: space-between;
 }
 
@@ -175,6 +176,7 @@
     padding: 2rem 1rem 1rem;
     margin-top: 2rem;
     margin-bottom: 3.5rem;
+    min-height: 80vh;
   }
 
   .category-page-header,

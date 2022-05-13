@@ -1,4 +1,11 @@
-import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
+import {
+  NavBar,
+  NavBarTop,
+  NavBarBottom,
+  Button,
+  Footer,
+  IconButton,
+} from "Components";
 import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import avatar from "Data/Img/avatar.png";
@@ -10,14 +17,16 @@ export const ProfilePage = () => {
   const {
     authState: { token, profileImg, name },
   } = useAuth();
-  const { playedQuizData } = useQuiz();
+  const { userQuizData } = useQuiz();
 
   const { setProfileMenu, authClickHandler } = useModal();
-  const progressBarFill = (playedQuizData?.level / 20) * 100;
+  const progressBarFill = (userQuizData?.level / 20) * 100;
 
-  const achievedBadges = playedQuizData?.badges.map((badge, index) => (
+  const achievedBadges = userQuizData?.badges?.map((badge, index) => (
     <img key={index} src={badge.badge} alt="badge" />
   ));
+
+  const fullUserName = userQuizData?.name ? userQuizData?.name : name;
 
   return (
     <div className="profile-page-body">
@@ -31,7 +40,7 @@ export const ProfilePage = () => {
         }}
       >
         <div className="profile-page-header">
-          <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
+          <h1>Hi, {fullUserName ? fullUserName.split(" ")[0] : "Guest"}</h1>
           <div className="flex-row login-btn-desktop">
             <Button
               onClick={authClickHandler}
@@ -46,31 +55,41 @@ export const ProfilePage = () => {
         {token ? (
           <div className="profile-details">
             <div className="profile-detail-section">
-              <img src={profileImg ? profileImg : avatar} alt="user-profile" />
+              <div className="profile-detail-img">
+                <img
+                  src={profileImg ? profileImg : avatar}
+                  alt="user-profile"
+                />
+                {/* <IconButton
+                  onClick={changeImageHandler}
+                  icon="fas fa-camera "
+                  btnClassName="btn icon-btn-sm edit-photo"
+                /> */}
+              </div>
               <div className="profile-detail-section-right">
                 <div className="user-detail-overview">
-                  <h2>{name ? name : "Guest User"}</h2>
-                  <p>Level {playedQuizData?.level}</p>
+                  <h2>{fullUserName ? fullUserName : "Guest User"}</h2>
+                  <p>Level {userQuizData?.level}</p>
                 </div>
                 <div className="profile-overview-section">
                   <div className="profile-overview">
                     <img src={flag} alt="icon" className="overview-icon" />
                     <div>
-                      <h3>{playedQuizData?.gameWin}</h3>
+                      <h3>{userQuizData?.gameWin}</h3>
                       <p>Game Wins</p>
                     </div>
                   </div>
                   <div className="profile-overview">
                     <img src={highest} alt="icon" className="overview-icon" />
                     <div>
-                      <h3>{playedQuizData?.totalScore}</h3>
+                      <h3>{userQuizData?.totalScore}</h3>
                       <p>Total Score</p>
                     </div>
                   </div>
                   <div className="profile-overview">
                     <img src={check_bg} alt="icon" className="overview-icon" />
                     <div>
-                      <h3>{playedQuizData?.correctAnswers}</h3>
+                      <h3>{userQuizData?.correctAnswers}</h3>
                       <p>Correct Answers</p>
                     </div>
                   </div>
@@ -81,7 +100,7 @@ export const ProfilePage = () => {
               <div className="profile-achievement-title">
                 <p>Achievements</p>
                 <div className="total-achievements">
-                  <p>{playedQuizData?.level}/20 </p>
+                  <p>{userQuizData?.level}/20 </p>
                   <div className="achievements-progress-bar">
                     <div
                       style={{ width: `${progressBarFill}%` }}

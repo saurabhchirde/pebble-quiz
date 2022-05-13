@@ -2,7 +2,7 @@ import { useModal } from "Context";
 import "./AlertModal.css";
 import { Button } from "Components";
 
-export const AlertModal = () => {
+export const AlertModal = ({ buttonAction, onConfirm }) => {
   const { alertText, setAlertText, setShowAlert } = useModal();
 
   const closeClickHandler = () => {
@@ -17,9 +17,9 @@ export const AlertModal = () => {
         <p>{alertText}</p>
         <div className="error-modal-button">
           <Button
-            onClick={closeClickHandler}
+            onClick={onConfirm ? onConfirm : closeClickHandler}
             btnClassName="btn primary-outline-btn-md"
-            label="Close"
+            label={buttonAction ? buttonAction : "Close"}
           />
         </div>
       </div>
