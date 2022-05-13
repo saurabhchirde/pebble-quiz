@@ -1,7 +1,6 @@
-import { useAlert, useAuth } from "Context";
+import { useAuth } from "Context";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 import {
   firestore,
   doc,
@@ -12,6 +11,7 @@ import {
   firebaseRealtimeDB,
 } from "firebase.config";
 import { child } from "firebase/database";
+import { AlertToast } from "Components";
 
 const initialUserQuizData = {
   quizGiven: 0,
@@ -22,6 +22,7 @@ const initialUserQuizData = {
   highestScore: 0,
   correctAnswers: 0,
   badges: [],
+  notifications: [],
 };
 
 const initialQuizData = [];
@@ -33,8 +34,6 @@ const QuizProvider = ({ children }) => {
   const {
     authState: { token, name, email, profileImg, id },
   } = useAuth();
-
-  const { alertDispatch } = useAlert();
 
   const [startQuiz, setStartQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -62,7 +61,7 @@ const QuizProvider = ({ children }) => {
       const allQuestions = await get(child(dbRef, "quizDB"));
       setAllQuizQuestions(allQuestions.val());
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -85,7 +84,7 @@ const QuizProvider = ({ children }) => {
     try {
       await setDoc(addUser, userData, { merge: true });
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -104,7 +103,7 @@ const QuizProvider = ({ children }) => {
         setFlag(true);
       }
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 

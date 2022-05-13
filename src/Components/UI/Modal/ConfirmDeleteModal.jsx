@@ -22,7 +22,10 @@ export const ConfirmDeleteModal = ({ setShowDeleteModal }) => {
     <>
       <div className="modal-backdrop"></div>
       <div className="discard-modal-md">
-        <p>Are you sure, you want to delete your account?</p>
+        <p>
+          Are you sure, you want to delete your account? Your all progress will
+          be lost!
+        </p>
         <div className="error-modal-button">
           <Button
             onClick={() => {

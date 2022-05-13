@@ -1,7 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import {
   AnimationProvider,
-  AlertProvider,
   ModalProvider,
   ScrollToTop,
   ThemeProvider,
@@ -15,17 +14,15 @@ const PebbleQuizProvider = ({ children }) => {
     <BrowserRouter>
       <ThemeProvider>
         <ScrollToTop>
-          <AlertProvider>
-            <AnimationProvider>
-              <AuthProvider>
-                <ModalProvider>
-                  <NetworkProvider>
-                    <QuizProvider>{children} </QuizProvider>
-                  </NetworkProvider>
-                </ModalProvider>
-              </AuthProvider>
-            </AnimationProvider>
-          </AlertProvider>
+          <AnimationProvider>
+            <AuthProvider>
+              <ModalProvider>
+                <NetworkProvider>
+                  <QuizProvider>{children} </QuizProvider>
+                </NetworkProvider>
+              </ModalProvider>
+            </AuthProvider>
+          </AnimationProvider>
         </ScrollToTop>
       </ThemeProvider>
     </BrowserRouter>

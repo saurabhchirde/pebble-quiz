@@ -6,13 +6,13 @@ import {
   ConfirmDeleteModal,
   InputTypePassword,
   Footer,
+  AlertToast,
 } from "Components";
-import { useAlert, useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
+import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
 import { firestore } from "firebase.config";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 import "../CommonStyling.css";
 import "./SettingPage.css";
 
@@ -22,14 +22,13 @@ export const SettingPage = () => {
     authState: { token, name, email },
     authDispatch,
   } = useAuth();
-  const { alertDispatch } = useAlert();
   const navigate = useNavigate();
   const { userQuizData, setUserQuizData } = useQuiz();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [newName, setNewName] = useState(userQuizData?.name ?? name);
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { updateUserDBHandler, passwordChangeHandler } = useNetworkCalls();
+  const { updateUserNameDBHandler, passwordChangeHandler } = useNetworkCalls();
 
   const deleteAccountHandler = () => {
     setShowDeleteModal(true);
@@ -37,14 +36,9 @@ export const SettingPage = () => {
 
   const changeNameHandler = () => {
     if (newName.trim() === "") {
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "INFO",
-        "Name cannot be blank"
-      );
+      AlertToast("error", "Enter a valid Name");
     } else {
-      updateUserDBHandler(email, newName);
+      updateUserNameDBHandler(email, newName);
     }
   };
 
@@ -52,12 +46,7 @@ export const SettingPage = () => {
 
   const changePasswordHandler = () => {
     if (newPassword.trim() === "") {
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "INFO",
-        "Password cannot be blank"
-      );
+      AlertToast("info", "Enter a valid password");
     } else {
       if (newPassword.match(passwordValidate)) {
         passwordChangeHandler(newPassword);
@@ -66,10 +55,8 @@ export const SettingPage = () => {
         setShowLogin(true);
         setNewPassword("");
       } else {
-        alertDispatchHandler(
-          alertDispatch,
-          "ALERT_CTA",
-          "INFO",
+        AlertToast(
+          "info",
           "Password should be, Minimum 8 char, 1 Uppercase, 1 Lowercase, 1 number & 1 Special Character"
         );
       }

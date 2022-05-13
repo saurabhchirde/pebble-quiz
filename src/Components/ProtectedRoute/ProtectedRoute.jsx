@@ -6,5 +6,5 @@ export const ProtectedRoute = ({ children }) => {
     authState: { token },
   } = useAuth();
 
-  return <>{token ? children : <Navigate to="*" replace />}</>;
+  return <>{token ? children : <Navigate to="/" replace />}</>;
 };

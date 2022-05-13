@@ -1,11 +1,4 @@
-import {
-  NavBar,
-  NavBarTop,
-  NavBarBottom,
-  Button,
-  Footer,
-  IconButton,
-} from "Components";
+import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
 import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import avatar from "Data/Img/avatar.png";
@@ -21,6 +14,7 @@ export const ProfilePage = () => {
 
   const { setProfileMenu, authClickHandler } = useModal();
   const progressBarFill = (userQuizData?.level / 20) * 100;
+  const progressBarShow = progressBarFill > 100 ? 100 : progressBarFill;
 
   const achievedBadges = userQuizData?.badges?.map((badge, index) => (
     <img key={index} src={badge.badge} alt="badge" />
@@ -60,11 +54,6 @@ export const ProfilePage = () => {
                   src={profileImg ? profileImg : avatar}
                   alt="user-profile"
                 />
-                {/* <IconButton
-                  onClick={changeImageHandler}
-                  icon="fas fa-camera "
-                  btnClassName="btn icon-btn-sm edit-photo"
-                /> */}
               </div>
               <div className="profile-detail-section-right">
                 <div className="user-detail-overview">
@@ -103,7 +92,9 @@ export const ProfilePage = () => {
                   <p>{userQuizData?.level}/20 </p>
                   <div className="achievements-progress-bar">
                     <div
-                      style={{ width: `${progressBarFill}%` }}
+                      style={{
+                        width: `${progressBarShow}%`,
+                      }}
                       className="achievements-progress-bar-fill"
                     ></div>
                   </div>

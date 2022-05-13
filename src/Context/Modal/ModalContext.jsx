@@ -1,4 +1,5 @@
-import { useAlert, useAuth } from "Context";
+import { AlertToast } from "Components";
+import { useAuth } from "Context";
 import { createContext, useContext, useState } from "react";
 
 const ModalContext = createContext(null);
@@ -18,19 +19,11 @@ const ModalProvider = ({ children }) => {
     authState: { token },
     authDispatch,
   } = useAuth();
-  const { alertDispatch } = useAlert();
 
   const authClickHandler = () => {
     if (token) {
       authDispatch({ type: "LOGOUT" });
-      alertDispatch({
-        type: "ALERT",
-        payload: {
-          alertText: "You have been logged out",
-          alertType: "alert-info",
-          alertIcon: "fas fa-info alert-icon",
-        },
-      });
+      AlertToast("info", "You have been logged out");
     } else {
       setShowLogin(true);
     }

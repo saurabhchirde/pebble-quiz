@@ -1,0 +1,44 @@
+.all-notifications {
+  margin-top: 2.5rem;
+}
+
+.list-stacked {
+  background-color: var(--info-bg);
+  padding-right: 8px;
+}
+
+.list-stacked img {
+  width: 2.5rem;
+  margin-left: 5px;
+  border: none;
+}
+
+.list-stacked .list-body {
+  width: 75%;
+}
+
+.list-stacked button {
+  margin-right: 0;
+}
+
+.list-stacked .avatar {
+  outline: none;
+}
+
+.un-read {
+  background-color: var(--primary-bg);
+}
+
+@media screen and (max-width: 400px) {
+  .list-stacked {
+    padding-left: 2px;
+  }
+
+  .all-notifications {
+    margin-top: 2.5rem;
+  }
+
+  .list-stacked img {
+    width: 2.5rem;
+  }
+}

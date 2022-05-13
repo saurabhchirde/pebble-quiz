@@ -5,13 +5,14 @@ import {
   Button,
   QuizEndModal,
   RulesModal,
+  AlertToast,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAlert, useAnimation, useAuth, useModal, useQuiz } from "Context";
+import { useAnimation, useAuth, useModal, useQuiz } from "Context";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 import { storage, ref, getDownloadURL } from "firebase.config";
+import { v4 as uuid } from "uuid";
 import "../CommonStyling.css";
 import "./QuestionPage.css";
 
@@ -20,7 +21,6 @@ export const QuestionPage = () => {
     authState: { token },
   } = useAuth();
 
-  const { alertDispatch } = useAlert();
   const { showCelebration } = useAnimation();
 
   const { setProfileMenu, authClickHandler, setShowBadgeModal } = useModal();
@@ -59,7 +59,6 @@ export const QuestionPage = () => {
   const timerInterval = () => {
     setTimeout(() => {
       if (startQuiz) {
-        setFinalScore(0);
         if (timer < 1 || selectedChoice) {
           if (nextQuestion < category?.questions.length - 1) {
             setNextQuestion((preQuestion) => preQuestion + 1);
@@ -93,6 +92,7 @@ export const QuestionPage = () => {
                 correctAnswers: userQuizData.correctAnswers + correctAnswer,
               };
             });
+            setFinalScore(0);
           }
           setTimer(20);
         } else {
@@ -116,7 +116,7 @@ export const QuestionPage = () => {
 
   useEffect(() => {
     if (!startQuiz) {
-      if (score < 1) {
+      if (score < 0) {
         setFinalScore(0);
       } else {
         setFinalScore(score);
@@ -147,6 +147,15 @@ export const QuestionPage = () => {
                   badge: `${badgeUrl}`,
                 },
               ],
+              notifications: [
+                {
+                  id: uuid(),
+                  icon: `${badgeUrl}`,
+                  date: new Date().toLocaleDateString(),
+                  unRead: true,
+                },
+                ...userQuizData.notifications,
+              ],
               winningStreak: 0,
             };
           });
@@ -157,7 +166,7 @@ export const QuestionPage = () => {
           // showing badge earned modal
           setShowBadgeModal(true);
         } catch (error) {
-          alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+          AlertToast("info", error.message);
         }
       })();
 

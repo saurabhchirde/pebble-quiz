@@ -51,21 +51,21 @@ export const QuestionCard = ({
           </div>
           <div className="quiz-detail">
             <div className="quiz-total-time">
-              <img src={watch} />
+              <img src={watch} alt="timer-icon" />
               <div>
                 <h3>{timer} sec</h3>
                 <p>Time Left</p>
               </div>
             </div>
             <div className="quiz-high-score">
-              <img src={check} />
+              <img src={check} alt="check-icon" />
               <div>
                 <h3>{score}</h3>
                 <p>Score</p>
               </div>
             </div>
             <div className="quiz-progress">
-              <img src={paper} />
+              <img src={paper} alt="note-icon" />
               <div>
                 <h3>
                   {questionNum}/{totalQuestions}

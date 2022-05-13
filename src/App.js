@@ -1,6 +1,4 @@
 import {
-  Alert,
-  AlertWithCTA,
   AnimateCelebration,
   AnimateLoader,
   BadgeModal,
@@ -9,7 +7,7 @@ import {
   Signup,
   ProtectedRoute,
 } from "Components";
-import { useAlert, useAnimation, useModal } from "Context";
+import { useAnimation, useModal } from "Context";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import {
@@ -20,34 +18,40 @@ import {
   ProfilePage,
   QuestionPage,
   SettingPage,
-  SupportPage,
+  HelpPage,
+  NotificationPage,
 } from "./Pages";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { showLogin, showSignup, showResetPassword, showBadgeModal } =
     useModal();
   const { loader, celebrate } = useAnimation();
-  const {
-    alertState: { showAlertBar, showAlertCTABar },
-  } = useAlert();
 
   return (
     <div className="App">
+      <ToastContainer />
       {loader && <AnimateLoader />}
       {showLogin && <Login />}
       {showSignup && <Signup />}
       {showResetPassword && <ResetPassword />}
       {showBadgeModal && <BadgeModal />}
       {celebrate && <AnimateCelebration />}
-      {showAlertBar && <Alert />}
-      {showAlertCTABar && <AlertWithCTA />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/category" element={<CategoryPage />} />
         <Route path="/category/:categoryId" element={<QuestionPage />} />
         <Route path="/account" element={<ProfilePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/support" element={<SupportPage />} />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <NotificationPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/help" element={<HelpPage />} />
         <Route
           path="/settings"
           element={

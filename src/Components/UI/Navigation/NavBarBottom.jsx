@@ -7,8 +7,12 @@ import {
   notifications,
 } from "Data/Icons/icons";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "Context";
 
 export const NavBarBottom = () => {
+  const {
+    authState: { token },
+  } = useAuth();
   const { pathname } = useLocation();
 
   const activeLeaderboard = pathname.includes("leaderboard");
@@ -26,16 +30,23 @@ export const NavBarBottom = () => {
         >
           <img src={leaderboard} alt="icon" />
         </Link>
-        <img src={notifications} alt="icon" />
         <Link to="/category" className={activeCategory ? "active-nav" : ""}>
           <img src={category} alt="icon" />
         </Link>
-        <Link to="/support" className={activeSupport ? "active-nav" : ""}>
+        <Link
+          to="/notifications"
+          className={activeNotifications ? "active-nav" : ""}
+        >
+          <img src={notifications} alt="icon" />
+        </Link>
+        <Link to="/help" className={activeSupport ? "active-nav" : ""}>
           <img src={help} alt="icon" />
         </Link>
-        <Link to="/settings" className={activeSettings ? "active-nav" : ""}>
-          <img src={settings} alt="icon" />
-        </Link>
+        {token && (
+          <Link to="/settings" className={activeSettings ? "active-nav" : ""}>
+            <img src={settings} alt="icon" />
+          </Link>
+        )}
       </div>
     </div>
   );

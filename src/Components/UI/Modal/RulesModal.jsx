@@ -36,11 +36,6 @@ export const RulesModal = ({ setShowRules, startQuizClickHandler }) => {
               <li>You cannot skip the question.</li>
               <li>After finishing the quiz total score will be shown.</li>
             </ol>
-            {/* commented for the development purpose
-            
-            <p className="p-lg text-center mg-1-top">
-              *To Store your results, you need to login first.
-            </p> */}
           </div>
           <Button
             onClick={startQuizClickHandler}

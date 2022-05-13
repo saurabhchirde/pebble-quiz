@@ -1,4 +1,4 @@
-import { useAlert, useAuth, useModal, useQuiz } from "Context";
+import { useAuth, useModal } from "Context";
 import { createContext, useContext } from "react";
 import {
   signInWithPopup,
@@ -7,25 +7,21 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  updateProfile,
   updatePassword,
 } from "firebase/auth";
 import {
   firebaseAuth,
   firestore,
-  collection,
   doc,
-  addDoc,
   updateDoc,
   deleteDoc,
 } from "firebase.config";
-import { alertDispatchHandler } from "Utils/alertDispatchHandler";
+import { AlertToast } from "Components";
 
 const NetworkContext = createContext({});
 
 const NetworkProvider = ({ children }) => {
   const { authDispatch } = useAuth();
-  const { alertDispatch } = useAlert();
   const { setShowLogin, setShowSignup } = useModal();
 
   const googleProvider = new GoogleAuthProvider();
@@ -37,17 +33,18 @@ const NetworkProvider = ({ children }) => {
     try {
       await updateDoc(selectUser, userQuizData);
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
-  // update users in firestore
-  const updateUserDBHandler = async (email, newName) => {
+  // update user name in firestore
+  const updateUserNameDBHandler = async (email, newName) => {
     const selectUser = doc(firestore, `users/${email}`);
     try {
       await updateDoc(selectUser, { name: newName });
+      AlertToast("success", "Name Changed Successfully");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -64,14 +61,9 @@ const NetworkProvider = ({ children }) => {
 
       setShowLogin(false);
       setShowSignup(false);
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Login Successfully"
-      );
+      AlertToast("success", "Login Successfully");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -88,14 +80,9 @@ const NetworkProvider = ({ children }) => {
 
       setShowLogin(false);
       setShowSignup(false);
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Login Successfully"
-      );
+      AlertToast("success", "Login Successfully");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -116,14 +103,9 @@ const NetworkProvider = ({ children }) => {
 
       setShowLogin(false);
       setShowSignup(false);
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Login Successfully"
-      );
+      AlertToast("success", "Login Successfully");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -143,28 +125,18 @@ const NetworkProvider = ({ children }) => {
       });
 
       setShowSignup(false);
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Account Created Successfully"
-      );
+      AlertToast("success", "Account Created Successfully");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
   const passwordResetEmailHandler = (email) => {
     try {
       sendPasswordResetEmail(firebaseAuth, email);
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Check your mailbox, to reset password"
-      );
+      AlertToast("success", "Check your mailbox, to reset password");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -174,28 +146,18 @@ const NetworkProvider = ({ children }) => {
 
     try {
       updatePassword(selectUser, newPassword);
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Password Updated, Login with new Password"
-      );
+      AlertToast("success", "Password Updated, Login with new Password");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
   const accountDeleteHandler = async (email) => {
     try {
       await deleteDoc(doc(firestore, `users/${email}`));
-      alertDispatchHandler(
-        alertDispatch,
-        "ALERT",
-        "SUCCESS",
-        "Account Deleted Successfully"
-      );
+      AlertToast("info", "Account Deleted Successfully");
     } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
+      AlertToast("error", error.message);
     }
   };
 
@@ -210,7 +172,7 @@ const NetworkProvider = ({ children }) => {
         passwordResetEmailHandler,
         accountDeleteHandler,
         passwordChangeHandler,
-        updateUserDBHandler,
+        updateUserNameDBHandler,
       }}
     >
       {children}

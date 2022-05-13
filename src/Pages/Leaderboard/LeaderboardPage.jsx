@@ -1,34 +1,40 @@
-import { NavBar, NavBarTop, NavBarBottom, Button } from "Components";
+import {
+  NavBar,
+  NavBarTop,
+  NavBarBottom,
+  Button,
+  AlertToast,
+} from "Components";
 import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
-import { useAlert, useAuth, useModal, useQuiz } from "Context";
+import { useAnimation, useAuth, useModal, useQuiz } from "Context";
 import { useState, useEffect } from "react";
 import { getDocs, collection, firestore } from "firebase.config";
-import { alertDispatchHandler } from "Utils/alertDispatchHandler";
 import { sortByPoints } from "Utils/sortByPoints";
+import avatar from "Data/Img/avatar.png";
 
 export const LeaderboardPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
   const { userQuizData } = useQuiz();
+  const { setLoader } = useAnimation();
 
   const { setProfileMenu, authClickHandler } = useModal();
-  const { alertDispatch } = useAlert();
   const [allUsers, setAllUsers] = useState([]);
   const [uniqueUsers, setUniqueUsers] = useState([]);
 
   // get all users data to show on leaderboard
   const getAllUsersFromFirestore = async () => {
     try {
+      setLoader(true);
       const usersList = await getDocs(collection(firestore, "users"));
 
       usersList.forEach((doc) =>
         setAllUsers((preData) => [...preData, doc.data()])
       );
-    } catch (error) {
-      alertDispatchHandler(alertDispatch, "ALERT", "INFO", error.message);
-    }
+      setLoader(false);
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -40,7 +46,7 @@ export const LeaderboardPage = () => {
   const showAllUsers = sortByPoints(uniqueUsers)?.map((user) => (
     <div key={user.email} className="leaderboard-user-details">
       <div>
-        <img src={user?.profileImg} alt="user" />
+        <img src={user?.profileImg ?? avatar} alt="user" />
         <li>
           <h2 className="leaderboard-user-name">{user.name}</h2>
         </li>
@@ -53,6 +59,11 @@ export const LeaderboardPage = () => {
   ));
 
   const userName = userQuizData?.name ? userQuizData?.name : name;
+
+  // show loader until fetching the data
+  if (allUsers.length < 1) {
+  } else {
+  }
 
   useEffect(() => {
     getAllUsersFromFirestore();
