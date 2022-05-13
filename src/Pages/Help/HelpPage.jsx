@@ -5,7 +5,7 @@ import {
   Button,
   AccordionSummary,
 } from "Components";
-import { useAuth, useModal } from "Context";
+import { useAuth, useModal, useQuiz } from "Context";
 import badges from "Data/Img/badges.png";
 import "../CommonStyling.css";
 import "./HelpPage.css";
@@ -15,6 +15,7 @@ export const HelpPage = () => {
   const {
     authState: { token },
   } = useAuth();
+  const { allQuizQuestions } = useQuiz();
 
   return (
     <div className="help-page-body">
@@ -45,18 +46,13 @@ export const HelpPage = () => {
             />
             <div className="help-faq-text">
               <p className="mg-1-bot">
-                Currently, We have only 8 categories, with just 3-4 questions
-                per quiz.
+                Currently, We have only {allQuizQuestions.length} categories,
+                with average 3-4 questions per category.
               </p>
               <ol className="list-basic">
-                <li>Avengers</li>
-                <li>Sports</li>
-                <li>Movies</li>
-                <li>Travel</li>
-                <li>Science</li>
-                <li>Technology</li>
-                <li>Animals</li>
-                <li>Language</li>
+                {allQuizQuestions?.map((category) => (
+                  <li key={category._id}>{category.name}</li>
+                ))}
               </ol>
             </div>
           </details>

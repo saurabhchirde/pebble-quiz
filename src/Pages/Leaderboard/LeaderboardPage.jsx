@@ -7,7 +7,7 @@ import {
 } from "Components";
 import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
-import { useAuth, useModal, useQuiz } from "Context";
+import { useAnimation, useAuth, useModal, useQuiz } from "Context";
 import { useState, useEffect } from "react";
 import { getDocs, collection, firestore } from "firebase.config";
 import { sortByPoints } from "Utils/sortByPoints";
@@ -18,6 +18,7 @@ export const LeaderboardPage = () => {
     authState: { token, name },
   } = useAuth();
   const { userQuizData } = useQuiz();
+  const { setLoader } = useAnimation();
 
   const { setProfileMenu, authClickHandler } = useModal();
   const [allUsers, setAllUsers] = useState([]);
@@ -26,14 +27,14 @@ export const LeaderboardPage = () => {
   // get all users data to show on leaderboard
   const getAllUsersFromFirestore = async () => {
     try {
+      setLoader(true);
       const usersList = await getDocs(collection(firestore, "users"));
 
       usersList.forEach((doc) =>
         setAllUsers((preData) => [...preData, doc.data()])
       );
-    } catch (error) {
-      AlertToast("info", error.message);
-    }
+      setLoader(false);
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -58,6 +59,11 @@ export const LeaderboardPage = () => {
   ));
 
   const userName = userQuizData?.name ? userQuizData?.name : name;
+
+  // show loader until fetching the data
+  if (allUsers.length < 1) {
+  } else {
+  }
 
   useEffect(() => {
     getAllUsersFromFirestore();

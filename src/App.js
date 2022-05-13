@@ -1,6 +1,4 @@
 import {
-  Alert,
-  AlertWithCTA,
   AnimateCelebration,
   AnimateLoader,
   BadgeModal,
@@ -9,7 +7,7 @@ import {
   Signup,
   ProtectedRoute,
 } from "Components";
-import { useAlert, useAnimation, useModal } from "Context";
+import { useAnimation, useModal } from "Context";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import {
@@ -45,7 +43,14 @@ function App() {
         <Route path="/category/:categoryId" element={<QuestionPage />} />
         <Route path="/account" element={<ProfilePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
-        <Route path="/notifications" element={<NotificationPage />} />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <NotificationPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/help" element={<HelpPage />} />
         <Route
           path="/settings"

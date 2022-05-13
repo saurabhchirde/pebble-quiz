@@ -9,9 +9,6 @@ export const AnimateCelebration = () => {
       container: document.querySelector("#celebration"),
       animationData: celebration,
     });
-    return () => {
-      // to unmount useEffect
-    };
   }, []);
 
   return (

@@ -54,12 +54,14 @@ export const NavBar = () => {
               <h2>Category</h2>
             </div>
           </Link>
-          <Link to="/notifications">
-            <div className={activeNotifications ? "active-nav" : ""}>
-              <img src={notifications} alt="icon" />
-              <h2>Notifications</h2>
-            </div>
-          </Link>
+          {token && (
+            <Link to="/notifications">
+              <div className={activeNotifications ? "active-nav" : ""}>
+                <img src={notifications} alt="icon" />
+                <h2>Notifications</h2>
+              </div>
+            </Link>
+          )}
           <Link to="/help">
             <div className={activeSupport ? "active-nav" : ""}>
               <img src={help} alt="icon" />
