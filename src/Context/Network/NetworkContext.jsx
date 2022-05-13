@@ -44,6 +44,7 @@ const NetworkProvider = ({ children }) => {
     const selectUser = doc(firestore, `users/${email}`);
     try {
       await updateDoc(selectUser, { name: newName });
+      AlertToast("success", "Name Changed Successfully");
     } catch (error) {
       AlertToast("error", error.message);
     }

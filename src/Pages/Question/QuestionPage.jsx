@@ -59,7 +59,6 @@ export const QuestionPage = () => {
   const timerInterval = () => {
     setTimeout(() => {
       if (startQuiz) {
-        setFinalScore(0);
         if (timer < 1 || selectedChoice) {
           if (nextQuestion < category?.questions.length - 1) {
             setNextQuestion((preQuestion) => preQuestion + 1);
@@ -89,10 +88,11 @@ export const QuestionPage = () => {
               return {
                 ...preData,
                 quizGiven: userQuizData.quizGiven + 1,
-                totalScore: userQuizData.totalScore + finalScore,
+                totalScore: userQuizData.totalScore + score,
                 correctAnswers: userQuizData.correctAnswers + correctAnswer,
               };
             });
+            setFinalScore(0);
           }
           setTimer(20);
         } else {
