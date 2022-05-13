@@ -1,6 +1,6 @@
 # Pebble Quiz
 
-## A Quiz app to boost your memory.
+## Play Fun Trivia Quizzes.
 
 #### - by Saurabh Chirde
 <img src="https://user-images.githubusercontent.com/92800463/168157436-9da42e34-c688-439f-bf2e-08e2cac40d7f.svg" width="500px" height="auto" alt="logo" />
