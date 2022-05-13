@@ -29,3 +29,4 @@ export { ConfirmDeleteModal } from "./UI/Modal/ConfirmDeleteModal";
 export { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 export { AccordionSummary } from "./Cards/Accordion/AccordionSummary";
 export { AlertToast } from "./Alert/AlertToast";
+export { ThemeToggle } from "./UI/ThemeToggle/ThemeToggle";

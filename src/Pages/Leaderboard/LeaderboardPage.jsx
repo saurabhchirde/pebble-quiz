@@ -4,6 +4,7 @@ import {
   NavBarBottom,
   Button,
   AlertToast,
+  ThemeToggle,
 } from "Components";
 import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
@@ -92,6 +93,7 @@ export const LeaderboardPage = () => {
               <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
             </Link>
           </div>
+          <ThemeToggle />
         </div>
         <div className="leaderboard-table-section">
           <h2>Leaderboard</h2>

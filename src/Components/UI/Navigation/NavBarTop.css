@@ -8,7 +8,7 @@
     height: 3.5rem;
     padding: 8px;
     background-color: var(--nav-bar-bg);
-    color: var(--text-white);
+    color: var(--title-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -40,10 +40,6 @@
     margin: 0 5px;
   }
 
-  .login-btn-mobile button:nth-child(1) {
-    color: var(--text-white);
-  }
-
   .user-menu {
     position: absolute;
     top: 2.7rem;
@@ -51,14 +47,15 @@
     background-color: var(--nav-bar-bg);
     padding: 1rem;
     border-radius: 4px;
+    z-index: 2;
   }
 
   .user-menu button {
-    color: var(--text-white);
+    color: var(--title-color);
   }
 
   .user-menu button:hover {
-    outline: 1px solid var(--text-white);
-    color: var(--text-white);
+    outline: 1px solid var(--title-color);
+    color: var(--title-color);
   }
 }

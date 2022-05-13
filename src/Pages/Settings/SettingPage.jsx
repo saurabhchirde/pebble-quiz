@@ -7,6 +7,7 @@ import {
   InputTypePassword,
   Footer,
   AlertToast,
+  ThemeToggle,
 } from "Components";
 import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
 import { firestore } from "firebase.config";
@@ -106,6 +107,7 @@ export const SettingPage = () => {
                 <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
               </Link>
             </div>
+            <ThemeToggle />
           </div>
           {token ? (
             <div className="setting-page-actions">

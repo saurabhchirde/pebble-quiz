@@ -90,7 +90,8 @@
 }
 
 .option-btn {
-  background-color: var(--primary-bg);
+  background-color: var(--answer-options);
+  color: var(--title-color);
   cursor: pointer;
   box-shadow: 0px 4px 12px var(--option-btn-shadow);
   outline: 1px solid var(--option-btn-shadow);

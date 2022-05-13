@@ -21,7 +21,7 @@ export const NavBar = () => {
   const activeLeaderboard = pathname.includes("leaderboard");
   const activeCategory = pathname.includes("category");
   const activeNotifications = pathname.includes("notifications");
-  const activeSupport = pathname.includes("support");
+  const activeHelp = pathname.includes("help");
   const activeSettings = pathname.includes("settings");
 
   const userName = userQuizData?.name ? userQuizData?.name : name;
@@ -63,7 +63,7 @@ export const NavBar = () => {
             </Link>
           )}
           <Link to="/help">
-            <div className={activeSupport ? "active-nav" : ""}>
+            <div className={activeHelp ? "active-nav" : ""}>
               <img src={help} alt="icon" />
               <h2>Help</h2>
             </div>

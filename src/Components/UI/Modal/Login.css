@@ -55,7 +55,7 @@
 }
 
 .signin-modal .password-reset {
-  color: var(--text-light);
+  color: var(--title-color);
 }
 
 .signin-modal .password-reset span {

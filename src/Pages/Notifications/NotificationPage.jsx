@@ -1,4 +1,11 @@
-import { NavBar, NavBarBottom, NavBarTop, Button } from "Components";
+import {
+  NavBar,
+  NavBarBottom,
+  NavBarTop,
+  Button,
+  ThemeToggle,
+  Footer,
+} from "Components";
 import { useAuth, useModal, useQuiz } from "Context";
 import "../CommonStyling.css";
 import "./NotificationPage.css";
@@ -35,27 +42,31 @@ export const NotificationPage = () => {
     );
 
   return (
-    <div className="help-page-body">
+    <div className="notification-page-body">
       <NavBar />
       <NavBarBottom />
       <NavBarTop />
       <div
-        className="help-page-content"
+        className="notification-page-content"
         onClick={() => {
           setProfileMenu(false);
         }}
       >
-        <div className="help-page-header">
-          <h1>All Notifications</h1>
-          <div className="flex-row login-btn-desktop">
-            <Button
-              onClick={authClickHandler}
-              label={token ? "Logout" : "Login"}
-              btnClassName="btn primary-outline-btn-md"
-            />
+        <div>
+          <div className="notification-page-header">
+            <h1>All Notifications</h1>
+            <div className="flex-row login-btn-desktop">
+              <Button
+                onClick={authClickHandler}
+                label={token ? "Logout" : "Login"}
+                btnClassName="btn primary-outline-btn-md"
+              />
+            </div>
+            <ThemeToggle />
           </div>
+          <ul className="all-notifications">{allNotifications}</ul>
         </div>
-        <ul className="all-notifications">{allNotifications}</ul>
+        <Footer />
       </div>
     </div>
   );

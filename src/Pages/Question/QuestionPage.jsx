@@ -6,6 +6,7 @@ import {
   QuizEndModal,
   RulesModal,
   AlertToast,
+  ThemeToggle,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
 import { useAnimation, useAuth, useModal, useQuiz } from "Context";
@@ -220,6 +221,7 @@ export const QuestionPage = () => {
                 btnClassName="btn primary-btn-md"
               />
             </div>
+            <ThemeToggle />
           </div>
 
           <div className="question-section">

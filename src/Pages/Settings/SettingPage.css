@@ -26,8 +26,18 @@
 }
 
 .edit-user-name input,
+.edit-user-password input,
+.edit-user-password i {
+  color: var(--title-color);
+}
+
+.edit-user-name input,
 .edit-user-password input {
   padding-left: 0;
+}
+
+.password-input-field {
+  margin-right: 0;
 }
 
 .edit-user-name,

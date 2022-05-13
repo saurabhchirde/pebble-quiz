@@ -4,6 +4,7 @@ import {
   Footer,
   NavBarBottom,
   NavBarTop,
+  ThemeToggle,
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
 import { useAuth, useModal, useQuiz } from "Context";
@@ -58,6 +59,7 @@ export const LandingPage = () => {
                 <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
               </Link>
             </div>
+            <ThemeToggle />
           </div>
           <div className="landing-page-popular">
             <h2>Popular</h2>

@@ -39,19 +39,19 @@
 }
 
 .positive-score {
-  background-color: var(--background-color);
+  background-color: var(--rule-modal-bg);
 }
 
 .positive-score h1 {
-  color: var(--success-text);
+  color: var(--positive-score);
 }
 
 .zero-score {
-  background-color: var(--background-color);
+  background-color: var(--rule-modal-bg);
 }
 
 .zero-score h1 {
-  color: var(--error-text);
+  color: var(--zero-score);
 }
 
 .quiz-end-modal h1 {

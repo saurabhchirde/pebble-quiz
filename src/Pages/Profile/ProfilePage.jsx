@@ -1,4 +1,11 @@
-import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
+import {
+  NavBar,
+  NavBarTop,
+  NavBarBottom,
+  Button,
+  Footer,
+  ThemeToggle,
+} from "Components";
 import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import avatar from "Data/Img/avatar.png";
@@ -45,6 +52,7 @@ export const ProfilePage = () => {
               <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
             </Link>
           </div>
+          <ThemeToggle />
         </div>
         {token ? (
           <div className="profile-details">

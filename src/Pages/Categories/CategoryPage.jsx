@@ -5,6 +5,7 @@ import {
   Button,
   CategoryCard,
   Footer,
+  ThemeToggle,
 } from "Components";
 import "../CommonStyling.css";
 import "./CategoryPage.css";
@@ -42,6 +43,7 @@ export const CategoryPage = () => {
                 btnClassName="btn primary-outline-btn-md"
               />
             </div>
+            <ThemeToggle />
           </div>
           <div className="category-page-cards">
             <h2>All Categories</h2>

@@ -35,10 +35,14 @@
 .help-page-body,
 .help-page-content,
 .help-page-header,
+.notification-page-body,
+.notification-page-content,
+.notification-page-header,
 .setting-page-body,
 .setting-page-content,
 .setting-page-header {
   display: flex;
+  color: var(--title-color);
 }
 
 .landing-page-content,
@@ -47,6 +51,7 @@
 .profile-page-content,
 .leaderboard-page-content,
 .help-page-content,
+.notification-page-content,
 .setting-page-content {
   max-width: 70rem;
   width: 100%;
@@ -64,6 +69,7 @@
 .leaderboard-page-content,
 .leaderboard-table,
 .help-page-content,
+.notification-page-content,
 .setting-page-content {
   flex-direction: column;
 }
@@ -81,6 +87,9 @@
 .leaderboard-page-header,
 .leaderboard-user-details,
 .help-page-header,
+.help-page-content,
+.notification-page-header,
+.notification-page-content,
 .setting-page-header,
 .setting-page-content {
   justify-content: space-between;
@@ -97,8 +106,21 @@
 .leaderboard-user-details,
 .leaderboard-user-details > div,
 .help-page-header,
+.notification-page-header,
 .setting-page-header {
   align-items: center;
+}
+
+.landing-page-header,
+.category-page-header,
+.question-page-header,
+.profile-page-header,
+.total-achievements,
+.help-page-header,
+.notification-page-header,
+.leaderboard-page-header,
+.setting-page-header {
+  position: relative;
 }
 
 .landing-page-header h1,
@@ -107,6 +129,7 @@
 .profile-page-header h1,
 .leaderboard-page-header h1,
 .help-page-header h1,
+.notification-page-header h1,
 .setting-page-header h1 {
   font-size: 1.5rem;
   font-weight: 500;
@@ -201,6 +224,7 @@
   .help-page-title,
   .setting-page-title {
     font-size: 1.2rem;
+    margin-top: 10px;
   }
 
   .help-page-title,

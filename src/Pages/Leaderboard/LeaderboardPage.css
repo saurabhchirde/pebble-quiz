@@ -29,7 +29,7 @@
 }
 
 .leaderboard-user-details span {
-  color: var(--text-light);
+  color: var(--title-color);
   margin-left: 8px;
 }
 
@@ -44,11 +44,7 @@
 
 @media screen and (max-width: 768px) {
   .leaderboard-table-section {
-    margin-top: 1rem;
-  }
-
-  .leaderboard-page-header button {
-    font-size: 0.9rem;
+    margin-top: 0;
   }
 
   .leaderboard-page-header h1 {
@@ -67,10 +63,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-  }
-
-  .leaderboard-page-header button {
-    font-size: 0.9rem;
   }
 
   .leaderboard-table {

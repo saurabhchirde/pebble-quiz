@@ -13,6 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--title-color);
 }
 
 .rules-container button {
@@ -22,7 +23,7 @@
 
 .rules-container > div {
   width: 35rem;
-  background-color: var(--primary-bg);
+  background-color: var(--rule-modal-bg);
   padding: 2rem 1.5rem;
   border-radius: 15px;
   position: relative;

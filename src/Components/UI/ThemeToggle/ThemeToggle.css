@@ -1,0 +1,35 @@
+.theme-toggle {
+  cursor: pointer;
+  position: absolute;
+  right: 0rem;
+  top: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.theme-toggle button i {
+  color: var(--title-color);
+}
+
+.theme-toggle p {
+  display: none;
+  padding-right: 1.2rem;
+}
+
+.theme-toggle:hover p {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .theme-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+}

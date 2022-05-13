@@ -18,7 +18,7 @@ export const NavBarBottom = () => {
   const activeLeaderboard = pathname.includes("leaderboard");
   const activeCategory = pathname.includes("category");
   const activeNotifications = pathname.includes("notifications");
-  const activeSupport = pathname.includes("support");
+  const activeHelp = pathname.includes("help");
   const activeSettings = pathname.includes("settings");
 
   return (
@@ -41,7 +41,7 @@ export const NavBarBottom = () => {
             <img src={notifications} alt="icon" />
           </Link>
         )}
-        <Link to="/help" className={activeSupport ? "active-nav" : ""}>
+        <Link to="/help" className={activeHelp ? "active-nav" : ""}>
           <img src={help} alt="icon" />
         </Link>
         {token && (
