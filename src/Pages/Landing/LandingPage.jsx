@@ -1,23 +1,22 @@
 import {
-  Button,
   CategoryCard,
   Footer,
   NavBarBottom,
   NavBarTop,
+  PageHeader,
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
 import { useAuth, useModal, useQuiz } from "Context";
-import { Link } from "react-router-dom";
 import "../CommonStyling.css";
 import "./LandingPage.css";
 
 export const LandingPage = () => {
-  const { modalDispatch, authClickHandler } = useModal();
+  const { modalDispatch } = useModal();
   const {
-    authState: { token, name },
+    authState: { name },
   } = useAuth();
   const {
-    quizState: { allQuizQuestions },
+    quizState: { allQuizQuestions, userQuizData },
   } = useQuiz();
 
   const popularQuiz = allQuizQuestions
@@ -37,6 +36,8 @@ export const LandingPage = () => {
       <CategoryCard key={cat._id} cardSize="card-small" category={cat} />
     ));
 
+  const userName = userQuizData?.name ? userQuizData?.name : name;
+
   return (
     <div className="landing-page-body">
       <NavBar />
@@ -49,19 +50,9 @@ export const LandingPage = () => {
         }}
       >
         <div>
-          <div className="landing-page-header">
-            <h1>Hi, {name ? name.split(" ")[0] : "Guest"}</h1>
-            <div className="flex-row login-btn-desktop">
-              <Button
-                onClick={authClickHandler}
-                label={token ? "Logout" : "Login"}
-                btnClassName="btn primary-outline-btn-md"
-              />
-              <Link to="/category">
-                <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
-              </Link>
-            </div>
-          </div>
+          <PageHeader
+            title={`Hi, ${userName ? userName.split(" ")[0] : "Guest"}`}
+          />
           <div className="landing-page-popular">
             <h2>Popular</h2>
             <div>{popularQuiz}</div>

@@ -2,19 +2,16 @@ import {
   NavBar,
   NavBarBottom,
   NavBarTop,
-  Button,
   Footer,
   NotificationCard,
+  PageHeader,
 } from "Components";
-import { useAuth, useModal, useQuiz } from "Context";
+import { useModal, useQuiz } from "Context";
 import "../CommonStyling.css";
 import "./NotificationPage.css";
 
 export const NotificationPage = () => {
-  const { modalDispatch, authClickHandler } = useModal();
-  const {
-    authState: { token },
-  } = useAuth();
+  const { modalDispatch } = useModal();
   const {
     quizState: { userQuizData },
   } = useQuiz();
@@ -40,16 +37,7 @@ export const NotificationPage = () => {
         }}
       >
         <div>
-          <div className="notification-page-header">
-            <h1>All Notifications</h1>
-            <div className="flex-row login-btn-desktop">
-              <Button
-                onClick={authClickHandler}
-                label={token ? "Logout" : "Login"}
-                btnClassName="btn primary-outline-btn-md"
-              />
-            </div>
-          </div>
+          <PageHeader title="All Notifications" />
           <ul className="all-notifications">{allNotifications}</ul>
         </div>
         <Footer />

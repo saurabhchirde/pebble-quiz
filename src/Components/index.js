@@ -31,3 +31,4 @@ export { AccordionSummary } from "./Cards/Accordion/AccordionSummary";
 export { AlertToast } from "./Alert/AlertToast";
 export { ThemeToggle } from "./UI/ThemeToggle/ThemeToggle";
 export { NotificationCard } from "./Cards/NotificationCard/NotificationCard";
+export { PageHeader } from "./PagesHeader/PageHeader";

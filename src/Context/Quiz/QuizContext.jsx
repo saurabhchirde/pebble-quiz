@@ -45,12 +45,12 @@ const initialQuizState = {
 const QuizContext = createContext(null);
 
 const QuizProvider = ({ children }) => {
+  const [quizState, quizDispatch] = useReducer(quizReducer, initialQuizState);
+
   const navigate = useNavigate();
   const {
     authState: { token, name, email, profileImg, id },
   } = useAuth();
-
-  const [quizState, quizDispatch] = useReducer(quizReducer, initialQuizState);
 
   const [flag, setFlag] = useState(false);
 

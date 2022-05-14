@@ -1,5 +1,7 @@
 import { AlertToast } from "Components";
-import { useAuth } from "Context";
+import { useAuth, useNetworkCalls } from "Context";
+import { firestore } from "firebase.config";
+import { doc, updateDoc } from "firebase/firestore";
 import { createContext, useContext, useReducer } from "react";
 import { modalReducer } from "./modalReducer";
 
@@ -24,12 +26,23 @@ const ModalProvider = ({ children }) => {
   );
 
   const {
-    authState: { token },
+    authState: { token, email },
     authDispatch,
   } = useAuth();
 
+  // after log out, update winning streak to 0
+  const updateUserWinningStreak = async () => {
+    const selectUser = doc(firestore, `users/${email}`);
+    try {
+      await updateDoc(selectUser, { winningStreak: 0 });
+    } catch (error) {
+      AlertToast("error", error.message);
+    }
+  };
+
   const authClickHandler = () => {
     if (token) {
+      updateUserWinningStreak();
       authDispatch({ type: "LOGOUT" });
       AlertToast("info", "You have been logged out");
     } else {

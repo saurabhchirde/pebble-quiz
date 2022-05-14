@@ -16,13 +16,14 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase.config";
-import { AlertToast } from "Components";
+import { AlertToast, Login, ResetPassword, Signup } from "Components";
+import { onSnapshot } from "firebase/firestore";
 
 const NetworkContext = createContext({});
 
 const NetworkProvider = ({ children }) => {
   const { authDispatch } = useAuth();
-  const { modalDispatch } = useModal();
+  const { modalState, modalDispatch } = useModal();
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
@@ -48,6 +49,7 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
+  // login using google
   const googleLoginHandler = async () => {
     try {
       const response = await signInWithPopup(firebaseAuth, googleProvider);
@@ -68,6 +70,7 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
+  // login using facebook
   const facebookLoginHandler = async () => {
     try {
       const response = await signInWithPopup(firebaseAuth, facebookProvider);
@@ -88,6 +91,7 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
+  // login using email and password
   const emailPasswordLoginHandler = async (email, password) => {
     try {
       const response = await signInWithEmailAndPassword(
@@ -112,6 +116,7 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
+  // create new account
   const userSignupHandler = async (email, password) => {
     try {
       const response = await createUserWithEmailAndPassword(
@@ -134,6 +139,7 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
+  // reset password
   const passwordResetEmailHandler = (email) => {
     try {
       sendPasswordResetEmail(firebaseAuth, email);
@@ -155,6 +161,7 @@ const NetworkProvider = ({ children }) => {
     }
   };
 
+  // delete account
   const accountDeleteHandler = async (email) => {
     try {
       await deleteDoc(doc(firestore, `users/${email}`));
@@ -162,6 +169,13 @@ const NetworkProvider = ({ children }) => {
     } catch (error) {
       AlertToast("error", error.message);
     }
+  };
+
+  // get realtime data
+  const realTimeDataSnapshot = (email, quizDispatch) => {
+    onSnapshot(doc(firestore, "users", `${email}`), (doc) => {
+      quizDispatch({ type: "USER_QUIZ_DATA", payload: doc.data() });
+    });
   };
 
   return (
@@ -176,9 +190,15 @@ const NetworkProvider = ({ children }) => {
         accountDeleteHandler,
         passwordChangeHandler,
         updateUserNameDBHandler,
+        realTimeDataSnapshot,
       }}
     >
-      {children}
+      <>
+        {modalState.showLogin && <Login />}
+        {modalState.showSignup && <Signup />}
+        {modalState.showResetPassword && <ResetPassword />}
+        {children}
+      </>
     </NetworkContext.Provider>
   );
 };

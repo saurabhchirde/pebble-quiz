@@ -2,21 +2,17 @@ import {
   NavBar,
   NavBarBottom,
   NavBarTop,
-  Button,
   AccordionSummary,
   Footer,
+  PageHeader,
 } from "Components";
 import { useAuth, useModal, useQuiz } from "Context";
 import badges from "Data/Img/badges.png";
-import { Link } from "react-router-dom";
 import "../CommonStyling.css";
 import "./HelpPage.css";
 
 export const HelpPage = () => {
-  const { modalDispatch, authClickHandler } = useModal();
-  const {
-    authState: { token },
-  } = useAuth();
+  const { modalDispatch } = useModal();
   const {
     quizState: { allQuizQuestions },
   } = useQuiz();
@@ -33,19 +29,7 @@ export const HelpPage = () => {
         }}
       >
         <div>
-          <div className="help-page-header">
-            <h1>FAQs</h1>
-            <div className="flex-row login-btn-desktop">
-              <Button
-                onClick={authClickHandler}
-                label={token ? "Logout" : "Login"}
-                btnClassName="btn primary-outline-btn-md"
-              />
-              <Link to="/category">
-                <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
-              </Link>
-            </div>
-          </div>
+          <PageHeader title="FAQs" />
           <div className="help-page-faq">
             <details>
               <AccordionSummary

@@ -24,18 +24,15 @@ import {
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const {
-    modalState: { showLogin, showSignup, showResetPassword, showBadgeModal },
-  } = useModal();
   const { loader, celebrate } = useAnimation();
+  const {
+    modalState: { showBadgeModal },
+  } = useModal();
 
   return (
     <div className="App">
       <ToastContainer />
       {loader && <AnimateLoader />}
-      {showLogin && <Login />}
-      {showSignup && <Signup />}
-      {showResetPassword && <ResetPassword />}
       {showBadgeModal && <BadgeModal />}
       {celebrate && <AnimateCelebration />}
       <Routes>

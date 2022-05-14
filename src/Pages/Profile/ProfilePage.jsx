@@ -1,5 +1,10 @@
-import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
-import { Link } from "react-router-dom";
+import {
+  NavBar,
+  NavBarTop,
+  NavBarBottom,
+  Footer,
+  PageHeader,
+} from "Components";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import avatar from "Data/Img/avatar.png";
 import "../CommonStyling.css";
@@ -14,7 +19,7 @@ export const ProfilePage = () => {
     quizState: { userQuizData },
   } = useQuiz();
 
-  const { modalDispatch, authClickHandler } = useModal();
+  const { modalDispatch } = useModal();
   const progressBarFill = (userQuizData?.level / 20) * 100;
   const progressBarShow = progressBarFill > 100 ? 100 : progressBarFill;
 
@@ -22,7 +27,7 @@ export const ProfilePage = () => {
     <img key={index} src={badge.badge} alt="badge" />
   ));
 
-  const fullUserName = userQuizData?.name ? userQuizData?.name : name;
+  const userName = userQuizData?.name ? userQuizData?.name : name;
 
   return (
     <div className="profile-page-body">
@@ -35,19 +40,7 @@ export const ProfilePage = () => {
           modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
-        <div className="profile-page-header">
-          <h1>Hi, {fullUserName ? fullUserName.split(" ")[0] : "Guest"}</h1>
-          <div className="flex-row login-btn-desktop">
-            <Button
-              onClick={authClickHandler}
-              label={token ? "Logout" : "Login"}
-              btnClassName="btn primary-outline-btn-md"
-            />
-            <Link to="/category">
-              <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
-            </Link>
-          </div>
-        </div>
+        <PageHeader title="Your account" />
         {token ? (
           <div className="profile-details">
             <div className="profile-detail-section">
@@ -59,7 +52,7 @@ export const ProfilePage = () => {
               </div>
               <div className="profile-detail-section-right">
                 <div className="user-detail-overview">
-                  <h2>{fullUserName ? fullUserName : "Guest User"}</h2>
+                  <h2>{userName ? userName : "Guest User"}</h2>
                   <p>Level {userQuizData?.level}</p>
                 </div>
                 <div className="profile-overview-section">

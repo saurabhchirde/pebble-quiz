@@ -7,17 +7,16 @@ import {
   InputTypePassword,
   Footer,
   AlertToast,
+  PageHeader,
 } from "Components";
 import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
-import { firestore } from "firebase.config";
-import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../CommonStyling.css";
 import "./SettingPage.css";
 
 export const SettingPage = () => {
-  const { authClickHandler, modalDispatch } = useModal();
+  const { modalDispatch } = useModal();
   const {
     authState: { token, name, email },
     authDispatch,
@@ -32,7 +31,11 @@ export const SettingPage = () => {
   const [newName, setNewName] = useState(userQuizData?.name ?? name);
   const [newPassword, setNewPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { updateUserNameDBHandler, passwordChangeHandler } = useNetworkCalls();
+  const {
+    updateUserNameDBHandler,
+    passwordChangeHandler,
+    realTimeDataSnapshot,
+  } = useNetworkCalls();
 
   const deleteAccountHandler = () => {
     setShowDeleteModal(true);
@@ -67,13 +70,7 @@ export const SettingPage = () => {
     }
   };
 
-  useEffect(
-    () =>
-      onSnapshot(doc(firestore, "users", `${email}`), (doc) => {
-        quizDispatch({ type: "USER_QUIZ_DATA", payload: doc.data() });
-      }),
-    []
-  );
+  useEffect(() => realTimeDataSnapshot(email, quizDispatch), []);
 
   return (
     <>
@@ -98,19 +95,7 @@ export const SettingPage = () => {
             modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
           }}
         >
-          <div className="setting-page-header">
-            <h1>Settings</h1>
-            <div className="flex-row login-btn-desktop">
-              <Button
-                onClick={authClickHandler}
-                label={token ? "Logout" : "Login"}
-                btnClassName="btn primary-outline-btn-md"
-              />
-              <Link to="/category">
-                <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
-              </Link>
-            </div>
-          </div>
+          <PageHeader title="Settings" />
           {token ? (
             <div className="setting-page-actions">
               <div className="delete-page-user-details">

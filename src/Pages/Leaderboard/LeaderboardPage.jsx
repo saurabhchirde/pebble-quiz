@@ -2,10 +2,9 @@ import {
   NavBar,
   NavBarTop,
   NavBarBottom,
-  Button,
   AlertToast,
+  PageHeader,
 } from "Components";
-import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
 import { useAnimation, useAuth, useModal, useQuiz } from "Context";
 import { useState, useEffect } from "react";
@@ -15,7 +14,7 @@ import avatar from "Data/Img/avatar.png";
 
 export const LeaderboardPage = () => {
   const {
-    authState: { token, name },
+    authState: { name },
   } = useAuth();
   const {
     quizState: { userQuizData },
@@ -23,7 +22,7 @@ export const LeaderboardPage = () => {
 
   const { setLoader } = useAnimation();
 
-  const { modalDispatch, authClickHandler } = useModal();
+  const { modalDispatch } = useModal();
   const [allUsers, setAllUsers] = useState([]);
   const [uniqueUsers, setUniqueUsers] = useState([]);
 
@@ -65,11 +64,6 @@ export const LeaderboardPage = () => {
 
   const userName = userQuizData?.name ? userQuizData?.name : name;
 
-  // show loader until fetching the data
-  if (allUsers.length < 1) {
-  } else {
-  }
-
   useEffect(() => {
     getAllUsersFromFirestore();
   }, []);
@@ -85,19 +79,9 @@ export const LeaderboardPage = () => {
           modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
-        <div className="leaderboard-page-header">
-          <h1>Hi, {userName ? userName.split(" ")[0] : "Guest"}</h1>
-          <div className="flex-row login-btn-desktop">
-            <Button
-              onClick={authClickHandler}
-              label={token ? "Logout" : "Login"}
-              btnClassName="btn primary-outline-btn-md"
-            />
-            <Link to="/category">
-              <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
-            </Link>
-          </div>
-        </div>
+        <PageHeader
+          title={`Hi, ${userName ? userName.split(" ")[0] : "Guest"}`}
+        />
         <div className="leaderboard-table-section">
           <h2>Leaderboard</h2>
           <div className="leaderboard-table">

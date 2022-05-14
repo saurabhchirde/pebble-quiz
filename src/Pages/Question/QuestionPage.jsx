@@ -8,7 +8,13 @@ import {
   AlertToast,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
-import { useAnimation, useAuth, useModal, useQuiz } from "Context";
+import {
+  useAnimation,
+  useAuth,
+  useModal,
+  useNetworkCalls,
+  useQuiz,
+} from "Context";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { storage, ref, getDownloadURL } from "firebase.config";
@@ -46,6 +52,7 @@ export const QuestionPage = () => {
     startNewQuizHandler,
     quizDispatch,
   } = useQuiz();
+  const { updateFirestoreUserData } = useNetworkCalls();
 
   const category = allQuizQuestions.find((cat) => cat._id === categoryId);
 
@@ -122,7 +129,7 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (userQuizData?.winningStreak === 7 && token) {
+    if (userQuizData?.winningStreak === 2 && token) {
       let updatedLevel = userQuizData.level > 0 ? userQuizData.level + 1 : 1;
 
       // fetch badge url
@@ -160,7 +167,6 @@ export const QuestionPage = () => {
 
           // showing celebration
           showCelebration();
-
           // showing badge earned modal
           modalDispatch({ type: "SHOW_BADGE_MODAL", payload: true });
         } catch (error) {
@@ -178,6 +184,11 @@ export const QuestionPage = () => {
       }, 5500);
     }
   }, [userQuizData?.winningStreak]);
+
+  useEffect(() => {
+    // for updating after adding new badge
+    updateFirestoreUserData(email, userQuizData);
+  }, [userQuizData?.badges]);
 
   return (
     <div className="question-page-body">
