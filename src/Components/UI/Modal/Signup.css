@@ -8,6 +8,10 @@
   right: 1rem;
 }
 
+.signup-modal-one h1 {
+  margin: 0;
+}
+
 .existing-account-btn {
   text-align: center;
   cursor: pointer;

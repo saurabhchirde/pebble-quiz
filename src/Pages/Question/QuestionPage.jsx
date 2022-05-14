@@ -21,6 +21,7 @@ import { storage, ref, getDownloadURL } from "firebase.config";
 import { v4 as uuid } from "uuid";
 import "../CommonStyling.css";
 import "./QuestionPage.css";
+import { cleanErrorMessage } from "Utils/cleanErrorMessage";
 
 export const QuestionPage = () => {
   const {
@@ -164,13 +165,12 @@ export const QuestionPage = () => {
               winningStreak: 0,
             },
           });
-
           // showing celebration
           showCelebration();
           // showing badge earned modal
           modalDispatch({ type: "SHOW_BADGE_MODAL", payload: true });
         } catch (error) {
-          AlertToast("info", error.message);
+          AlertToast("info", cleanErrorMessage(error.message));
         }
       })();
 

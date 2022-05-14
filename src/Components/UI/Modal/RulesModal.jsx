@@ -17,7 +17,6 @@ export const RulesModal = ({ setShowRules, startQuizClickHandler }) => {
   return (
     <>
       <div className="modal-backdrop backdrop"></div>
-
       <div className="rules-container">
         <div>
           <i onClick={closeModalHandler} className="fa fa-times close-btn"></i>

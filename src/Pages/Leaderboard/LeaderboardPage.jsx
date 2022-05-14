@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import { getDocs, collection, firestore } from "firebase.config";
 import { sortByPoints } from "Utils/sortByPoints";
 import avatar from "Data/Img/avatar.png";
+import { cleanErrorMessage } from "Utils/cleanErrorMessage";
 
 export const LeaderboardPage = () => {
   const {
@@ -31,13 +32,12 @@ export const LeaderboardPage = () => {
     try {
       setLoader(true);
       const usersList = await getDocs(collection(firestore, "users"));
-
       usersList.forEach((doc) =>
         setAllUsers((preData) => [...preData, doc.data()])
       );
       setLoader(false);
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 

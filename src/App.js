@@ -2,9 +2,6 @@ import {
   AnimateCelebration,
   AnimateLoader,
   BadgeModal,
-  Login,
-  ResetPassword,
-  Signup,
   ProtectedRoute,
 } from "Components";
 import { useAnimation, useModal } from "Context";

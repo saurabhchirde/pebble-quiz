@@ -1,6 +1,9 @@
 import { AlertToast } from "Components";
 import { useModal, useNetworkCalls } from "Context";
+import { firestore } from "firebase.config";
+import { doc, getDoc } from "firebase/firestore";
 import { useState } from "react";
+import { cleanErrorMessage } from "Utils/cleanErrorMessage";
 import { Button, IconButton } from "../Button";
 import "./ResetPassword.css";
 export const ResetPassword = () => {
@@ -9,12 +12,40 @@ export const ResetPassword = () => {
 
   const [email, setEmail] = useState("");
 
+  // check if user is in database
+  const getUserData = async () => {
+    const selectUser = doc(firestore, `users/${email}`);
+    try {
+      const userResponse = await getDoc(selectUser);
+      if (userResponse.exists()) {
+        passwordResetEmailHandler(email);
+        modalDispatch({ type: "SHOW_RESET_PASSWORD", payload: false });
+      } else {
+        setEmail("");
+        AlertToast("error", "User not found, enter correct email");
+      }
+    } catch (error) {
+      AlertToast("error", cleanErrorMessage(error.message));
+    }
+  };
+
+  const delayFunction = (delay) => {
+    let setTimer;
+    return (e) => {
+      clearTimeout(setTimer);
+      setTimer = setTimeout(() => {
+        setEmail(e.target.value);
+      }, delay);
+    };
+  };
+
+  const debounce = delayFunction(300);
+
   const sendResetClickHandler = () => {
     if (email.trim() === "") {
       AlertToast("info", "Enter a valid email");
     } else {
-      passwordResetEmailHandler(email);
-      modalDispatch({ type: "SHOW_RESET_PASSWORD", payload: false });
+      getUserData();
     }
   };
 
@@ -33,8 +64,7 @@ export const ResetPassword = () => {
             Enter Email to reset your password
             <input
               type="email"
-              name="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => debounce(e)}
               autoComplete="email"
               placeholder="enter email"
             />

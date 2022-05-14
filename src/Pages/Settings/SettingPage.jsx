@@ -11,7 +11,7 @@ import {
 } from "Components";
 import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../CommonStyling.css";
 import "./SettingPage.css";
 
@@ -116,7 +116,6 @@ export const SettingPage = () => {
                     btnClassName="btn primary-outline-btn-md"
                   />
                 </div>
-
                 <h2 className="title-lg-wt-5 mg-1-top"> Change Password</h2>
                 <div className="edit-user-password">
                   <InputTypePassword

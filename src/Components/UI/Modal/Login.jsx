@@ -1,17 +1,13 @@
 import { useModal, useNetworkCalls } from "Context";
-import { Button, IconButton, InputTypeOne } from "Components";
+import { IconButton } from "Components";
 import { useState } from "react";
 import "./Login.css";
-import { InputTypePassword } from "../Input";
-import { LabelIconButton } from "../Button";
+import { LoginInputForm } from "./LoginInputForm/LoginInputForm";
+import { GoogleFacebookHandler } from "./GoogleFacebookHandler/GoogleFacebookHandler";
 
 export const Login = () => {
   const { modalDispatch } = useModal();
-  const {
-    emailPasswordLoginHandler,
-    googleLoginHandler,
-    facebookLoginHandler,
-  } = useNetworkCalls();
+  const { emailPasswordLoginHandler } = useNetworkCalls();
 
   const [showPassword, setShowPassword] = useState(false);
   const [loginInput, setLoginInput] = useState({
@@ -89,53 +85,18 @@ export const Login = () => {
           icon="fas fa-times"
           onClick={closeLoginHandler}
         />
-        <form onSubmit={onLoginSubmitHandler}>
-          <InputTypeOne
-            type="email"
-            name="email"
-            required="required"
-            placeholder="Enter your email *"
-            iconWrapper="input-icon"
-            icon="far fa-envelope"
-            inputWrapper="outline-email-input"
-            onChange={onModalInputHandler}
-            value={loginInput.email}
-          />
-          <InputTypePassword
-            type={showPassword ? "text" : "password"}
-            name="password"
-            required="required"
-            placeholder="Enter your password *"
-            iconWrapper="input-icon"
-            icon="fas fa-key"
-            eyeIcon={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}
-            inputWrapper="outline-password-input password-input-field"
-            onChange={onModalInputHandler}
-            onEyeClick={() => {
-              setShowPassword((preData) => !preData);
-            }}
-            value={loginInput.password}
-          />
-          <Button
-            btnWrapper="signin-btn"
-            type="submit"
-            label="Sign-In with Email"
-            btnClassName="btn primary-btn-md"
-            onClick={onLoginClickFormHandler}
-          />
-        </form>
-        <hr className="section-break-line" />
-        <LabelIconButton
-          icon="fab fa-google"
-          label="Sign-In with Google"
-          btnClassName="btn label-icon-outline-btn-md google-login"
-          onClick={googleLoginHandler}
+        <LoginInputForm
+          onLoginSubmitHandler={onLoginSubmitHandler}
+          onModalInputHandler={onModalInputHandler}
+          loginInput={loginInput}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          onLoginClickFormHandler={onLoginClickFormHandler}
         />
-        <LabelIconButton
-          icon="fab fa-facebook"
-          label="Sign-In with Facebook"
-          btnClassName="btn label-icon-outline-btn-md facebook-login"
-          onClick={facebookLoginHandler}
+        <hr className="section-break-line" />
+        <GoogleFacebookHandler
+          googleText="Sign-In with Google"
+          facebookText="Sign-In with Facebook"
         />
         <h3 className="title-sm-wt-5 mg-1-bot mg-point6-top password-reset">
           Forgot your password?

@@ -19,6 +19,7 @@ import {
 import { child } from "firebase/database";
 import { AlertToast } from "Components";
 import { quizReducer } from "./quizReducer";
+import { cleanErrorMessage } from "Utils/cleanErrorMessage";
 
 const initialUserQuizData = {
   quizGiven: 0,
@@ -69,7 +70,7 @@ const QuizProvider = ({ children }) => {
       const allQuestions = await get(child(dbRef, "quizDB"));
       quizDispatch({ type: "ALL_QUIZ_QUESTIONS", payload: allQuestions.val() });
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -92,7 +93,7 @@ const QuizProvider = ({ children }) => {
     try {
       await setDoc(addUser, userData, { merge: true });
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -107,7 +108,6 @@ const QuizProvider = ({ children }) => {
           type: "USER_QUIZ_DATA",
           payload: userResponse.data(),
         });
-        // setUserQuizData(userResponse.data());
       } else {
         // add if user is not in database
         addUserToFirestore();
@@ -115,11 +115,10 @@ const QuizProvider = ({ children }) => {
           type: "USER_QUIZ_DATA",
           payload: userResponse.data(),
         });
-        // setUserQuizData(userResponse.data());
         setFlag(true);
       }
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -129,7 +128,6 @@ const QuizProvider = ({ children }) => {
       type: "USER_QUIZ_DATA",
       payload: initialUserQuizData,
     });
-    // setUserQuizData(initialUserQuizData);
     if (token) {
       getUserData();
     }

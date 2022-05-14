@@ -17,6 +17,7 @@ import {
   deleteDoc,
 } from "firebase.config";
 import { AlertToast, Login, ResetPassword, Signup } from "Components";
+import { cleanErrorMessage } from "Utils/cleanErrorMessage";
 import { onSnapshot } from "firebase/firestore";
 
 const NetworkContext = createContext({});
@@ -34,7 +35,7 @@ const NetworkProvider = ({ children }) => {
     try {
       await updateDoc(selectUser, userQuizData);
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -45,7 +46,7 @@ const NetworkProvider = ({ children }) => {
       await updateDoc(selectUser, { name: newName });
       AlertToast("success", "Name Changed Successfully");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -66,7 +67,7 @@ const NetworkProvider = ({ children }) => {
 
       AlertToast("success", "Login Successfully");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -87,7 +88,7 @@ const NetworkProvider = ({ children }) => {
 
       AlertToast("success", "Login Successfully");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -112,7 +113,7 @@ const NetworkProvider = ({ children }) => {
 
       AlertToast("success", "Login Successfully");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -135,7 +136,7 @@ const NetworkProvider = ({ children }) => {
 
       AlertToast("success", "Account Created Successfully");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -145,7 +146,7 @@ const NetworkProvider = ({ children }) => {
       sendPasswordResetEmail(firebaseAuth, email);
       AlertToast("success", "Check your mailbox, to reset password");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -157,7 +158,7 @@ const NetworkProvider = ({ children }) => {
       updatePassword(selectUser, newPassword);
       AlertToast("success", "Password Updated, Login with new Password");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 
@@ -167,7 +168,7 @@ const NetworkProvider = ({ children }) => {
       await deleteDoc(doc(firestore, `users/${email}`));
       AlertToast("info", "Account Deleted Successfully");
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 

@@ -1,6 +1,5 @@
 export { AnimateLoader } from "./Animations/AnimateLoader";
 export { AnimateCelebration } from "./Animations/Celebration";
-export { NotLogged } from "./NotLogged/NotLogged";
 export { BadgeIconButton } from "./UI/Button";
 export { Button } from "./UI/Button";
 export { ButtonSimple } from "./UI/Button";
@@ -15,7 +14,6 @@ export { Login } from "./UI/Modal";
 export { Signup } from "./UI/Modal";
 export { SignupAlertModal } from "./UI/Modal";
 export { SearchBar } from "./UI/Navigation";
-export { NavbarAvatar } from "./UI/Navigation";
 export { NavBar } from "./UI/Navigation";
 export { NavBarTop } from "./UI/Navigation/NavBarTop";
 export { NavBarBottom } from "./UI/Navigation/NavBarBottom";

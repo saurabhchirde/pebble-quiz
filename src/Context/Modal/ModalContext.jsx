@@ -1,8 +1,9 @@
 import { AlertToast } from "Components";
-import { useAuth, useNetworkCalls } from "Context";
+import { useAuth } from "Context";
 import { firestore } from "firebase.config";
 import { doc, updateDoc } from "firebase/firestore";
 import { createContext, useContext, useReducer } from "react";
+import { cleanErrorMessage } from "Utils/cleanErrorMessage";
 import { modalReducer } from "./modalReducer";
 
 const ModalContext = createContext(null);
@@ -36,7 +37,7 @@ const ModalProvider = ({ children }) => {
     try {
       await updateDoc(selectUser, { winningStreak: 0 });
     } catch (error) {
-      AlertToast("error", error.message);
+      AlertToast("error", cleanErrorMessage(error.message));
     }
   };
 

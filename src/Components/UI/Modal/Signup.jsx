@@ -1,9 +1,9 @@
-import { Button } from "../Button/Button";
-import { AlertToast, IconButton, InputTypeOne } from "Components";
+import { AlertToast, IconButton } from "Components";
 import "./Signup.css";
 import { useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
-import { LabelIconButton } from "../Button";
+import { GoogleFacebookHandler } from "./GoogleFacebookHandler/GoogleFacebookHandler";
+import { SignupInputForm } from "./SignupInputForm/SignupInputForm";
 
 const initialSignupState = {
   email: "",
@@ -14,8 +14,7 @@ export const Signup = () => {
   const { modalDispatch } = useModal();
 
   const [user, setUser] = useState(initialSignupState);
-  const { userSignupHandler, googleLoginHandler, facebookLoginHandler } =
-    useNetworkCalls();
+  const { userSignupHandler } = useNetworkCalls();
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const emailValidate =
@@ -92,63 +91,16 @@ export const Signup = () => {
           icon="fas fa-times"
           onClick={onCloseClick}
         />
-
-        <form onSubmit={onSignupFormSubmitHandler}>
-          <InputTypeOne
-            label="Email *"
-            type="email"
-            name="email"
-            required="required"
-            autoComplete="email"
-            placeholder="Enter your email *"
-            inputWrapper="outline-email-input"
-            onChange={onInputChangeHandler}
-            value={user.email}
-          />
-          <InputTypeOne
-            label="Password *"
-            type="password"
-            name="password"
-            required="required"
-            autoComplete="current-password"
-            placeholder="Enter your password"
-            inputWrapper="outline-password-input"
-            onChange={onInputChangeHandler}
-            value={user.password}
-          />
-          <InputTypeOne
-            label="Confirm Password *"
-            type="text"
-            name="confirm-password"
-            required="required"
-            placeholder="Confirm password"
-            inputWrapper="outline-password-input"
-            onChange={onConfirmPasswordHandler}
-            value={confirmPassword}
-          />
-          <p>
-            By continuing you agree to our Terms of Service and
-            <span> Privacy Policy</span>
-          </p>
-          <Button
-            onClick={onSignupFormSubmitHandler}
-            btnWrapper="signup-btn"
-            type="submit"
-            btnClassName="btn primary-btn-md"
-            label=" Sign Up"
-          />{" "}
-        </form>
-        <LabelIconButton
-          icon="fab fa-google"
-          label="Continue with Google"
-          btnClassName="btn label-icon-outline-btn-md google-login"
-          onClick={googleLoginHandler}
+        <SignupInputForm
+          onSignupFormSubmitHandler={onSignupFormSubmitHandler}
+          onInputChangeHandler={onInputChangeHandler}
+          user={user}
+          confirmPassword={confirmPassword}
+          onConfirmPasswordHandler={onConfirmPasswordHandler}
         />
-        <LabelIconButton
-          icon="fab fa-facebook"
-          label="Continue with Facebook"
-          btnClassName="btn label-icon-outline-btn-md facebook-login"
-          onClick={facebookLoginHandler}
+        <GoogleFacebookHandler
+          googleText="Continue with Google"
+          facebookText="Continue with Facebook"
         />
         <div className="existing-account-btn" onClick={onLoginClick}>
           <h2>
