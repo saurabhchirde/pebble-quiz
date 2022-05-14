@@ -1,0 +1,43 @@
+.list-stacked {
+  background-color: var(--info-bg);
+  margin: 8px 0;
+}
+
+.list-stacked img {
+  width: 2.5rem;
+  margin-left: 5px;
+  border: none;
+}
+
+.list-stacked .list-body {
+  width: 95%;
+}
+
+.list-stacked button {
+  margin-right: 0;
+}
+
+.list-stacked .avatar {
+  outline: none;
+}
+
+.un-read {
+  background-color: var(--notification-card);
+  border: none;
+  box-shadow: 0 2px 4px var(--notification-shadow);
+}
+
+.list-text h1,
+.list-text p {
+  color: var(--title-color);
+}
+
+@media screen and (max-width: 400px) {
+  .list-stacked {
+    padding-left: 2px;
+  }
+
+  .list-stacked img {
+    width: 2.5rem;
+  }
+}

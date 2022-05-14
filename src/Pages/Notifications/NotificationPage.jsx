@@ -1,4 +1,11 @@
-import { NavBar, NavBarBottom, NavBarTop, Button, Footer } from "Components";
+import {
+  NavBar,
+  NavBarBottom,
+  NavBarTop,
+  Button,
+  Footer,
+  NotificationCard,
+} from "Components";
 import { useAuth, useModal, useQuiz } from "Context";
 import "../CommonStyling.css";
 import "./NotificationPage.css";
@@ -15,22 +22,7 @@ export const NotificationPage = () => {
   const allNotifications =
     userQuizData?.notifications?.length > 0 ? (
       userQuizData?.notifications?.map((notification) => (
-        <li
-          key={notification.id}
-          className={`list-stacked list-close-btn ${
-            notification.unRead ? "un-read" : ""
-          }`}
-        >
-          <div className="list-body">
-            <div className="avatar avatar-sm-round">
-              <img loading="lazy" src={notification.icon} alt="avatar-image" />
-            </div>
-            <div>
-              <h1>You earned a new badge</h1>
-              <p>{notification.date}</p>
-            </div>
-          </div>
-        </li>
+        <NotificationCard notification={notification} key={notification.id} />
       ))
     ) : (
       <h2 className="title-lg-wt-5">No Notifications</h2>

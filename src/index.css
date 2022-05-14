@@ -24,6 +24,8 @@ html[data-pebblequiz-theme="light"] {
   --sub-title-color: rgb(55, 55, 55);
   --rule-modal-bg: rgb(234, 234, 234);
   --answer-options: white;
+  --notification-card: rgba(255, 255, 255, 0.837);
+  --notification-shadow: rgba(0, 0, 0, 0.116);
 }
 
 html[data-pebblequiz-theme="dark"] {
@@ -38,6 +40,8 @@ html[data-pebblequiz-theme="dark"] {
   --sub-title-color: rgb(202, 202, 202);
   --rule-modal-bg: rgb(79, 79, 79);
   --answer-options: rgb(93, 93, 93);
+  --notification-card: rgba(42, 42, 42, 0.922);
+  --notification-shadow: rgba(197, 197, 197, 0.229);
 }
 
 body {
