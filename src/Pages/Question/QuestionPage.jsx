@@ -129,7 +129,7 @@ export const QuestionPage = () => {
   }, [score, startQuiz]);
 
   useEffect(() => {
-    if (userQuizData?.winningStreak === 2 && token) {
+    if (userQuizData?.winningStreak === 7 && token) {
       let updatedLevel = userQuizData.level > 0 ? userQuizData.level + 1 : 1;
 
       // fetch badge url
