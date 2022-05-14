@@ -75,7 +75,6 @@ export const QuestionPage = () => {
             });
 
             if (wrongAnswers > 0) {
-              console.log("wrong set to 0");
               quizDispatch({
                 type: "USER_QUIZ_DATA",
                 payload: { ...userQuizData, winningStreak: 0 },

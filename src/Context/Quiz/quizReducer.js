@@ -13,7 +13,6 @@ export const quizReducer = (quizState, action) => {
       return { ...quizState, finalScore: action.payload };
 
     case "USER_QUIZ_DATA":
-      console.log(action.payload);
       return { ...quizState, userQuizData: action.payload };
 
     case "ALL_QUIZ_QUESTIONS":
