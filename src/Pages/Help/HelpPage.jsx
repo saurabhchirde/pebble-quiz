@@ -68,15 +68,46 @@ export const HelpPage = () => {
               />
               <div className="help-faq-text">
                 <p>
-                  Achievements are the badges you will receive. If you win 7
-                  consecutive games without losing your winning streak.
-                  <br /> That is, "Not a single Wrong answer while playing a
-                  quiz, else the winning streak will break."
+                  <li>
+                    Achievements are the badges you will receive, after you win
+                    7 consecutive games without losing your winning streak.
+                  </li>
                   <br />
-                  <br /> After successful 7 consecutive wins, You will receive a
-                  similar badge shown below and it will be visible in your
-                  account section.
+                  <li>
+                    That is, "Not a single Wrong answer while playing a quiz,
+                    else the winning streak will break."
+                  </li>{" "}
+                  <br />
+                  <li>
+                    After successful 7 consecutive wins, You will receive a
+                    similar badge shown below and it will be visible in your
+                    account section.
+                  </li>
+                  <br />
                   <img src={badges} alt="badges" />
+                </p>
+              </div>
+            </details>
+            <details>
+              <AccordionSummary text=" What is the winning streak? How it works?" />
+              <div className="help-faq-text">
+                <p>
+                  <li>
+                    Winning streak are used to find, whether all of your answers
+                    are correct or not.
+                  </li>
+                  <br />
+                  <li>
+                    If you win 7 consecutive game, then you will receive an
+                    achievement badge.
+                  </li>
+                  <br />
+                  <li>
+                    If any or your answer is wrong or you logged out of the game
+                    before playing 7 games, then your winning streak will be
+                    reset to 0.
+                  </li>
+                  <br />
                 </p>
               </div>
             </details>
