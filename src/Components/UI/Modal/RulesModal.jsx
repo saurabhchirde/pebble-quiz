@@ -5,7 +5,9 @@ import "./RulesModal.css";
 
 export const RulesModal = ({ setShowRules, startQuizClickHandler }) => {
   const navigate = useNavigate();
-  const { startQuiz } = useQuiz();
+  const {
+    quizState: { startQuiz },
+  } = useQuiz();
 
   const closeModalHandler = () => {
     navigate("/category");

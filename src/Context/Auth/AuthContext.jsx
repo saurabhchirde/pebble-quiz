@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("pebble-quiz-auth", JSON.stringify(authState));
-  }, [authState.token]);
+  }, [authState?.token]);
 
   return (
     <AuthContext.Provider value={{ authState, authDispatch }}>

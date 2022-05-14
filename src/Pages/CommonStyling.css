@@ -111,18 +111,6 @@
   align-items: center;
 }
 
-.landing-page-header,
-.category-page-header,
-.question-page-header,
-.profile-page-header,
-.total-achievements,
-.help-page-header,
-.notification-page-header,
-.leaderboard-page-header,
-.setting-page-header {
-  position: relative;
-}
-
 .landing-page-header h1,
 .category-page-header h1,
 .question-page-header h1,
@@ -138,9 +126,11 @@
 .landing-page-popular,
 .landing-page-top-categories,
 .leaderboard-table-section,
+.category-page-cards,
 .help-page-title,
+.all-notifications h2,
 .setting-page-title {
-  margin-top: 2.5rem;
+  margin-top: 3.5rem;
 }
 
 .landing-page-popular,
@@ -194,12 +184,13 @@
   .profile-page-content,
   .leaderboard-page-content,
   .help-page-content,
+  .notification-page-content,
   .setting-page-content {
     width: 100%;
     padding: 2rem 1rem 1rem;
     margin-top: 2rem;
     margin-bottom: 3.5rem;
-    min-height: 80vh;
+    min-height: 88vh;
   }
 
   .category-page-header,
@@ -207,6 +198,7 @@
   .question-page-header,
   .leaderboard-page-header,
   .help-page-header,
+  .notification-page-header,
   .setting-page-header {
     justify-content: center;
   }
@@ -221,6 +213,7 @@
   .leaderboard-table-section > h2,
   .help-page-header h1,
   .setting-page-header h1,
+  .notification-page-header h1,
   .help-page-title,
   .setting-page-title {
     font-size: 1.2rem;
@@ -238,6 +231,7 @@
   .category-page-header h1,
   .question-page-header h1,
   .help-page-header h1,
+  .notification-page-header h1,
   .setting-page-header h1 {
     font-size: 1.1rem;
   }

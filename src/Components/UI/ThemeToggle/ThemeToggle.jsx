@@ -1,4 +1,3 @@
-import { IconButton } from "Components/UI/Button";
 import { useTheme } from "Context";
 import "./ThemeToggle.css";
 
@@ -9,7 +8,13 @@ export const ThemeToggle = () => {
 
   return (
     <div className="theme-toggle" onClick={toggleTheme}>
-      <IconButton icon={themeIcon} btnClassName="btn icon-btn-md" />
+      <i className={themeIcon}></i>
+      <h2 className="theme-title-desktop">
+        {theme === "dark" ? "Light Theme" : "Dark Theme"}
+      </h2>
+      <h2 className="theme-title-mobile ">
+        {theme === "dark" ? "Light" : "Dark"}
+      </h2>
     </div>
   );
 };

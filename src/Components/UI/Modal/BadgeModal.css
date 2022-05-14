@@ -14,8 +14,9 @@
 }
 
 .badge-modal-container div {
-  background-color: var(--background-color);
+  background-color: var(--rule-modal-bg);
   width: 30rem;
   padding: 2.5rem 1rem;
   border-radius: 10px;
+  color: var(--title-color);
 }

@@ -4,7 +4,6 @@ import {
   NavBarTop,
   Button,
   AccordionSummary,
-  ThemeToggle,
   Footer,
 } from "Components";
 import { useAuth, useModal, useQuiz } from "Context";
@@ -14,11 +13,13 @@ import "../CommonStyling.css";
 import "./HelpPage.css";
 
 export const HelpPage = () => {
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const {
     authState: { token },
   } = useAuth();
-  const { allQuizQuestions } = useQuiz();
+  const {
+    quizState: { allQuizQuestions },
+  } = useQuiz();
 
   return (
     <div className="help-page-body">
@@ -28,7 +29,7 @@ export const HelpPage = () => {
       <div
         className="help-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div>
@@ -44,7 +45,6 @@ export const HelpPage = () => {
                 <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
               </Link>
             </div>
-            <ThemeToggle />
           </div>
           <div className="help-page-faq">
             <details>

@@ -4,7 +4,6 @@ import {
   NavBarBottom,
   Button,
   AlertToast,
-  ThemeToggle,
 } from "Components";
 import { Link } from "react-router-dom";
 import "./LeaderboardPage.css";
@@ -18,10 +17,13 @@ export const LeaderboardPage = () => {
   const {
     authState: { token, name },
   } = useAuth();
-  const { userQuizData } = useQuiz();
+  const {
+    quizState: { userQuizData },
+  } = useQuiz();
+
   const { setLoader } = useAnimation();
 
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const [allUsers, setAllUsers] = useState([]);
   const [uniqueUsers, setUniqueUsers] = useState([]);
 
@@ -35,7 +37,9 @@ export const LeaderboardPage = () => {
         setAllUsers((preData) => [...preData, doc.data()])
       );
       setLoader(false);
-    } catch (error) {}
+    } catch (error) {
+      AlertToast("error", error.message);
+    }
   };
 
   useEffect(() => {
@@ -78,7 +82,7 @@ export const LeaderboardPage = () => {
       <div
         className="leaderboard-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div className="leaderboard-page-header">
@@ -93,7 +97,6 @@ export const LeaderboardPage = () => {
               <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
             </Link>
           </div>
-          <ThemeToggle />
         </div>
         <div className="leaderboard-table-section">
           <h2>Leaderboard</h2>

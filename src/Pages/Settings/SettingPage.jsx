@@ -7,7 +7,6 @@ import {
   InputTypePassword,
   Footer,
   AlertToast,
-  ThemeToggle,
 } from "Components";
 import { useAuth, useModal, useNetworkCalls, useQuiz } from "Context";
 import { firestore } from "firebase.config";
@@ -18,13 +17,17 @@ import "../CommonStyling.css";
 import "./SettingPage.css";
 
 export const SettingPage = () => {
-  const { setProfileMenu, authClickHandler, setShowLogin } = useModal();
+  const { authClickHandler, modalDispatch } = useModal();
   const {
     authState: { token, name, email },
     authDispatch,
   } = useAuth();
   const navigate = useNavigate();
-  const { userQuizData, setUserQuizData } = useQuiz();
+  const {
+    quizState: { userQuizData },
+    quizDispatch,
+  } = useQuiz();
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [newName, setNewName] = useState(userQuizData?.name ?? name);
   const [newPassword, setNewPassword] = useState("");
@@ -53,7 +56,7 @@ export const SettingPage = () => {
         passwordChangeHandler(newPassword);
         authDispatch({ type: "LOGOUT" });
         navigate("/");
-        setShowLogin(true);
+        modalDispatch({ type: "SHOW_LOGIN", payload: true });
         setNewPassword("");
       } else {
         AlertToast(
@@ -67,7 +70,7 @@ export const SettingPage = () => {
   useEffect(
     () =>
       onSnapshot(doc(firestore, "users", `${email}`), (doc) => {
-        setUserQuizData(doc.data());
+        quizDispatch({ type: "USER_QUIZ_DATA", payload: doc.data() });
       }),
     []
   );
@@ -92,7 +95,7 @@ export const SettingPage = () => {
         <div
           className="setting-page-content"
           onClick={() => {
-            setProfileMenu(false);
+            modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
           }}
         >
           <div className="setting-page-header">
@@ -107,7 +110,6 @@ export const SettingPage = () => {
                 <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
               </Link>
             </div>
-            <ThemeToggle />
           </div>
           {token ? (
             <div className="setting-page-actions">

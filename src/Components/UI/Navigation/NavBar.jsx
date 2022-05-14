@@ -10,13 +10,16 @@ import { logo_light } from "Data/Logo/logo";
 import { Link, useLocation } from "react-router-dom";
 import avatar from "Data/Img/avatar.png";
 import { useAuth, useQuiz } from "Context";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 
 export const NavBar = () => {
   const { pathname } = useLocation();
   const {
     authState: { profileImg, name, token },
   } = useAuth();
-  const { userQuizData } = useQuiz();
+  const {
+    quizState: { userQuizData },
+  } = useQuiz();
 
   const activeLeaderboard = pathname.includes("leaderboard");
   const activeCategory = pathname.includes("category");
@@ -77,6 +80,7 @@ export const NavBar = () => {
             </Link>
           )}
         </div>
+        <ThemeToggle />
       </div>
       <Link to="/">
         <img src={logo_light} alt="logo" />

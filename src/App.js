@@ -24,8 +24,9 @@ import {
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const { showLogin, showSignup, showResetPassword, showBadgeModal } =
-    useModal();
+  const {
+    modalState: { showLogin, showSignup, showResetPassword, showBadgeModal },
+  } = useModal();
   const { loader, celebrate } = useAnimation();
 
   return (

@@ -4,10 +4,19 @@ import { Button } from "Components";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth, useModal, useQuiz } from "Context";
 import avatar from "Data/Img/avatar.png";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 
 export const NavBarTop = () => {
-  const { startQuiz, startQuizHandler, startNewQuizHandler } = useQuiz();
-  const { profileMenu, setProfileMenu, authClickHandler } = useModal();
+  const {
+    quizState: { startQuiz },
+    startQuizHandler,
+    startNewQuizHandler,
+  } = useQuiz();
+  const {
+    modalState: { profileMenu },
+    modalDispatch,
+    authClickHandler,
+  } = useModal();
   const { pathname } = useLocation();
   const {
     authState: { token, profileImg },
@@ -25,6 +34,8 @@ export const NavBarTop = () => {
     }
   };
 
+  const activeProfile = pathname.includes("account");
+
   return (
     <div className="nav-bar-top">
       <Link to="/">
@@ -40,43 +51,46 @@ export const NavBarTop = () => {
             />
           </div>
         )}
-        {token ? (
-          <div className="user-avatar">
-            <div
-              className="avatar avatar-sm-round"
-              onClick={() => {
-                setProfileMenu((show) => !show);
-              }}
-            >
-              <img
-                loading="lazy"
-                src={profileImg ? profileImg : avatar}
-                alt="avatar"
-              />
-            </div>
-            {profileMenu && (
-              <div className="user-menu">
-                <Link to="/account">
+
+        <div className="user-avatar">
+          <div
+            className="avatar avatar-sm-round"
+            onClick={() => {
+              modalDispatch({ type: "SHOW_PROFILE_MENU" });
+            }}
+          >
+            <img
+              loading="lazy"
+              src={profileImg ? profileImg : avatar}
+              alt="avatar"
+            />
+          </div>
+          {profileMenu && (
+            <div className="user-menu">
+              {token && (
+                <Link
+                  to="/account"
+                  className={activeProfile ? "active-button" : ""}
+                >
                   <Button
                     label="Profile"
-                    btnClassName="btn primary-text-btn-md"
+                    btnClassName={`btn primary-text-btn-md ${
+                      activeProfile ? "active-button" : ""
+                    }`}
                   />
                 </Link>
-                <Button
-                  onClick={authClickHandler}
-                  label="Logout"
-                  btnClassName="btn primary-text-btn-md"
-                />
-              </div>
-            )}
-          </div>
-        ) : (
-          <Button
-            onClick={authClickHandler}
-            label={token ? "Logout" : "Login"}
-            btnClassName="btn primary-outline-btn-md"
-          />
-        )}
+              )}
+              <Button
+                onClick={authClickHandler}
+                label={token ? "Logout" : "Login"}
+                btnClassName="btn primary-text-btn-md"
+              />
+              <ThemeToggle />
+            </div>
+          )}
+        </div>
+        {/*
+         */}
       </div>
     </div>
   );

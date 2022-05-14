@@ -11,7 +11,7 @@ const initialSignupState = {
 };
 
 export const Signup = () => {
-  const { setShowLogin, setShowSignup } = useModal();
+  const { modalDispatch } = useModal();
 
   const [user, setUser] = useState(initialSignupState);
   const { userSignupHandler, googleLoginHandler, facebookLoginHandler } =
@@ -34,7 +34,7 @@ export const Signup = () => {
       ) {
         if (user.password === confirmPassword) {
           userSignupHandler(user.email, user.password);
-          setShowSignup(false);
+          modalDispatch({ type: "SHOW_SIGNUP", payload: false });
           setUser(initialSignupState);
           setConfirmPassword("");
         } else {
@@ -67,13 +67,13 @@ export const Signup = () => {
   };
 
   const onCloseClick = () => {
-    setShowLogin(false);
-    setShowSignup(false);
+    modalDispatch({ type: "SHOW_LOGIN", payload: false });
+    modalDispatch({ type: "SHOW_SIGNUP", payload: false });
   };
 
   const onLoginClick = () => {
-    setShowLogin(true);
-    setShowSignup(false);
+    modalDispatch({ type: "SHOW_LOGIN", payload: true });
+    modalDispatch({ type: "SHOW_SIGNUP", payload: false });
   };
 
   return (
@@ -81,7 +81,7 @@ export const Signup = () => {
       <div
         className="modal-backdrop"
         onClick={() => {
-          setShowSignup(false);
+          modalDispatch({ type: "SHOW_SIGNUP", payload: false });
         }}
       ></div>
       <div className="signup-modal-one">

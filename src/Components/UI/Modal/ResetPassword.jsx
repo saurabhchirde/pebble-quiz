@@ -1,10 +1,10 @@
 import { AlertToast } from "Components";
-import { useAlert, useModal, useNetworkCalls } from "Context";
+import { useModal, useNetworkCalls } from "Context";
 import { useState } from "react";
 import { Button, IconButton } from "../Button";
 import "./ResetPassword.css";
 export const ResetPassword = () => {
-  const { setShowResetPassword } = useModal();
+  const { modalDispatch } = useModal();
   const { passwordResetEmailHandler } = useNetworkCalls();
 
   const [email, setEmail] = useState("");
@@ -14,15 +14,17 @@ export const ResetPassword = () => {
       AlertToast("info", "Enter a valid email");
     } else {
       passwordResetEmailHandler(email);
-      setShowResetPassword(false);
+      modalDispatch({ type: "SHOW_RESET_PASSWORD", payload: false });
     }
   };
 
   return (
     <div className="reset-password-container">
-      <form onSubmit={sendResetClickHandler}>
+      <div>
         <IconButton
-          onClick={() => setShowResetPassword(false)}
+          onClick={() =>
+            modalDispatch({ type: "SHOW_RESET_PASSWORD", payload: false })
+          }
           icon="fas fa-times"
           btnClassName="btn icon-btn-sm close-btn"
         />
@@ -33,18 +35,17 @@ export const ResetPassword = () => {
               type="email"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
-              required
               autoComplete="email"
               placeholder="enter email"
             />
           </label>
         </div>
         <Button
-          type="submit"
+          onClick={sendResetClickHandler}
           label="Send Reset Link"
           btnClassName="btn primary-btn-md"
         />
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,11 @@
 import { useAuth } from "Context";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import {
   firestore,
@@ -12,6 +18,7 @@ import {
 } from "firebase.config";
 import { child } from "firebase/database";
 import { AlertToast } from "Components";
+import { quizReducer } from "./quizReducer";
 
 const initialUserQuizData = {
   quizGiven: 0,
@@ -25,7 +32,15 @@ const initialUserQuizData = {
   notifications: [],
 };
 
-const initialQuizData = [];
+const initialQuizState = {
+  startQuiz: false,
+  showResult: false,
+  finalScore: 0,
+  userQuizData: initialUserQuizData,
+  allQuizQuestions:
+    JSON.parse(sessionStorage.getItem("pebble-quiz-quiestions")) ?? [],
+  earnedBadge: "",
+};
 
 const QuizContext = createContext(null);
 
@@ -35,19 +50,12 @@ const QuizProvider = ({ children }) => {
     authState: { token, name, email, profileImg, id },
   } = useAuth();
 
-  const [startQuiz, setStartQuiz] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [finalScore, setFinalScore] = useState(0);
-  const [userQuizData, setUserQuizData] = useState(initialUserQuizData);
-  const [allQuizQuestions, setAllQuizQuestions] = useState(
-    JSON.parse(localStorage.getItem("pebble-quiz-quiestions")) ??
-      initialQuizData
-  );
-  const [earnedBadge, setEarnedBadge] = useState("");
+  const [quizState, quizDispatch] = useReducer(quizReducer, initialQuizState);
+
   const [flag, setFlag] = useState(false);
 
   const startQuizHandler = () => {
-    setStartQuiz((pre) => !pre);
+    quizDispatch({ type: "START_QUIZ" });
   };
 
   const startNewQuizHandler = () => {
@@ -59,25 +67,25 @@ const QuizProvider = ({ children }) => {
     const dbRef = realTimeDBRef(firebaseRealtimeDB);
     try {
       const allQuestions = await get(child(dbRef, "quizDB"));
-      setAllQuizQuestions(allQuestions.val());
+      quizDispatch({ type: "ALL_QUIZ_QUESTIONS", payload: allQuestions.val() });
     } catch (error) {
       AlertToast("error", error.message);
     }
   };
 
   useEffect(() => {
-    if (allQuizQuestions.length < 1) {
+    if (quizState.allQuizQuestions.length < 1) {
       getAllQuizQuestions();
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "pebble-quiz-quiestions",
-        JSON.stringify(allQuizQuestions)
+        JSON.stringify(quizState.allQuizQuestions)
       );
     }
-  }, [allQuizQuestions]);
+  }, [quizState.allQuizQuestions]);
 
   // ad all data - quiz and user
-  const userData = { ...userQuizData, name, email, id, profileImg };
+  const userData = { ...quizState.userQuizData, name, email, id, profileImg };
 
   const addUserToFirestore = async () => {
     const addUser = doc(firestore, `users/${email}`);
@@ -95,11 +103,19 @@ const QuizProvider = ({ children }) => {
       const userResponse = await getDoc(selectUser);
       // check if user in database
       if (userResponse.exists()) {
-        setUserQuizData(userResponse.data());
+        quizDispatch({
+          type: "USER_QUIZ_DATA",
+          payload: userResponse.data(),
+        });
+        // setUserQuizData(userResponse.data());
       } else {
         // add if user is not in database
         addUserToFirestore();
-        setUserQuizData(userResponse.data());
+        quizDispatch({
+          type: "USER_QUIZ_DATA",
+          payload: userResponse.data(),
+        });
+        // setUserQuizData(userResponse.data());
         setFlag(true);
       }
     } catch (error) {
@@ -109,7 +125,11 @@ const QuizProvider = ({ children }) => {
 
   useEffect(() => {
     // reset data after logout
-    setUserQuizData(initialUserQuizData);
+    quizDispatch({
+      type: "USER_QUIZ_DATA",
+      payload: initialUserQuizData,
+    });
+    // setUserQuizData(initialUserQuizData);
     if (token) {
       getUserData();
     }
@@ -125,20 +145,10 @@ const QuizProvider = ({ children }) => {
   return (
     <QuizContext.Provider
       value={{
-        startQuiz,
-        setStartQuiz,
-        showResult,
-        setShowResult,
-        finalScore,
-        setFinalScore,
-        userQuizData,
-        earnedBadge,
-        setEarnedBadge,
-        setUserQuizData,
+        quizState,
+        quizDispatch,
         startQuizHandler,
         startNewQuizHandler,
-        allQuizQuestions,
-        setAllQuizQuestions,
       }}
     >
       {children}

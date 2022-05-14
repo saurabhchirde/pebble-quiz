@@ -8,7 +8,7 @@
     height: 3.5rem;
     padding: 8px;
     background-color: var(--nav-bar-bg);
-    color: var(--title-color);
+    color: var(--text-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -40,6 +40,10 @@
     margin: 0 5px;
   }
 
+  .active-button {
+    outline: 1px solid var(--text-white);
+  }
+
   .user-menu {
     position: absolute;
     top: 2.7rem;
@@ -47,15 +51,18 @@
     background-color: var(--nav-bar-bg);
     padding: 1rem;
     border-radius: 4px;
+    width: 8rem;
     z-index: 2;
   }
 
   .user-menu button {
-    color: var(--title-color);
+    color: var(--text-white);
+    width: 6rem;
+    margin: 5px 0;
   }
 
   .user-menu button:hover {
-    outline: 1px solid var(--title-color);
-    color: var(--title-color);
+    outline: 1px solid var(--text-white);
+    color: var(--text-white);
   }
 }

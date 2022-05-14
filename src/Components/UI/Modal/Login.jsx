@@ -6,13 +6,7 @@ import { InputTypePassword } from "../Input";
 import { LabelIconButton } from "../Button";
 
 export const Login = () => {
-  const {
-    setShowLogin,
-    setShowSignup,
-    setAlertText,
-    setShowAlert,
-    setShowResetPassword,
-  } = useModal();
+  const { modalDispatch } = useModal();
   const {
     emailPasswordLoginHandler,
     googleLoginHandler,
@@ -30,14 +24,20 @@ export const Login = () => {
 
   const onLoginClickFormHandler = () => {
     if (loginInput.email.trim() === "" || loginInput.password.trim() === "") {
-      setAlertText("Input cannot be blank, try again");
-      setShowAlert(true);
+      modalDispatch({
+        type: "ALERT_TEXT",
+        payload: "Input cannot be blank, try again",
+      });
+      modalDispatch({ type: "SHOW_ALERT", payload: true });
     } else {
       if (loginInput.email.match(emailValidate)) {
         emailPasswordLoginHandler(loginInput.email, loginInput.password);
       } else {
-        setAlertText("Entered email is wrong, please try again");
-        setShowAlert(true);
+        modalDispatch({
+          type: "ALERT_TEXT",
+          payload: "Entered email is wrong, please try again",
+        });
+        modalDispatch({ type: "SHOW_ALERT", payload: true });
       }
     }
   };
@@ -48,8 +48,8 @@ export const Login = () => {
   };
 
   const resetPasswordClickHandler = () => {
-    setShowLogin(false);
-    setShowResetPassword(true);
+    modalDispatch({ type: "SHOW_LOGIN", payload: false });
+    modalDispatch({ type: "SHOW_RESET_PASSWORD", payload: true });
   };
 
   const onModalInputHandler = (e) => {
@@ -63,12 +63,22 @@ export const Login = () => {
     });
   };
 
+  const closeLoginHandler = () => {
+    modalDispatch({ type: "SHOW_LOGIN", payload: false });
+    modalDispatch({ type: "SHOW_SIGNUP", payload: false });
+  };
+
+  const createAccountHandler = () => {
+    modalDispatch({ type: "SHOW_LOGIN", payload: false });
+    modalDispatch({ type: "SHOW_SIGNUP", payload: true });
+  };
+
   return (
     <>
       <div
         className="modal-backdrop"
         onClick={() => {
-          setShowLogin(false);
+          modalDispatch({ type: "SHOW_LOGIN", payload: false });
         }}
       ></div>
       <div className="signin-modal">
@@ -77,10 +87,7 @@ export const Login = () => {
         <IconButton
           btnClassName="btn icon-btn-sm close-modal-btn"
           icon="fas fa-times"
-          onClick={() => {
-            setShowLogin(false);
-            setShowSignup(false);
-          }}
+          onClick={closeLoginHandler}
         />
         <form onSubmit={onLoginSubmitHandler}>
           <InputTypeOne
@@ -136,10 +143,7 @@ export const Login = () => {
         </h3>
         <button
           className="btn primary-text-btn-sm create-account-btn"
-          onClick={() => {
-            setShowLogin(false);
-            setShowSignup(true);
-          }}
+          onClick={createAccountHandler}
         >
           <h2>
             Create New Account <i className="fas fa-angle-right"></i>

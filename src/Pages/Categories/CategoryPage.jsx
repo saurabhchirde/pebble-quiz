@@ -5,18 +5,19 @@ import {
   Button,
   CategoryCard,
   Footer,
-  ThemeToggle,
 } from "Components";
 import "../CommonStyling.css";
 import "./CategoryPage.css";
 import { useAuth, useModal, useQuiz } from "Context";
 
 export const CategoryPage = () => {
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const {
     authState: { token },
   } = useAuth();
-  const { allQuizQuestions } = useQuiz();
+  const {
+    quizState: { allQuizQuestions },
+  } = useQuiz();
 
   const showCategories = allQuizQuestions.map((cat) => (
     <CategoryCard key={cat.name} category={cat} cardSize="card-square" />
@@ -30,7 +31,7 @@ export const CategoryPage = () => {
       <div
         className="category-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div>
@@ -43,7 +44,6 @@ export const CategoryPage = () => {
                 btnClassName="btn primary-outline-btn-md"
               />
             </div>
-            <ThemeToggle />
           </div>
           <div className="category-page-cards">
             <h2>All Categories</h2>

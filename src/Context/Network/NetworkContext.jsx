@@ -22,7 +22,7 @@ const NetworkContext = createContext({});
 
 const NetworkProvider = ({ children }) => {
   const { authDispatch } = useAuth();
-  const { setShowLogin, setShowSignup } = useModal();
+  const { modalDispatch } = useModal();
 
   const googleProvider = new GoogleAuthProvider();
   const facebookProvider = new FacebookAuthProvider();
@@ -59,8 +59,9 @@ const NetworkProvider = ({ children }) => {
         },
       });
 
-      setShowLogin(false);
-      setShowSignup(false);
+      modalDispatch({ type: "SHOW_LOGIN", payload: false });
+      modalDispatch({ type: "SHOW_SIGNUP", payload: false });
+
       AlertToast("success", "Login Successfully");
     } catch (error) {
       AlertToast("error", error.message);
@@ -78,8 +79,9 @@ const NetworkProvider = ({ children }) => {
         },
       });
 
-      setShowLogin(false);
-      setShowSignup(false);
+      modalDispatch({ type: "SHOW_LOGIN", payload: false });
+      modalDispatch({ type: "SHOW_SIGNUP", payload: false });
+
       AlertToast("success", "Login Successfully");
     } catch (error) {
       AlertToast("error", error.message);
@@ -101,8 +103,9 @@ const NetworkProvider = ({ children }) => {
         },
       });
 
-      setShowLogin(false);
-      setShowSignup(false);
+      modalDispatch({ type: "SHOW_LOGIN", payload: false });
+      modalDispatch({ type: "SHOW_SIGNUP", payload: false });
+
       AlertToast("success", "Login Successfully");
     } catch (error) {
       AlertToast("error", error.message);
@@ -123,8 +126,8 @@ const NetworkProvider = ({ children }) => {
           user: response.user.providerData[0],
         },
       });
+      modalDispatch({ type: "SHOW_SIGNUP", payload: false });
 
-      setShowSignup(false);
       AlertToast("success", "Account Created Successfully");
     } catch (error) {
       AlertToast("error", error.message);

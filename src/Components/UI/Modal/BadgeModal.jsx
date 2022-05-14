@@ -2,7 +2,9 @@ import { useQuiz } from "Context";
 import "./BadgeModal.css";
 
 export const BadgeModal = () => {
-  const { earnedBadge } = useQuiz();
+  const {
+    quizState: { earnedBadge },
+  } = useQuiz();
 
   return (
     <div className="badge-modal-container">

@@ -4,7 +4,6 @@ import {
   Footer,
   NavBarBottom,
   NavBarTop,
-  ThemeToggle,
 } from "Components";
 import { NavBar } from "Components/UI/Navigation";
 import { useAuth, useModal, useQuiz } from "Context";
@@ -13,11 +12,14 @@ import "../CommonStyling.css";
 import "./LandingPage.css";
 
 export const LandingPage = () => {
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const {
     authState: { token, name },
   } = useAuth();
-  const { allQuizQuestions } = useQuiz();
+  const {
+    quizState: { allQuizQuestions },
+  } = useQuiz();
+
   const popularQuiz = allQuizQuestions
     .filter((cat) => cat.popular)
     .map((cat) => (
@@ -43,7 +45,7 @@ export const LandingPage = () => {
       <div
         className="landing-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div>
@@ -59,7 +61,6 @@ export const LandingPage = () => {
                 <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
               </Link>
             </div>
-            <ThemeToggle />
           </div>
           <div className="landing-page-popular">
             <h2>Popular</h2>

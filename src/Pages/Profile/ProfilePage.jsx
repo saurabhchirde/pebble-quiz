@@ -1,11 +1,4 @@
-import {
-  NavBar,
-  NavBarTop,
-  NavBarBottom,
-  Button,
-  Footer,
-  ThemeToggle,
-} from "Components";
+import { NavBar, NavBarTop, NavBarBottom, Button, Footer } from "Components";
 import { Link } from "react-router-dom";
 import { check_bg, highest, flag } from "Data/Icons/icons";
 import avatar from "Data/Img/avatar.png";
@@ -17,9 +10,11 @@ export const ProfilePage = () => {
   const {
     authState: { token, profileImg, name },
   } = useAuth();
-  const { userQuizData } = useQuiz();
+  const {
+    quizState: { userQuizData },
+  } = useQuiz();
 
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const progressBarFill = (userQuizData?.level / 20) * 100;
   const progressBarShow = progressBarFill > 100 ? 100 : progressBarFill;
 
@@ -37,7 +32,7 @@ export const ProfilePage = () => {
       <div
         className="profile-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div className="profile-page-header">
@@ -52,7 +47,6 @@ export const ProfilePage = () => {
               <Button label="Start Quiz" btnClassName="btn primary-btn-md" />
             </Link>
           </div>
-          <ThemeToggle />
         </div>
         {token ? (
           <div className="profile-details">

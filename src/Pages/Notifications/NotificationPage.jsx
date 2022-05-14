@@ -1,21 +1,16 @@
-import {
-  NavBar,
-  NavBarBottom,
-  NavBarTop,
-  Button,
-  ThemeToggle,
-  Footer,
-} from "Components";
+import { NavBar, NavBarBottom, NavBarTop, Button, Footer } from "Components";
 import { useAuth, useModal, useQuiz } from "Context";
 import "../CommonStyling.css";
 import "./NotificationPage.css";
 
 export const NotificationPage = () => {
-  const { setProfileMenu, authClickHandler } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const {
     authState: { token },
   } = useAuth();
-  const { userQuizData } = useQuiz();
+  const {
+    quizState: { userQuizData },
+  } = useQuiz();
 
   const allNotifications =
     userQuizData?.notifications?.length > 0 ? (
@@ -49,7 +44,7 @@ export const NotificationPage = () => {
       <div
         className="notification-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div>
@@ -62,7 +57,6 @@ export const NotificationPage = () => {
                 btnClassName="btn primary-outline-btn-md"
               />
             </div>
-            <ThemeToggle />
           </div>
           <ul className="all-notifications">{allNotifications}</ul>
         </div>

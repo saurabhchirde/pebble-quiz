@@ -3,11 +3,14 @@ import "./AlertModal.css";
 import { Button } from "Components";
 
 export const AlertModal = ({ buttonAction, onConfirm }) => {
-  const { alertText, setAlertText, setShowAlert } = useModal();
+  const {
+    modalState: { alertText },
+    modalDispatch,
+  } = useModal();
 
   const closeClickHandler = () => {
-    setShowAlert(false);
-    setAlertText("");
+    modalDispatch({ type: "SHOW_ALERT", payload: false });
+    modalDispatch({ type: "ALERT_TEXT", payload: "" });
   };
 
   return (

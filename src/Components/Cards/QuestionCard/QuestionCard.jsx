@@ -17,7 +17,9 @@ export const QuestionCard = ({
   setWrongAnswers,
   setCorrectAnswer,
 }) => {
-  const { startQuiz } = useQuiz();
+  const {
+    quizState: { startQuiz },
+  } = useQuiz();
 
   const optionSelectHandler = (option) => {
     setSelectedChoice(option);

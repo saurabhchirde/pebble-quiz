@@ -1,35 +1,56 @@
 .theme-toggle {
   cursor: pointer;
-  position: absolute;
-  right: 0rem;
-  top: 4rem;
-
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
+  margin: 0.7rem 0;
+  padding: 5px 10px;
 }
 
-.theme-toggle button i {
-  color: var(--title-color);
+.theme-toggle i {
+  color: var(--text-white);
+  font-size: 1.4rem;
+  padding: 6px;
 }
 
-.theme-toggle p {
-  display: none;
-  padding-right: 1.2rem;
+.theme-toggle h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 0.9rem;
 }
 
 .theme-toggle:hover p {
   display: flex;
 }
 
+.theme-title-desktop {
+  display: flex;
+}
+
+.theme-title-mobile {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .theme-toggle {
-    position: absolute;
     right: 0;
     top: 0;
-    z-index: 1;
+  }
+  .theme-title-desktop {
+    display: none;
+  }
+
+  .theme-title-mobile {
+    display: flex;
+  }
+  .theme-toggle i {
+    color: var(--text-white);
+    font-size: 1rem;
+    padding: 6px;
+  }
+
+  .theme-toggle h2 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 0;
   }
 }

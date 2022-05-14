@@ -6,7 +6,6 @@ import {
   QuizEndModal,
   RulesModal,
   AlertToast,
-  ThemeToggle,
 } from "Components";
 import { QuestionCard } from "Components/Cards";
 import { useAnimation, useAuth, useModal, useQuiz } from "Context";
@@ -19,12 +18,12 @@ import "./QuestionPage.css";
 
 export const QuestionPage = () => {
   const {
-    authState: { token },
+    authState: { token, email },
   } = useAuth();
 
   const { showCelebration } = useAnimation();
 
-  const { setProfileMenu, authClickHandler, setShowBadgeModal } = useModal();
+  const { modalDispatch, authClickHandler } = useModal();
   const { categoryId } = useParams();
 
   const [nextQuestion, setNextQuestion] = useState(0);
@@ -36,18 +35,16 @@ export const QuestionPage = () => {
   const [wrongAnswers, setWrongAnswers] = useState(0);
 
   const {
-    showResult,
-    startQuiz,
-    setShowResult,
-    setStartQuiz,
-    finalScore,
-    setFinalScore,
+    quizState: {
+      startQuiz,
+      showResult,
+      finalScore,
+      userQuizData,
+      allQuizQuestions,
+    },
     startQuizHandler,
     startNewQuizHandler,
-    userQuizData,
-    setEarnedBadge,
-    setUserQuizData,
-    allQuizQuestions,
+    quizDispatch,
   } = useQuiz();
 
   const category = allQuizQuestions.find((cat) => cat._id === categoryId);
@@ -65,35 +62,35 @@ export const QuestionPage = () => {
             setNextQuestion((preQuestion) => preQuestion + 1);
             setSelectedChoice("");
           } else {
-            setShowResult(true);
-            setStartQuiz(false);
-
             // after finishing one quiz
+            quizDispatch({ type: "SHOW_RESULT", payload: true });
+            quizDispatch({ type: "START_QUIZ", payload: false });
+            quizDispatch({
+              type: "USER_QUIZ_DATA",
+              payload: {
+                ...userQuizData,
+                quizGiven: userQuizData.quizGiven + 1,
+                correctAnswers: userQuizData.correctAnswers + correctAnswer,
+              },
+            });
+
             if (wrongAnswers > 0) {
-              setUserQuizData((preData) => {
-                return {
-                  ...preData,
-                  winningStreak: 0,
-                };
+              console.log("wrong set to 0");
+              quizDispatch({
+                type: "USER_QUIZ_DATA",
+                payload: { ...userQuizData, winningStreak: 0 },
               });
             } else {
-              setUserQuizData((preData) => {
-                return {
-                  ...preData,
+              quizDispatch({
+                type: "USER_QUIZ_DATA",
+                payload: {
+                  ...userQuizData,
                   winningStreak: userQuizData.winningStreak + 1,
                   gameWin: userQuizData.gameWin + 1,
-                };
+                  totalScore: userQuizData.totalScore + score,
+                },
               });
             }
-            setUserQuizData((preData) => {
-              return {
-                ...preData,
-                quizGiven: userQuizData.quizGiven + 1,
-                totalScore: userQuizData.totalScore + score,
-                correctAnswers: userQuizData.correctAnswers + correctAnswer,
-              };
-            });
-            setFinalScore(0);
           }
           setTimer(20);
         } else {
@@ -118,9 +115,9 @@ export const QuestionPage = () => {
   useEffect(() => {
     if (!startQuiz) {
       if (score < 0) {
-        setFinalScore(0);
+        quizDispatch({ type: "FINAL_SCORE", payload: 0 });
       } else {
-        setFinalScore(score);
+        quizDispatch({ type: "FINAL_SCORE", payload: score });
       }
     }
   }, [score, startQuiz]);
@@ -135,11 +132,12 @@ export const QuestionPage = () => {
         try {
           const badgeUrl = await getDownloadURL(imgReference);
           // for badge earned modal
-          setEarnedBadge(badgeUrl);
+          quizDispatch({ type: "EARNED_BADGE", payload: badgeUrl });
           // add badge in users account
-          setUserQuizData((preData) => {
-            return {
-              ...preData,
+          quizDispatch({
+            type: "USER_QUIZ_DATA",
+            payload: {
+              ...userQuizData,
               level: updatedLevel,
               badges: [
                 ...userQuizData.badges,
@@ -158,14 +156,14 @@ export const QuestionPage = () => {
                 ...userQuizData.notifications,
               ],
               winningStreak: 0,
-            };
+            },
           });
 
           // showing celebration
           showCelebration();
 
           // showing badge earned modal
-          setShowBadgeModal(true);
+          modalDispatch({ type: "SHOW_BADGE_MODAL", payload: true });
         } catch (error) {
           AlertToast("info", error.message);
         }
@@ -176,8 +174,8 @@ export const QuestionPage = () => {
       }, 5500);
 
       setTimeout(() => {
-        setShowBadgeModal(false);
-        setEarnedBadge("");
+        modalDispatch({ type: "SHOW_BADGE_MODAL", payload: false });
+        quizDispatch({ type: "EARNED_BADGE", payload: "" });
       }, 5500);
     }
   }, [userQuizData?.winningStreak]);
@@ -197,7 +195,7 @@ export const QuestionPage = () => {
       <div
         className="question-page-content"
         onClick={() => {
-          setProfileMenu(false);
+          modalDispatch({ type: "SHOW_PROFILE_MENU", payload: false });
         }}
       >
         <div>
@@ -221,7 +219,6 @@ export const QuestionPage = () => {
                 btnClassName="btn primary-btn-md"
               />
             </div>
-            <ThemeToggle />
           </div>
 
           <div className="question-section">
