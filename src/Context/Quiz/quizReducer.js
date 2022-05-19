@@ -21,6 +21,19 @@ export const quizReducer = (quizState, action) => {
     case "EARNED_BADGE":
       return { ...quizState, earnedBadge: action.payload };
 
+    case "RECENT_QUIZ_GIVEN":
+      return { ...quizState, recentGivenQuiz: action.payload };
+
+    case "CLEAR_RECENT_QUIZ_GIVEN":
+      return {
+        ...quizState,
+        recentGivenQuiz: {
+          category: "",
+          finalScore: 0,
+          questions: [],
+        },
+      };
+
     default:
       return quizState;
   }

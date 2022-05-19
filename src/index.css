@@ -38,7 +38,7 @@ html[data-pebblequiz-theme="dark"] {
   --progress-bar-color: rgb(255, 132, 0);
   --title-color: rgb(231, 231, 231);
   --sub-title-color: rgb(202, 202, 202);
-  --rule-modal-bg: rgb(79, 79, 79);
+  --rule-modal-bg: #1c2224;
   --answer-options: rgb(93, 93, 93);
   --notification-card: rgba(42, 42, 42, 0.922);
   --notification-shadow: rgba(197, 197, 197, 0.229);

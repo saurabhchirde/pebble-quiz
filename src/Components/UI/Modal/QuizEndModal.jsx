@@ -7,7 +7,7 @@ import "./QuizEndModal.css";
 export const QuizEndModal = ({ finalScore }) => {
   const navigate = useNavigate();
   const {
-    quizState: { showResult, userQuizData },
+    quizState: { showResult, userQuizData, recentGivenQuiz },
     quizDispatch,
   } = useQuiz();
   const {
@@ -17,16 +17,19 @@ export const QuizEndModal = ({ finalScore }) => {
 
   const closeModalHandler = () => {
     quizDispatch({ type: "SHOW_RESULT", payload: false });
+    quizDispatch({ type: "CLEAR_RECENT_QUIZ_GIVEN" });
     navigate("/");
   };
 
   const checkLeaderboardHandler = () => {
     quizDispatch({ type: "SHOW_RESULT", payload: false });
+    quizDispatch({ type: "CLEAR_RECENT_QUIZ_GIVEN" });
     navigate("/leaderboard");
   };
 
   const takeNewQuizHandler = () => {
     quizDispatch({ type: "SHOW_RESULT", payload: false });
+    quizDispatch({ type: "CLEAR_RECENT_QUIZ_GIVEN" });
     navigate("/category");
   };
 
@@ -46,9 +49,40 @@ export const QuizEndModal = ({ finalScore }) => {
       <div className="quiz-end-modal">
         <div className={finalScore > 0 ? "positive-score" : "zero-score"}>
           <i onClick={closeModalHandler} className="fa fa-times close-btn"></i>
-          <h1>
-            You scored <span>{finalScore}</span> points
-          </h1>
+          <div className="flex-row-center flex-justify-space-between">
+            <h1>Quiz Summary</h1>
+            <h1>
+              Score <span>{finalScore}</span> points
+            </h1>
+          </div>
+          <h2 className="title-lg-wt-5 text-center">
+            Category : {recentGivenQuiz.category}
+          </h2>
+          {recentGivenQuiz?.questions.map((question, index) => (
+            <div key={index} className="all-given-questions">
+              <p className="mg-point6-bot">Question : {question.question}</p>
+              <div className="end-modal-options">
+                {question.options.map((option, index) => (
+                  <li
+                    className={`option-btn  ${
+                      option === question.selectedChoice &&
+                      question.selectedChoice === question.answer
+                        ? "right-ans"
+                        : option === question.selectedChoice
+                        ? "wrong-ans"
+                        : question.selectedChoice && option === question.answer
+                        ? "right-ans"
+                        : ""
+                    }`}
+                    key={index}
+                  >
+                    {option}
+                  </li>
+                ))}
+              </div>
+            </div>
+          ))}
+
           <div className="quiz-end-modal-cta flex-row-center">
             <Button
               onClick={takeNewQuizHandler}
@@ -58,7 +92,7 @@ export const QuizEndModal = ({ finalScore }) => {
             <Button
               onClick={checkLeaderboardHandler}
               label="Check Leaderboard"
-              btnClassName="btn primary-text-btn-md"
+              btnClassName="btn secondary-outline-btn-md"
             />
           </div>
         </div>

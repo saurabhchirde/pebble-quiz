@@ -48,6 +48,7 @@ export const QuestionPage = () => {
       finalScore,
       userQuizData,
       allQuizQuestions,
+      recentGivenQuiz,
     },
     startQuizHandler,
     startNewQuizHandler,
@@ -125,6 +126,13 @@ export const QuestionPage = () => {
         quizDispatch({ type: "FINAL_SCORE", payload: 0 });
       } else {
         quizDispatch({ type: "FINAL_SCORE", payload: score });
+        quizDispatch({
+          type: "RECENT_QUIZ_GIVEN",
+          payload: {
+            ...recentGivenQuiz,
+            finalScore: score,
+          },
+        });
       }
     }
   }, [score, startQuiz]);
@@ -248,6 +256,7 @@ export const QuestionPage = () => {
                   setScore={setScore}
                   setWrongAnswers={setWrongAnswers}
                   setCorrectAnswer={setCorrectAnswer}
+                  category={category}
                 />
               </div>
             ) : (

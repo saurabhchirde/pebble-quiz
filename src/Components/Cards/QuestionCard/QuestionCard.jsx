@@ -16,13 +16,31 @@ export const QuestionCard = ({
   setScore,
   setWrongAnswers,
   setCorrectAnswer,
+  category,
 }) => {
   const {
-    quizState: { startQuiz },
+    quizState: { startQuiz, recentGivenQuiz },
+    quizDispatch,
   } = useQuiz();
 
   const optionSelectHandler = (option) => {
     setSelectedChoice(option);
+    quizDispatch({
+      type: "RECENT_QUIZ_GIVEN",
+      payload: {
+        ...recentGivenQuiz,
+        category: category?.name,
+        questions: [
+          ...recentGivenQuiz.questions,
+          {
+            answer: answer,
+            question: question,
+            options: options,
+            selectedChoice: option,
+          },
+        ],
+      },
+    });
     if (answer === option) {
       setCorrectAnswer((preData) => preData + 1);
       setScore((preScore) => preScore + 5);

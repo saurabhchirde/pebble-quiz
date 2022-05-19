@@ -41,6 +41,11 @@ const initialQuizState = {
   allQuizQuestions:
     JSON.parse(sessionStorage.getItem("pebble-quiz-quiestions")) ?? [],
   earnedBadge: "",
+  recentGivenQuiz: {
+    category: "",
+    finalScore: 0,
+    questions: [],
+  },
 };
 
 const QuizContext = createContext(null);
