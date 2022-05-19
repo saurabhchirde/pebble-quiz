@@ -4,7 +4,7 @@ const ThemeContext = createContext(null);
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(
-    localStorage.getItem("data-pebblequiz-theme") ?? "dark"
+    localStorage.getItem("data-pebblequiz-theme") ?? "light"
   );
 
   useEffect(() => {
