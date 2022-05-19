@@ -74,19 +74,17 @@ export const QuestionPage = () => {
             // after finishing one quiz
             quizDispatch({ type: "SHOW_RESULT", payload: true });
             quizDispatch({ type: "START_QUIZ", payload: false });
-            quizDispatch({
-              type: "USER_QUIZ_DATA",
-              payload: {
-                ...userQuizData,
-                quizGiven: userQuizData.quizGiven + 1,
-                correctAnswers: userQuizData.correctAnswers + correctAnswer,
-              },
-            });
 
             if (wrongAnswers > 0) {
               quizDispatch({
                 type: "USER_QUIZ_DATA",
-                payload: { ...userQuizData, winningStreak: 0 },
+                payload: {
+                  ...userQuizData,
+                  winningStreak: 0,
+                  quizGiven: userQuizData.quizGiven + 1,
+                  totalScore: userQuizData.totalScore + score,
+                  correctAnswers: userQuizData.correctAnswers + correctAnswer,
+                },
               });
             } else {
               quizDispatch({
@@ -95,7 +93,9 @@ export const QuestionPage = () => {
                   ...userQuizData,
                   winningStreak: userQuizData.winningStreak + 1,
                   gameWin: userQuizData.gameWin + 1,
+                  quizGiven: userQuizData.quizGiven + 1,
                   totalScore: userQuizData.totalScore + score,
+                  correctAnswers: userQuizData.correctAnswers + correctAnswer,
                 },
               });
             }
