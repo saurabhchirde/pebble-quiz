@@ -5,7 +5,6 @@ export const LoginInputForm = ({
   loginInput,
   showPassword,
   setShowPassword,
-  onLoginClickFormHandler,
 }) => {
   return (
     <form onSubmit={onLoginSubmitHandler}>
@@ -40,7 +39,6 @@ export const LoginInputForm = ({
         type="submit"
         label="Sign-In with Email"
         btnClassName="btn primary-btn-md"
-        onClick={onLoginClickFormHandler}
       />
     </form>
   );

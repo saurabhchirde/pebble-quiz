@@ -91,7 +91,6 @@ export const Login = () => {
           loginInput={loginInput}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
-          onLoginClickFormHandler={onLoginClickFormHandler}
         />
         <hr className="section-break-line" />
         <GoogleFacebookHandler
