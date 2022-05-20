@@ -11,6 +11,17 @@
 
 [Pebble Quiz](https://quiz.pebbleui.com/)
 
+
+### Game flow for Guest Users
+![Quiz Guest](https://user-images.githubusercontent.com/92800463/169605486-9303ac7e-e176-474f-a173-07392f9b25a1.gif)
+
+### Game flow for Registered User
+![Quiz User](https://user-images.githubusercontent.com/92800463/169605595-117260b9-04a1-4daf-a92b-c0d6a295c732.gif)
+
+### Achievements Badges for registred Users 
+![Quiz Achievement](https://user-images.githubusercontent.com/92800463/169605682-073fec09-6588-450f-9168-ba42cf359e88.gif)
+
+
 </br>
 
 ## Features
@@ -19,19 +30,22 @@
   - Sign In
   - Sign Up
   - Sign Out
-- Protected/Private Routes
+- Protected/Private Routes with users quiz data
 - Categorywise Quiz
 - Pointwise Leaderboard
 - Different levels with Achievement Badges
 - User Account Page
+- Change Display Names
+- Set new account password
+- Delete Account
 
 </br>
 
 ## Tech Stack
 
-**Client:** React, React Router, Context API, [Pebble UI](https://pebbleui.com/)
+**Client side:** React, React Router, Context API, [Pebble UI](https://pebbleui.com/)
 
-**Server:** Firebase
+**Server side:** Firebase
 
 </br>
 
