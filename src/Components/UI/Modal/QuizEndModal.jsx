@@ -52,37 +52,41 @@ export const QuizEndModal = ({ finalScore }) => {
           <div className="flex-row-center flex-justify-space-between">
             <h1>Quiz Summary</h1>
             <h1>
-              Score <span>{finalScore}</span> points
+              Scored <span>{finalScore}</span> points
             </h1>
           </div>
           <h2 className="title-lg-wt-5 text-center">
             Category : {recentGivenQuiz.category}
           </h2>
-          {recentGivenQuiz?.questions.map((question, index) => (
-            <div key={index} className="all-given-questions">
-              <p className="mg-point6-bot">Question : {question.question}</p>
-              <div className="end-modal-options">
-                {question.options.map((option, index) => (
-                  <li
-                    className={`option-btn  ${
-                      option === question.selectedChoice &&
-                      question.selectedChoice === question.answer
-                        ? "right-ans"
-                        : option === question.selectedChoice
-                        ? "wrong-ans"
-                        : question.selectedChoice && option === question.answer
-                        ? "right-ans"
-                        : ""
-                    }`}
-                    key={index}
-                  >
-                    {option}
-                  </li>
-                ))}
+          <div className="all-questions-container">
+            {recentGivenQuiz?.questions.map((question, index) => (
+              <div key={index} className="all-given-questions">
+                <p className="mg-point6-bot">
+                  Question {index + 1} : {question.question}
+                </p>
+                <div className="end-modal-options">
+                  {question.options.map((option, index) => (
+                    <li
+                      className={`option-btn  ${
+                        option === question.selectedChoice &&
+                        question.selectedChoice === question.answer
+                          ? "right-ans"
+                          : option === question.selectedChoice
+                          ? "wrong-ans"
+                          : question.selectedChoice &&
+                            option === question.answer
+                          ? "right-ans"
+                          : ""
+                      }`}
+                      key={index}
+                    >
+                      {option}
+                    </li>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-
+            ))}
+          </div>
           <div className="quiz-end-modal-cta flex-row-center">
             <Button
               onClick={takeNewQuizHandler}

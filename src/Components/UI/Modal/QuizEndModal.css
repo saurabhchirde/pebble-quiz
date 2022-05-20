@@ -64,6 +64,14 @@
   font-weight: bold;
 }
 
+.all-questions-container {
+  overflow-y: scroll;
+  height: 15rem;
+  margin: 1.5rem 0 2rem;
+  border-radius: 4px;
+  border: 1px solid var(--sub-title-color);
+}
+
 .all-given-questions {
   margin: 10px 0;
   padding: 5px;
