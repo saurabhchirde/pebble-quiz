@@ -24,8 +24,8 @@
 }
 
 .question-img {
-  width: 22rem;
-  height: 24rem;
+  min-width: 22rem;
+  height: 20rem;
   object-fit: cover;
   border-radius: 15px;
   margin-right: 1rem;
@@ -83,7 +83,7 @@
 .answer-options button {
   border-radius: 15px;
   border: none;
-  padding: 2.5rem 1rem;
+  padding: 2rem 1rem;
   width: 100%;
   font-size: 1.3rem;
   font-weight: 500;
