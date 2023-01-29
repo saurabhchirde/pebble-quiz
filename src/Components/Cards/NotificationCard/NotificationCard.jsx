@@ -9,7 +9,7 @@ export const NotificationCard = ({ notification }) => {
     >
       <div className="list-body">
         <div className="avatar avatar-sm-round">
-          <img loading="lazy" src={notification.icon} alt="avatar-image" />
+          <img loading="lazy" src={notification.icon} alt="avatar" />
         </div>
         <div className="list-text">
           <h1>You earned a new badge</h1>
