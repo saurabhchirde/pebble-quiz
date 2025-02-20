@@ -3,24 +3,26 @@
 ## Play Fun Trivia Quizzes.
 
 #### - by Saurabh Chirde
+
 <img src="https://user-images.githubusercontent.com/92800463/168157436-9da42e34-c688-439f-bf2e-08e2cac40d7f.svg" width="500px" height="auto" alt="logo" />
 
 ## Demo
 
 ### Link
 
-[Pebble Quiz](https://quiz.pebbleui.com/)
-
+[Pebble Quiz](https://quiz.saurabhchirde.com/)
 
 ### Game flow for Guest Users
+
 ![Quiz Guest](https://user-images.githubusercontent.com/92800463/169605486-9303ac7e-e176-474f-a173-07392f9b25a1.gif)
 
 ### Game flow for Registered User
+
 ![Quiz User](https://user-images.githubusercontent.com/92800463/169605595-117260b9-04a1-4daf-a92b-c0d6a295c732.gif)
 
-### Achievements Badges for registred Users 
-![Quiz Achievement](https://user-images.githubusercontent.com/92800463/169605682-073fec09-6588-450f-9168-ba42cf359e88.gif)
+### Achievements Badges for registred Users
 
+![Quiz Achievement](https://user-images.githubusercontent.com/92800463/169605682-073fec09-6588-450f-9168-ba42cf359e88.gif)
 
 </br>
 
@@ -43,7 +45,7 @@
 
 ## Tech Stack
 
-**Client side:** React, React Router, Context API, [Pebble UI](https://pebbleui.com/)
+**Client side:** React, React Router, Context API, [Pebble UI](https://ui.saurabhchirde.com/)
 
 **Server side:** Firebase
 
