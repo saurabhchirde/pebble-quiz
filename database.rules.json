@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "quizDB": {
+      ".read": true,
+      ".write": false
+    }
+  }
+}

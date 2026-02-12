@@ -71,6 +71,34 @@ Install dependencies
   npm install
 ```
 
+Configure Firebase
+
+1. Create a `.env` file in the root directory (use `.env.example` as template)
+2. Add your Firebase configuration values to `.env`
+3. Get your Firebase config from [Firebase Console](https://console.firebase.google.com/)
+
+```bash
+  # Copy the example file
+  cp .env.example .env
+
+  # Edit .env and add your Firebase credentials
+```
+
+Deploy Firebase Security Rules (Optional)
+
+```bash
+  # Make sure Firebase CLI is installed
+  npm install -g firebase-tools
+
+  # Run the deployment script
+  ./deploy-rules.sh
+
+  # Or manually deploy
+  firebase deploy --only firestore:rules,database
+```
+
+See [FIREBASE_SECURITY_RULES.md](./FIREBASE_SECURITY_RULES.md) for detailed security rules documentation.
+
 Start the server
 
 ```bash
